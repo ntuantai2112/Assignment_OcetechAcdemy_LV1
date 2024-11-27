@@ -1,6 +1,7 @@
 package com.globits.da.rest;
 
 
+import com.globits.da.dto.ApiResponse;
 import com.globits.da.dto.MyApiDto;
 import com.globits.da.service.MyApiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,12 @@ public class RestMyAPIController {
     //    Câu 4: 1. Tạo REST GET api MyFirstApi với source code vừa clone
     // 2. Trả về 1 String MyFirstApi
     @GetMapping("/my-api")
-    public String getMyFirstApi() {
-        return "Rest My First API";
+    public ApiResponse<String> getMyFirstApi() {
+
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setMessage("Successfully");
+        apiResponse.setResult("Rest My First API");
+        return apiResponse;
     }
 
     //    Câu 5: Call Service MyFirstApiService từ Rest Controller gọi method trả về string MyFirstApiService
@@ -95,10 +100,18 @@ public class RestMyAPIController {
 
     @PostMapping("/my-api-file")
     public ResponseEntity<String> getMyApiFile(@RequestParam MultipartFile file){
-
            return myApiService.processFile(file);
     }
 
+    // Câu 13:
+            //1. Thực hiện postman post raw json với API khi xóa @RequestBody
+            //2. Ghi lại kết quả và tìm hiểu lý do
+
+    @PostMapping("/my-api-no-request-body")
+    public ResponseEntity<MyApiDto> getMyApiNoRequestBody(MyApiDto myApiDto) {
+        return myApiService.getMyApiNoRequestBody(myApiDto);
+
+    }
 
 
 }

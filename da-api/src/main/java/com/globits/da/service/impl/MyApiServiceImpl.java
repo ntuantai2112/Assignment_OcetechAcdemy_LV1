@@ -100,6 +100,11 @@ public class MyApiServiceImpl implements MyApiService {
         }
     }
 
+    @Override
+    public ResponseEntity<MyApiDto> getMyApiNoRequestBody(MyApiDto myApiDto) {
+        return ResponseEntity.ok(myApiDto);
+    }
+
 
     public void readFile(MultipartFile file) {
         String fileType = file.getContentType();

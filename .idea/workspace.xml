@@ -35,6 +35,7 @@
     <option name="showModules" value="false" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -96,22 +97,13 @@
       <workItem from="1732174072554" duration="6572000" />
       <workItem from="1732239698374" duration="1198000" />
       <workItem from="1732259168519" duration="7566000" />
-      <workItem from="1732499860405" duration="8001000" />
+      <workItem from="1732499860405" duration="11263000" />
+      <workItem from="1732585776683" duration="13961000" />
+      <workItem from="1732672633094" duration="2382000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/da-api/src/main/java/com/globits/da/rest/RestMyAPIController.java</url>
-          <line>98</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

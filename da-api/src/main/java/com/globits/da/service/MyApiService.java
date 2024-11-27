@@ -2,6 +2,7 @@ package com.globits.da.service;
 
 import com.globits.da.dto.MyApiDto;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,4 +23,7 @@ public interface MyApiService {
     ResponseEntity<String> getMyFirstAPI(HttpServletRequest request);
 
     ResponseEntity<String> processFile(MultipartFile file);
+
+
+    ResponseEntity<MyApiDto> getMyApiNoRequestBody(MyApiDto myApiDto);
 }
