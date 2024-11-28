@@ -5,10 +5,14 @@ import com.globits.da.dto.EmployeeDto;
 import com.globits.da.dto.search.EmployeeSearchDto;
 import com.globits.da.repository.EmployeeRepository;
 import com.globits.da.service.EmployeeService;
+import com.globits.da.utils.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -19,7 +23,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> getAllEmployee() {
+
+
         return employeeRepo.findAll();
+    }
+
+    @Override
+    public List<EmployeeDto> getAllEmployees() {
+        List<Employee> employees = employeeRepo.findAll();
+        return employees.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
     @Override
@@ -47,18 +59,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setPhone(request.getPhone());
         employee.setAge(request.getAge());
 
-        return  employeeRepo.save(employee);
+        return employeeRepo.save(employee);
     }
 
     @Override
     public String delelteEmployee(Integer id) {
-            Employee emp = employeeRepo.findById(id).get();
-            if(emp != null){
-                employeeRepo.delete(emp);
-                return "Delete employee successfully";
-            }
+        Employee emp = employeeRepo.findById(id).get();
+        if (emp != null) {
+            employeeRepo.delete(emp);
+            return "Delete employee successfully";
+        }
 
-            return "Employee not exit";
+        return "Employee not exit";
     }
 
     @Override
@@ -76,6 +88,33 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> searchEmployees(EmployeeSearchDto employeeSearchDto) {
-        return  employeeRepo.searchEmployees(employeeSearchDto.getCode(), employeeSearchDto.getName(), employeeSearchDto.getName(),employeeSearchDto.getPhone() );
+        return employeeRepo.searchEmployees(employeeSearchDto.getCode(), employeeSearchDto.getName(), employeeSearchDto.getName(), employeeSearchDto.getPhone());
     }
+
+    @Override
+    public ByteArrayInputStream getDataDowloadedExcel() throws IOException {
+        List<Employee> employees = employeeRepo.findAll(); // Hoặc dữ liệu cần export
+        if (employees == null || employees.isEmpty()) {
+            throw new RuntimeException("No employees found for export");
+        }
+        return ExcelUtil.exportToExcel(employees);
+    }
+
+
+
+    private EmployeeDto convertToDto(Employee employee) {
+
+        EmployeeDto empDto = new EmployeeDto();
+        empDto.setCode(employee.getCode());
+        empDto.setName(employee.getName());
+        empDto.setEmail(employee.getEmail());
+        empDto.setPhone(employee.getPhone());
+        empDto.setAge(employee.getAge());
+
+
+        return empDto;
+
+    }
+
+
 }

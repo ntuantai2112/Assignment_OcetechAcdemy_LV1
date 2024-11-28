@@ -36,6 +36,25 @@
 	</repositories>
 
 	<dependencies>
+
+
+
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.34</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.5.4.Final</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>com.globits</groupId>
 			<artifactId>core-v2-api</artifactId>

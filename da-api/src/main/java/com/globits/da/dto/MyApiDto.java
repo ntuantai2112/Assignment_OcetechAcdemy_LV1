@@ -1,7 +1,15 @@
 package com.globits.da.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class MyApiDto {
 
     private String code;
@@ -10,52 +18,7 @@ public class MyApiDto {
     private MultipartFile file;
 
 
-    public MyApiDto() {
-    }
 
-    public MyApiDto(String code, String name, Integer age) {
-        this.code = code;
-        this.name = name;
-        this.age = age;
-    }
-
-    public MyApiDto(String name, int age, MultipartFile file) {
-        this.name = name;
-        this.age = age;
-        this.file = file;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public MultipartFile getFile() {
-        return file;
-    }
-
-    public void setFile(MultipartFile file) {
-        this.file = file;
-    }
 
     @Override
     public String toString() {

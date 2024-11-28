@@ -54,17 +54,22 @@
     <property name="project.structure.last.edited" value="Facets" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.annotationProcessors" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.globits.da.service" />
+      <recent name="com.globits.da.repository" />
+    </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -99,7 +104,8 @@
       <workItem from="1732259168519" duration="7566000" />
       <workItem from="1732499860405" duration="11263000" />
       <workItem from="1732585776683" duration="13961000" />
-      <workItem from="1732672633094" duration="2382000" />
+      <workItem from="1732672633094" duration="13243000" />
+      <workItem from="1732759250227" duration="10290000" />
     </task>
     <servers />
   </component>
