@@ -17,8 +17,11 @@ public class MyApiDto {
     private int age;
     private MultipartFile file;
 
-
-
+    public MyApiDto(String name, int age, MultipartFile file) {
+        this.name = name;
+        this.age = age;
+        this.file = file;
+    }
 
     @Override
     public String toString() {

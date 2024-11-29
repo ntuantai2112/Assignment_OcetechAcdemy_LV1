@@ -1,17 +1,16 @@
-package com.globits.da.dto;
+package com.globits.da.dto.response;
+
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommuneDto {
+public class DistrictResponse {
 
+    private int id;
     private String name;
     private int status;
-
 }

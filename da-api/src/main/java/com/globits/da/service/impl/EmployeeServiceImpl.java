@@ -3,6 +3,7 @@ package com.globits.da.service.impl;
 import com.globits.da.domain.Employee;
 import com.globits.da.dto.EmployeeDto;
 import com.globits.da.dto.search.EmployeeSearchDto;
+import com.globits.da.mapper.EmployeeMapper;
 import com.globits.da.repository.EmployeeRepository;
 import com.globits.da.service.EmployeeService;
 import com.globits.da.utils.ExcelUtil;
@@ -21,10 +22,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepo;
 
+    @Autowired
+    private EmployeeMapper employeeMapper;
+
     @Override
     public List<Employee> getAllEmployee() {
-
-
         return employeeRepo.findAll();
     }
 
@@ -52,18 +54,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee addEmployee(EmployeeDto request) {
 
-        Employee employee = new Employee();
-        employee.setCode(request.getCode());
-        employee.setName(request.getName());
-        employee.setEmail(request.getEmail());
-        employee.setPhone(request.getPhone());
-        employee.setAge(request.getAge());
+        Employee employee = employeeMapper.toEmployee(request);
 
         return employeeRepo.save(employee);
     }
 
     @Override
-    public String delelteEmployee(Integer id) {
+    public String deleteEmployee(Integer id) {
         Employee emp = employeeRepo.findById(id).get();
         if (emp != null) {
             employeeRepo.delete(emp);
@@ -77,11 +74,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee updateEmployee(Integer id, EmployeeDto request) {
 
         Employee employee = employeeRepo.findById(id).get();
-        employee.setCode(request.getCode());
-        employee.setName(request.getName());
-        employee.setEmail(request.getEmail());
-        employee.setPhone(request.getPhone());
-        employee.setAge(request.getAge());
+        employeeMapper.updateEmployee(employee,request);
 
         return employeeRepo.save(employee);
     }

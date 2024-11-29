@@ -1,16 +1,24 @@
 package com.globits.da.domain;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tbl_province")
-public class Province {
+@Data
+public class Province implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     @Column(name = "name")
@@ -18,58 +26,12 @@ public class Province {
     @Column(name = "status")
     private int status;
     @Column(name = "created_at")
-    private DateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
     @Column(name = "updated_at")
-    private DateTime updatedAt;
+    private LocalDateTime  updatedAt = LocalDateTime.now();
 
-    public Province() {
-    }
 
-    public Province(int id, String name, int status, DateTime createdAt, DateTime updatedAt) {
-        this.id = id;
-        this.name = name;
-        this.status = status;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public DateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(DateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public DateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(DateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 }

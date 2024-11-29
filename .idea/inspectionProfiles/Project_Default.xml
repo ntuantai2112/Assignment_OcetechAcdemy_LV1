@@ -1,0 +1,14 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="ContextJavaBeanUnresolvedMethodsInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringCacheableComponentsInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringComponentScan" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringConfigurationProxyMethods" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringContextConfigurationInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringJavaConfigInconsistencyInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringJavaConstructorAutowiringInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringJavaInjectionPointsAutowiringInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SpringProfileExpression" enabled="true" level="WARNING" enabled_by_default="true" />
+  </profile>
+</component>

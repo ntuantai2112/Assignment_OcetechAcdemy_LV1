@@ -1,27 +1,25 @@
 package com.globits.da.service;
 
-import com.globits.da.domain.Employee;
 import com.globits.da.domain.Province;
-import com.globits.da.dto.EmployeeDto;
-import com.globits.da.dto.ProvinceDto;
-import com.globits.da.dto.search.EmployeeSearchDto;
+import com.globits.da.dto.request.ProvinceDto;
+import com.globits.da.dto.response.ProvinceResponse;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.util.List;
 
 public interface ProvinceService {
 
-    List<Province> getAllProvince();
+    List<ProvinceResponse> getAllProvince();
 
 
-    List<Province> getProvinceByName(String name);
+    List<ProvinceResponse>  getProvinceByName(String name);
 
-    Province addProvince(ProvinceDto provinceDto);
+    ProvinceResponse  getProvinceById(Integer id);
 
-    String delelteProvince(Integer id);
+    ProvinceResponse addProvince(ProvinceDto provinceDto);
 
-    Province updateProvince(Integer id,ProvinceDto provinceDto);
+    String deleteProvince(Integer id);
+
+    ProvinceResponse updateProvince(Integer id,ProvinceDto provinceDto);
 
 
 

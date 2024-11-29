@@ -1,7 +1,7 @@
 package com.globits.da.rest;
 
 
-import com.globits.da.dto.ApiResponse;
+import com.globits.da.dto.response.ApiResponse;
 import com.globits.da.dto.MyApiDto;
 import com.globits.da.service.MyApiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController

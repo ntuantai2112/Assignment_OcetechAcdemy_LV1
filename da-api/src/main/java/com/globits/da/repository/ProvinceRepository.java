@@ -12,6 +12,10 @@ import java.util.List;
 @Repository
 public interface ProvinceRepository extends JpaRepository<Province,Integer> {
 
+    @Query("SELECT P FROM Province P WHERE lower(P.name) LIKE lower(concat('%', :name , '%'))")
+    List<Province> findByNameQuery(@Param("name") String name);
 
+//    @Query(value = "SELECT * FROM tbl_province WHERE LOWER(name) LIKE LOWER(CONCAT('%', :keyword, '%'))", nativeQuery = true)
+//    List<Province> findByNameQuery(@Param("keyword") String keyword);
 
 }

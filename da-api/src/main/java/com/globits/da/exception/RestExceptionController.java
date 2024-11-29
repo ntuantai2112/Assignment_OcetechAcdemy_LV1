@@ -1,6 +1,7 @@
 package com.globits.da.exception;
 
 
+import com.globits.da.dto.response.ApiResponse;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -72,6 +73,15 @@ public class RestExceptionController {
         map.put("error", "Params are wrong types");
 
         return map;
+    }
+
+    @ExceptionHandler(value = RuntimeException.class)
+    ResponseEntity<ApiResponse<String>> handleRuntimeException(RuntimeException e){
+        ApiResponse<String> response = new ApiResponse<>();
+        response.setCode(400);
+        response.setMessage(e.getMessage());
+
+        return  ResponseEntity.badRequest().body(response);
     }
 
 

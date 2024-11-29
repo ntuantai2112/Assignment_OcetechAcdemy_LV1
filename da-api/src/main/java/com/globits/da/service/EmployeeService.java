@@ -23,7 +23,7 @@ public interface EmployeeService {
 
     Employee addEmployee(EmployeeDto employeeDto);
 
-    String delelteEmployee(Integer id);
+    String deleteEmployee(Integer id);
 
     Employee updateEmployee(Integer id,EmployeeDto employeeDto);
 

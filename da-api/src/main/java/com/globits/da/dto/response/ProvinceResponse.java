@@ -1,21 +1,18 @@
-package com.globits.da.dto;
+package com.globits.da.dto.response;
+
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.joda.time.DateTime;
 
 import javax.persistence.Column;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProvinceDto {
+public class ProvinceResponse {
 
+    private int id;
     private String name;
     private int status;
-
-
 }
