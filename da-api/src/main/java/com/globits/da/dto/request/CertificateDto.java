@@ -1,10 +1,12 @@
 package com.globits.da.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.joda.time.DateTime;
 
 import javax.persistence.Column;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -13,9 +15,10 @@ import java.util.Date;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CertificateDto {
-    int id;
     String name;
-    Date validForm;
-    Date validUntil;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    LocalDate validFrom;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    LocalDate validUntil;
     int status;
 }

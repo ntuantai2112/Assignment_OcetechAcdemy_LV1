@@ -22,6 +22,9 @@ public interface ProvinceService {
     ProvinceResponse updateProvince(Integer id,ProvinceDto provinceDto);
 
 
+    ProvinceResponse createProvinceAndDistricts(ProvinceDto request);
+
+
 
 
 

@@ -66,19 +66,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="DAApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="da-app" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.globits.DAApplication" />
@@ -112,6 +99,10 @@
       <workItem from="1732672633094" duration="13243000" />
       <workItem from="1732759250227" duration="15636000" />
       <workItem from="1732845481344" duration="19904000" />
+      <workItem from="1733105642014" duration="4867000" />
+      <workItem from="1733123699920" duration="6973000" />
+      <workItem from="1733190216611" duration="11121000" />
+      <workItem from="1733277163808" duration="909000" />
     </task>
     <servers />
   </component>
@@ -123,7 +114,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/da-api/src/main/java/com/globits/da/rest/RestProvinceController.java</url>
-          <line>41</line>
+          <line>42</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

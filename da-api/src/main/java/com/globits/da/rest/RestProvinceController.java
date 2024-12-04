@@ -4,6 +4,7 @@ import com.globits.da.domain.Employee;
 import com.globits.da.domain.Province;
 import com.globits.da.dto.EmployeeDto;
 import com.globits.da.dto.request.ProvinceDto;
+import com.globits.da.dto.response.ApiResponse;
 import com.globits.da.dto.response.ProvinceResponse;
 import com.globits.da.dto.search.EmployeeSearchDto;
 import com.globits.da.service.EmployeeService;
@@ -66,6 +67,16 @@ public class RestProvinceController {
     @PutMapping("/update-province/{provinceId}")
     public ProvinceResponse updateProvince(@PathVariable("provinceId") Integer id ,@RequestBody ProvinceDto request){
         return  provinceService.updateProvince(id,request);
+    }
+
+
+    @PostMapping("/add-province-districts")
+    public ResponseEntity<ApiResponse<ProvinceResponse>> createProvinceAndDistricts(@RequestBody ProvinceDto request){
+        ApiResponse<ProvinceResponse>response = new ApiResponse<>();
+        response.setCode(200);
+        response.setMessage("add successfully!");
+        response.setResult(provinceService.createProvinceAndDistricts(request));
+        return  ResponseEntity.ok(response);
     }
 
 

@@ -1,13 +1,16 @@
 package com.globits.da.service.impl;
 
+import com.globits.da.domain.District;
 import com.globits.da.domain.Employee;
 import com.globits.da.domain.Province;
 import com.globits.da.dto.EmployeeDto;
 import com.globits.da.dto.request.ProvinceDto;
 import com.globits.da.dto.response.ProvinceResponse;
 import com.globits.da.dto.search.EmployeeSearchDto;
+import com.globits.da.mapper.DistrictMapper;
 import com.globits.da.mapper.EmployeeMapper;
 import com.globits.da.mapper.ProvinceMapper;
+import com.globits.da.repository.DistrictRepository;
 import com.globits.da.repository.ProvinceRepository;
 import com.globits.da.service.EmployeeService;
 import com.globits.da.service.ProvinceService;
@@ -31,7 +34,13 @@ public class ProvinceServiceImpl implements ProvinceService {
     private ProvinceRepository provinceRepo;
 
     @Autowired
+    private DistrictRepository districtRepo;
+
+    @Autowired
     private ProvinceMapper provinceMapper;
+
+    @Autowired
+    private DistrictMapper districtMapper;
 
 
     @Override
@@ -89,5 +98,25 @@ public class ProvinceServiceImpl implements ProvinceService {
         Province province = provinceRepo.findById(id).orElseThrow( () -> new RuntimeException("Provice not found"));
         provinceMapper.updateProvince(province,provinceDto);
         return  provinceMapper.toProvinceResponse(provinceRepo.save(province));
+    }
+
+    @Override
+    public ProvinceResponse createProvinceAndDistricts(ProvinceDto provinceRequest) {
+
+        Province province = provinceMapper.toProvince(provinceRequest);
+
+        Province saveProvince = provinceRepo.save(province);
+
+        List<District> newDistricts = provinceRequest.getDistricts().stream()
+                .map( districtRequest -> {
+                    District district = districtMapper.toDistrict(districtRequest);
+                    district.setProvince(saveProvince);
+                    return district;
+                }).collect(Collectors.toList());
+
+        districtRepo.saveAll(newDistricts);
+        saveProvince.setDistricts(newDistricts);
+
+        return provinceMapper.toProvinceResponse(saveProvince);
     }
 }

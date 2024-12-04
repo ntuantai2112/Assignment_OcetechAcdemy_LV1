@@ -13,4 +13,6 @@ public class DistrictResponse {
     private int id;
     private String name;
     private int status;
+
+
 }

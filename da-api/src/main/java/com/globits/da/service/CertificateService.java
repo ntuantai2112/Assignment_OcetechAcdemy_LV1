@@ -9,10 +9,12 @@ import java.util.List;
 
 public interface CertificateService {
 
-    List<Certificate> getAllCertificate();
+    List<CertificateResponse> getAllCertificate();
 
 
     List<CertificateResponse> getCertificateByName(String name);
+
+    CertificateResponse getCertificateResponseById(Integer id);
 
     CertificateResponse addCertificate(CertificateDto request);
 

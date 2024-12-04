@@ -3,10 +3,13 @@ package com.globits.da.domain;
 
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -22,10 +25,10 @@ public class Certificate {
     int id;
     @Column(name = "name")
     String name;
-    @Column(name = "valid_form")
-    Date validForm;
-    @Column(name = "valid_until")
-    Date validUntil;
+    @Column(name = "valid_from",nullable = false)
+    LocalDate validFrom ;
+    @Column(name = "valid_until",nullable = false)
+    LocalDate validUntil ;
     @Column(name = "status")
     int status;
     @Column(name = "created_at")

@@ -3,6 +3,7 @@ package com.globits.da.rest;
 import com.globits.da.domain.District;
 import com.globits.da.dto.request.DistrictDto;
 import com.globits.da.dto.request.ProvinceDto;
+import com.globits.da.dto.response.ApiResponse;
 import com.globits.da.dto.response.DistrictResponse;
 import com.globits.da.dto.response.DistrictResponse;
 import com.globits.da.service.DistrictService;
@@ -49,7 +50,17 @@ public class RestDistrictController {
 
     @PostMapping("/add")
     public DistrictResponse create(@RequestBody DistrictDto request){
-      return  service.addDistrict(request);
+      return
+              service.addDistrict(request);
+    }
+
+    @PostMapping("/add/{provinceId}")
+    public ApiResponse<DistrictResponse> create(@PathVariable("provinceId") Integer provinceId,@RequestBody DistrictDto request){
+        ApiResponse<DistrictResponse> response = new ApiResponse<>();
+        response.setCode(200);
+        response.setMessage("Add district successfully!");
+        response.setResult(service.addDistrict(provinceId,request));
+        return response;
     }
 
     @DeleteMapping("/delete/{id}")
@@ -65,6 +76,15 @@ public class RestDistrictController {
     }
 
 
+
+    @GetMapping("/find-districts/{provinceId}")
+    public ApiResponse<List<DistrictResponse>> getDistrictByProvinceId(@PathVariable("provinceId") Integer provinceId){
+        ApiResponse<List<DistrictResponse>> response = new ApiResponse<>();
+        response.setCode(200);
+        response.setMessage("Success fully!");
+        response.setResult(service.findDistrictsByProvinceId(provinceId));
+        return  response;
+    }
 
 
 
