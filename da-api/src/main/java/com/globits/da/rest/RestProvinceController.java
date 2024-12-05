@@ -69,13 +69,35 @@ public class RestProvinceController {
         return  provinceService.updateProvince(id,request);
     }
 
-
+    // Thực hiện thêm provice và district cùng 1 lúc
     @PostMapping("/add-province-districts")
     public ResponseEntity<ApiResponse<ProvinceResponse>> createProvinceAndDistricts(@RequestBody ProvinceDto request){
         ApiResponse<ProvinceResponse>response = new ApiResponse<>();
         response.setCode(200);
         response.setMessage("add successfully!");
         response.setResult(provinceService.createProvinceAndDistricts(request));
+        return  ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/update-province-districts/{provinceId}")
+    public ResponseEntity<ApiResponse<ProvinceResponse>> updateProvinceAndDistricts(
+            @PathVariable("provinceId") Integer provinceId
+            ,@RequestBody ProvinceDto request){
+        ApiResponse<ProvinceResponse>response = new ApiResponse<>();
+        response.setCode(200);
+        response.setMessage("update successfully!");
+        response.setResult(provinceService.updateProvince(provinceId,request));
+        return  ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/update-province-crud-districts/{provinceId}")
+    public ResponseEntity<ApiResponse<ProvinceResponse>> updateProvinceAndCRUDDistrict(
+            @PathVariable("provinceId") Integer provinceId
+            ,@RequestBody ProvinceDto request){
+        ApiResponse<ProvinceResponse>response = new ApiResponse<>();
+        response.setCode(200);
+        response.setMessage("update successfully!");
+        response.setResult(provinceService.updateProvinceAndCRUDDistrict(provinceId,request));
         return  ResponseEntity.ok(response);
     }
 

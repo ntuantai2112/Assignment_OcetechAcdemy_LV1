@@ -42,11 +42,7 @@ public class RestCommuneController {
         return ResponseEntity.ok(response);
     }
 
-
-
-
-
-
+    // Thêm xã và xác định xã đó thuộc huyện nào
     @PostMapping("/add")
     public ApiResponse<CommuneResponse> create(@RequestBody CommuneDto request){
       return  service.addCommune(request);
@@ -62,6 +58,17 @@ public class RestCommuneController {
     @PutMapping("/update/{id}")
     public ApiResponse<CommuneResponse> update(@PathVariable("id") Integer id ,@RequestBody CommuneDto request){
         return  service.updateCommune(id,request);
+    }
+
+    // Tìm kiếm danh sách xã theo ID huyện
+    @GetMapping("/find-communes/{districtId}")
+    public ApiResponse<List<CommuneResponse>> findCommunesByDistrictId(@PathVariable("districtId") Integer districtId){
+         ApiResponse<List<CommuneResponse>> response = new ApiResponse<>();
+         response.setCode(200);
+         response.setMessage("Find sucessfully!");
+         response.setResult(service.findCommunesByDistrictId(districtId));
+         return response;
+
     }
 
 

@@ -26,7 +26,9 @@ public interface DistrictService {
 
     List<DistrictResponse> findDistrictsByProvinceId(Integer provinceId);
 
-//    void createDistrictAndProvince(ProvinceDto provinceRequest,DistrictDto districtRequest);
+//    DistrictResponse createDistrictAndCommune(Integer provinceId,DistrictDto request);
+
+    DistrictResponse createDistrictAndCommune(DistrictDto request);
 
 
 

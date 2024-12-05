@@ -18,4 +18,7 @@ public interface ProvinceRepository extends JpaRepository<Province,Integer> {
 //    @Query(value = "SELECT * FROM tbl_province WHERE LOWER(name) LIKE LOWER(CONCAT('%', :keyword, '%'))", nativeQuery = true)
 //    List<Province> findByNameQuery(@Param("keyword") String keyword);
 
+    @Query("SELECT P FROM Province P WHERE lower(P.name) LIKE lower(concat('%', :provinceName , '%'))")
+    Province findProvinceByNameQuery(@Param("provinceName") String provinceName);
+
 }

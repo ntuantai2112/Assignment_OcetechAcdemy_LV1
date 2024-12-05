@@ -24,7 +24,9 @@ public interface ProvinceService {
 
     ProvinceResponse createProvinceAndDistricts(ProvinceDto request);
 
+    ProvinceResponse updateProvinceAndDistrict(Integer provinceId,ProvinceDto request);
 
+    ProvinceResponse updateProvinceAndCRUDDistrict(Integer provinceId,ProvinceDto request);
 
 
 

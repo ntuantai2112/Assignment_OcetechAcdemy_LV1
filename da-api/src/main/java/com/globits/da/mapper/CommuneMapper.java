@@ -14,8 +14,6 @@ public interface CommuneMapper {
 
     CommuneResponse toCommuneResponse(Commune commune);
 
-
-
     void updateCommune(@MappingTarget Commune commune, CommuneDto communeDto);
 
 

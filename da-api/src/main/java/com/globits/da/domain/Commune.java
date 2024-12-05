@@ -28,4 +28,9 @@ public class Commune {
     @Column(name = "updated_at")
     private LocalDateTime  updatedAt = LocalDateTime.now();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "district_id")
+    private District district;
+
+
 }

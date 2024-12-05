@@ -17,7 +17,8 @@ public interface DistrictRepository extends JpaRepository<District,Integer> {
 
     List<District> findByProvinceId(Integer provinceId);
 
-
+    @Query("SELECT D FROM District D WHERE lower(D.name) LIKE lower(concat('%', :districtName , '%'))")
+    District findDistrictByNameQuery(@Param("districtName") String districtName);
 
 
 }

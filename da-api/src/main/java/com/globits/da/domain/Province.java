@@ -1,9 +1,7 @@
 package com.globits.da.domain;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
@@ -14,7 +12,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "tbl_province")
-@Data
+@Getter
+@Setter
 public class Province implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -6,6 +6,7 @@ import com.globits.da.dto.request.ProvinceDto;
 import com.globits.da.dto.response.ApiResponse;
 import com.globits.da.dto.response.DistrictResponse;
 import com.globits.da.dto.response.DistrictResponse;
+import com.globits.da.dto.response.ProvinceResponse;
 import com.globits.da.service.DistrictService;
 import com.globits.da.service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,14 +47,6 @@ public class RestDistrictController {
 
 
 
-
-
-    @PostMapping("/add")
-    public DistrictResponse create(@RequestBody DistrictDto request){
-      return
-              service.addDistrict(request);
-    }
-
     @PostMapping("/add/{provinceId}")
     public ApiResponse<DistrictResponse> create(@PathVariable("provinceId") Integer provinceId,@RequestBody DistrictDto request){
         ApiResponse<DistrictResponse> response = new ApiResponse<>();
@@ -63,6 +56,17 @@ public class RestDistrictController {
         return response;
     }
 
+
+    @PostMapping("/add")
+    public ApiResponse<DistrictResponse> createDistrict(@RequestBody DistrictDto request){
+        ApiResponse<DistrictResponse> response = new ApiResponse<>();
+        response.setCode(200);
+        response.setMessage("Add district successfully!");
+        response.setResult(service.addDistrict(request));
+        return response;
+    }
+
+    // Khi thực hiện xóa huyện , thì có xã có id Huyện cũng bị xóa theo
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id){
 
@@ -76,7 +80,6 @@ public class RestDistrictController {
     }
 
 
-
     @GetMapping("/find-districts/{provinceId}")
     public ApiResponse<List<DistrictResponse>> getDistrictByProvinceId(@PathVariable("provinceId") Integer provinceId){
         ApiResponse<List<DistrictResponse>> response = new ApiResponse<>();
@@ -84,6 +87,29 @@ public class RestDistrictController {
         response.setMessage("Success fully!");
         response.setResult(service.findDistrictsByProvinceId(provinceId));
         return  response;
+    }
+
+    // Thực hiện thêm huyện và thêm xã cùng 1 lúc
+//    @PostMapping("/create-district-commune/{provinceId}")
+//    public ApiResponse<DistrictResponse> createDistrictAndCommune(@PathVariable("provinceId") Integer provinceId,@RequestBody DistrictDto districtRequest){
+//        ApiResponse<DistrictResponse> response = new ApiResponse<>();
+//        response.setCode(200);
+//        response.setMessage("Add Sucessfully!");
+//        response.setResult(service.createDistrictAndCommune(provinceId,districtRequest));
+//        return  response;
+//
+//
+//    }
+
+    @PostMapping("/create-district-commune")
+    public ApiResponse<DistrictResponse> createDistrictAndCommune(@RequestBody DistrictDto districtRequest){
+        ApiResponse<DistrictResponse> response = new ApiResponse<>();
+        response.setCode(200);
+        response.setMessage("Add Sucessfully!");
+        response.setResult(service.createDistrictAndCommune(districtRequest));
+        return  response;
+
+
     }
 
 

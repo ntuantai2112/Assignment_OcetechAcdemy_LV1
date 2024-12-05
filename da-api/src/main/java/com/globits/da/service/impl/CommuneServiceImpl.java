@@ -1,11 +1,13 @@
 package com.globits.da.service.impl;
 
 import com.globits.da.domain.Commune;
+import com.globits.da.domain.District;
 import com.globits.da.dto.response.ApiResponse;
 import com.globits.da.dto.request.CommuneDto;
 import com.globits.da.dto.response.CommuneResponse;
 import com.globits.da.mapper.CommuneMapper;
 import com.globits.da.repository.CommuneRepository;
+import com.globits.da.repository.DistrictRepository;
 import com.globits.da.service.CommuneService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -16,6 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 @Transactional
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -24,6 +29,9 @@ public class CommuneServiceImpl implements CommuneService {
 
     @Autowired
     CommuneRepository repository;
+
+    @Autowired
+    DistrictRepository districtReo;
 
     @Autowired
     CommuneMapper mapper;
@@ -48,11 +56,9 @@ public class CommuneServiceImpl implements CommuneService {
 
     @Override
     public ApiResponse<List<CommuneResponse>> getCommuneByName(String name) {
-        List<Commune> communes = repository.findByNameQuery(name);
-        List<CommuneResponse> communeResponses = new ArrayList<>();
-        for (Commune commune : communes) {
-            communeResponses.add(mapper.toCommuneResponse(commune));
-        }
+        List<CommuneResponse> communeResponses = repository.findByNameQuery(name).stream()
+                .map(mapper :: toCommuneResponse)
+                .collect(Collectors.toList());
 
         ApiResponse<List<CommuneResponse>> response = new ApiResponse<>();
         response.setCode(200);
@@ -74,7 +80,10 @@ public class CommuneServiceImpl implements CommuneService {
 
     @Override
     public ApiResponse<CommuneResponse> addCommune(CommuneDto request) {
+
+        District district = districtReo.findDistrictByNameQuery(request.getDistrictName());
         Commune commune = mapper.toCommune(request);
+        commune.setDistrict(district);
         mapper.toCommuneResponse(repository.save(commune));
         apiResponse.setCode(200);
         apiResponse.setResult(mapper.toCommuneResponse(repository.save(commune)));
@@ -104,6 +113,15 @@ public class CommuneServiceImpl implements CommuneService {
         apiResponse.setMessage("Update Successfully!");
         apiResponse.setResult(mapper.toCommuneResponse(repository.save(commune)));
         return apiResponse;
+    }
+
+    @Override
+    public List<CommuneResponse> findCommunesByDistrictId(Integer districtId) {
+         List<CommuneResponse> responses = repository.findCommunesByDistrictId(districtId)
+                 .stream()
+                 .map( mapper :: toCommuneResponse)
+                 .collect(Collectors.toList());
+        return responses;
     }
 
 
