@@ -13,8 +13,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -66,6 +67,17 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DAApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="da-app" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.globits.DAApplication" />
@@ -104,6 +116,10 @@
       <workItem from="1733190216611" duration="11121000" />
       <workItem from="1733277163808" duration="18410000" />
       <workItem from="1733363732742" duration="19331000" />
+      <workItem from="1733450166127" duration="18987000" />
+      <workItem from="1733538355259" duration="1327000" />
+      <workItem from="1733626985746" duration="591000" />
+      <workItem from="1733710872233" duration="19321000" />
     </task>
     <servers />
   </component>
@@ -114,9 +130,17 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/da-api/src/main/java/com/globits/da/rest/RestProvinceController.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="1" />
+          <url>file://$PROJECT_DIR$/da-api/src/main/java/com/globits/da/service/impl/DistrictServiceImpl.java</url>
+          <line>119</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/da-api/src/main/java/com/globits/da/service/impl/DistrictServiceImpl.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

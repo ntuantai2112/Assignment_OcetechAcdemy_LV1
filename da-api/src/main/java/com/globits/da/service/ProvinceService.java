@@ -29,7 +29,7 @@ public interface ProvinceService {
     ProvinceResponse updateProvinceAndCRUDDistrict(Integer provinceId,ProvinceDto request);
 
 
-
+    ProvinceResponse createProvinceAndDistrictAndCommune(ProvinceDto request);
 
 
 

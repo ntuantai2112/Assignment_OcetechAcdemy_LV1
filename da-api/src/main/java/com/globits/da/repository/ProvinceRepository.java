@@ -21,4 +21,6 @@ public interface ProvinceRepository extends JpaRepository<Province,Integer> {
     @Query("SELECT P FROM Province P WHERE lower(P.name) LIKE lower(concat('%', :provinceName , '%'))")
     Province findProvinceByNameQuery(@Param("provinceName") String provinceName);
 
+    boolean existsByName(String proviceName);
+
 }

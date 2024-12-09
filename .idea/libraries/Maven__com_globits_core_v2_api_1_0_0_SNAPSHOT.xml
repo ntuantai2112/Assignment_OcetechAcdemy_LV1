@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: com.globits:core-v2-api:1.0.0-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/globits/core-v2-api/1.0.0-SNAPSHOT/core-v2-api-1.0.0-20240821.072618-2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/globits/core-v2-api/1.0.0-SNAPSHOT/core-v2-api-1.0.0-SNAPSHOT.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/com/globits/core-v2-api/1.0.0-SNAPSHOT/core-v2-api-1.0.0-20240821.072618-2-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/globits/core-v2-api/1.0.0-SNAPSHOT/core-v2-api-1.0.0-SNAPSHOT-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/globits/core-v2-api/1.0.0-SNAPSHOT/core-v2-api-1.0.0-20240821.072618-2-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/globits/core-v2-api/1.0.0-SNAPSHOT/core-v2-api-1.0.0-SNAPSHOT-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

@@ -3,15 +3,20 @@ package com.globits.da.service.impl;
 import com.globits.da.domain.Employee;
 import com.globits.da.dto.EmployeeDto;
 import com.globits.da.dto.search.EmployeeSearchDto;
+import com.globits.da.exception.EmployeeAppException;
+import com.globits.da.exception.EmployeeCodeException;
+import com.globits.da.exception.ValidationException;
 import com.globits.da.mapper.EmployeeMapper;
 import com.globits.da.repository.EmployeeRepository;
 import com.globits.da.service.EmployeeService;
 import com.globits.da.utils.ExcelUtil;
+import com.globits.da.utils.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,6 +59,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee addEmployee(EmployeeDto request) {
 
+        validateEmployee(request);
+
+
         Employee employee = employeeMapper.toEmployee(request);
 
         return employeeRepo.save(employee);
@@ -91,6 +99,62 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new RuntimeException("No employees found for export");
         }
         return ExcelUtil.exportToExcel(employees);
+    }
+
+    @Override
+    public void validateEmployee(EmployeeDto request) {
+        List<ValidationException> errors = new ArrayList<>();
+
+        // Validate Code employee
+        if(request.getCode().trim() == null || request.getCode().trim().isEmpty()){
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_CODE_NOT_NULL);
+        }
+
+        if(employeeRepo.findByCode(request.getCode().trim()).isPresent()){
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_CODE_ALREADY_EXISTS);
+        }
+
+        String code = request.getCode().trim();
+
+        if(code.length() < 6 ){
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_CODE_MIN_LENGTH);
+        }
+
+        if(code.length() > 10 ){
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_CODE_MAX_LENGTH);
+        }
+
+        // Validate Name employee
+        if(request.getName().trim() == null || request.getName().trim().isEmpty()){
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_NAME_NOT_NULL);
+        }
+
+        // Validate email employee
+        if(request.getEmail().trim() == null ||  request.getEmail().trim().isEmpty()){
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_EMAIL_NOT_NULL);
+        }
+
+        if(!ValidationUtil.isValidEmail(request.getEmail())){
+            throw  new EmployeeAppException(EmployeeCodeException.EMPLOYEE_EMAIL_FORMAT);
+        }
+
+        // Validate phone employee
+        if(request.getPhone().trim() == null ||  request.getPhone().trim().isEmpty()){
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_PHONE_NOT_NULL);
+        }
+
+        if(!ValidationUtil.isPhone(request.getPhone())){
+            throw  new EmployeeAppException(EmployeeCodeException.EMPLOYEE_PHONE_FORMAT);
+
+        }
+
+        // Validate age employee
+        if(request.getAge() <= 0 || Integer.valueOf(request.getAge()) == null){
+            throw  new EmployeeAppException(EmployeeCodeException.EMPLOYEE_AGE_VALUE);
+        }
+
+
+
     }
 
 

@@ -1,6 +1,7 @@
 package com.globits.da.service;
 
 import com.globits.da.domain.District;
+import com.globits.da.dto.request.CommuneDto;
 import com.globits.da.dto.request.DistrictDto;
 import com.globits.da.dto.request.ProvinceDto;
 import com.globits.da.dto.response.DistrictResponse;
@@ -31,7 +32,7 @@ public interface DistrictService {
     DistrictResponse createDistrictAndCommune(DistrictDto request);
 
 
-
+    DistrictResponse createDistrictAndCRUDCommune(Integer districtId, DistrictDto districtDto);
 
 
 

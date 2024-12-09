@@ -2,7 +2,12 @@ package com.globits.da.rest;
 
 import com.globits.da.domain.Employee;
 import com.globits.da.dto.EmployeeDto;
+import com.globits.da.dto.response.ApiResponse;
 import com.globits.da.dto.search.EmployeeSearchDto;
+import com.globits.da.exception.EmployeeAppException;
+import com.globits.da.exception.EmployeeCodeException;
+import com.globits.da.exception.ErrorCodeException;
+import com.globits.da.exception.ValidationException;
 import com.globits.da.service.EmployeeService;
 import com.globits.da.utils.ExcelUtil;
 import org.springframework.core.io.InputStreamResource;
@@ -18,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -28,31 +34,34 @@ public class RestEmployeeController {
 
 
     @GetMapping("/get-all-employee")
-    public List<Employee> getAll(){
-        return  empService.getAllEmployee();
+    public List<Employee> getAll() {
+        return empService.getAllEmployee();
     }
 
     @PostMapping("/search-employees")
-    public ResponseEntity<List<Employee>> searchEmployees(@RequestBody EmployeeSearchDto employeeSearchDto){
-        List<Employee> employees =  empService.searchEmployees(employeeSearchDto);
+    public ResponseEntity<List<Employee>> searchEmployees(@RequestBody EmployeeSearchDto employeeSearchDto) {
+        List<Employee> employees = empService.searchEmployees(employeeSearchDto);
         return ResponseEntity.ok(employees);
     }
 
     @PostMapping("/add-employee")
-    public Employee createEmployee(@RequestBody EmployeeDto request){
-      return  empService.addEmployee(request);
+    public ResponseEntity<ApiResponse<?>> createEmployee(@RequestBody EmployeeDto request) {
+
+        ApiResponse<Employee> response = new ApiResponse<>();
+        response.setResult(empService.addEmployee(request));
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/delete-employee/{id}")
-    public String deleteEmployee(@PathVariable("id") Integer id){
+    public String deleteEmployee(@PathVariable("id") Integer id) {
 
-       return empService.deleteEmployee(id);
+        return empService.deleteEmployee(id);
 
     }
 
     @PutMapping("/update-employee/{empId}")
-    public Employee updateEmployee(@PathVariable("empId") Integer id ,@RequestBody EmployeeDto request){
-        return  empService.updateEmployee(id,request);
+    public Employee updateEmployee(@PathVariable("empId") Integer id, @RequestBody EmployeeDto request) {
+        return empService.updateEmployee(id, request);
     }
 
 
@@ -79,12 +88,6 @@ public class RestEmployeeController {
             throw new RuntimeException("Lỗi khi export file Excel", e);
         }
     }
-
-
-
-
-
-
 
 
 }

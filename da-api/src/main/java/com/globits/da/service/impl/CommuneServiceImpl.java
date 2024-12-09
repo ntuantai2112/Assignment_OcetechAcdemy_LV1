@@ -5,6 +5,8 @@ import com.globits.da.domain.District;
 import com.globits.da.dto.response.ApiResponse;
 import com.globits.da.dto.request.CommuneDto;
 import com.globits.da.dto.response.CommuneResponse;
+import com.globits.da.exception.AppException;
+import com.globits.da.exception.ErrorCodeException;
 import com.globits.da.mapper.CommuneMapper;
 import com.globits.da.repository.CommuneRepository;
 import com.globits.da.repository.DistrictRepository;
@@ -49,7 +51,7 @@ public class CommuneServiceImpl implements CommuneService {
         }
 
         ApiResponse<List<CommuneResponse>> response = new ApiResponse<>();
-        response.setCode(200);
+        response.setCode(ErrorCodeException.SUCCESS_CODE.getCode());
         response.setResult(communeResponses);
         return response;
     }
@@ -61,7 +63,7 @@ public class CommuneServiceImpl implements CommuneService {
                 .collect(Collectors.toList());
 
         ApiResponse<List<CommuneResponse>> response = new ApiResponse<>();
-        response.setCode(200);
+        response.setCode(ErrorCodeException.SUCCESS_CODE.getCode());
         response.setResult(communeResponses);
         return response;
 
@@ -71,7 +73,7 @@ public class CommuneServiceImpl implements CommuneService {
     public ApiResponse<CommuneResponse> getCommuneById(Integer id) {
         ApiResponse<CommuneResponse> apiResponse = new ApiResponse<>();
         Commune commune =  repository.findById(id).get();
-        apiResponse.setCode(200);
+        apiResponse.setCode(ErrorCodeException.SUCCESS_CODE.getCode());
         apiResponse.setMessage(null);
         apiResponse.setResult(mapper.toCommuneResponse(commune));
 
@@ -80,12 +82,16 @@ public class CommuneServiceImpl implements CommuneService {
 
     @Override
     public ApiResponse<CommuneResponse> addCommune(CommuneDto request) {
-
         District district = districtReo.findDistrictByNameQuery(request.getDistrictName());
+        Optional<Commune> existsCommune = repository.findByNameAndDistrictId(request.getName(), district.getId());
+        if(existsCommune.isPresent()){
+            throw new AppException(ErrorCodeException.COMMUNE_NAME_EXISTS);
+        }
+
         Commune commune = mapper.toCommune(request);
         commune.setDistrict(district);
         mapper.toCommuneResponse(repository.save(commune));
-        apiResponse.setCode(200);
+        apiResponse.setCode(ErrorCodeException.SUCCESS_CODE.getCode());
         apiResponse.setResult(mapper.toCommuneResponse(repository.save(commune)));
         apiResponse.setMessage("Add Commune Successfully!");
         return apiResponse;
@@ -97,7 +103,7 @@ public class CommuneServiceImpl implements CommuneService {
         ApiResponse<CommuneResponse> apiResponse = new ApiResponse<>();
 
         Commune commune = repository.findById(id).get();
-        apiResponse.setCode(200);
+        apiResponse.setCode(ErrorCodeException.SUCCESS_CODE.getCode());
         apiResponse.setMessage("Delete Succesfully!");
         apiResponse.setResult(mapper.toCommuneResponse(commune));
         repository.delete(commune);
@@ -109,7 +115,7 @@ public class CommuneServiceImpl implements CommuneService {
         ApiResponse<CommuneResponse> apiResponse = new ApiResponse<>();
         Commune commune = repository.findById(id).get();
         mapper.updateCommune(commune,request);
-        apiResponse.setCode(200);
+        apiResponse.setCode(ErrorCodeException.SUCCESS_CODE.getCode());
         apiResponse.setMessage("Update Successfully!");
         apiResponse.setResult(mapper.toCommuneResponse(repository.save(commune)));
         return apiResponse;

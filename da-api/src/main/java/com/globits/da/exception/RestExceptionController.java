@@ -75,14 +75,35 @@ public class RestExceptionController {
         return map;
     }
 
-    @ExceptionHandler(value = RuntimeException.class)
-    ResponseEntity<ApiResponse<String>> handleRuntimeException(RuntimeException e){
+    @ExceptionHandler(value = AppException.class)
+    ResponseEntity<ApiResponse<String>> handleAppException(AppException e){
         ApiResponse<String> response = new ApiResponse<>();
-        response.setCode(400);
-        response.setMessage(e.getMessage());
+        ErrorCodeException errorCode = e.getErrorCode();
+        response.setCode(errorCode.getCode());
+        response.setMessage(errorCode.getMessage());
 
         return  ResponseEntity.badRequest().body(response);
     }
 
+    @ExceptionHandler(value = EmployeeAppException.class)
+    ResponseEntity<ApiResponse<String>> handleEmployeeAppException(EmployeeAppException e){
+        ApiResponse<String> response = new ApiResponse<>();
+        EmployeeCodeException errorCode = e.getEmployeeCode();
+        response.setCode(errorCode.getCode());
+        response.setMessage(errorCode.getMessage());
+
+        return  ResponseEntity.badRequest().body(response);
+    }
+
+
+    @ExceptionHandler(value = Exception.class)
+    ResponseEntity<ApiResponse<String>> handlingException(Exception e){
+
+        ApiResponse<String> response = new ApiResponse<>();
+        response.setCode(ErrorCodeException.ERROR_CODE.getCode());
+        response.setMessage(e.getMessage());
+        return  ResponseEntity.badRequest().body(response);
+
+    }
 
 }

@@ -38,6 +38,11 @@
 	<dependencies>
 
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
@@ -293,13 +298,13 @@
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>build-helper-maven-plugin</artifactId>
-						<version>1.9.1</version>
+<!--						<version>1.9.1</version>-->
 					</plugin>
 
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-compiler-plugin</artifactId>
-						<version>3.5.1</version>
+<!--						<version>3.5.1</version>-->
 						<configuration>
 							<debug>true</debug> <!-- Set debug to true to retain the hash (#) for spring security -->
 							<encoding>UTF-8</encoding>
@@ -312,7 +317,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-dependency-plugin</artifactId>
-						<version>2.5.1</version>
+<!--						<version>2.5.1</version>-->
 						<executions>
 							<execution>
 								<id>install</id>

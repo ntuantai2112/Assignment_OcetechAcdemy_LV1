@@ -5,6 +5,7 @@ import com.globits.da.dto.request.DistrictDto;
 import com.globits.da.dto.response.ApiResponse;
 import com.globits.da.dto.response.CommuneResponse;
 import com.globits.da.dto.response.CommuneResponse;
+import com.globits.da.exception.ErrorCodeException;
 import com.globits.da.service.CommuneService;
 import com.globits.da.service.DistrictService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ public class RestCommuneController {
     @GetMapping("/find-communes/{districtId}")
     public ApiResponse<List<CommuneResponse>> findCommunesByDistrictId(@PathVariable("districtId") Integer districtId){
          ApiResponse<List<CommuneResponse>> response = new ApiResponse<>();
-         response.setCode(200);
+         response.setCode(ErrorCodeException.SUCCESS_CODE.getCode());
          response.setMessage("Find sucessfully!");
          response.setResult(service.findCommunesByDistrictId(districtId));
          return response;

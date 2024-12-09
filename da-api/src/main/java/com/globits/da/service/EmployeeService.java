@@ -3,6 +3,7 @@ package com.globits.da.service;
 import com.globits.da.domain.Employee;
 import com.globits.da.dto.EmployeeDto;
 import com.globits.da.dto.search.EmployeeSearchDto;
+import com.globits.da.exception.ValidationException;
 import org.springframework.data.jpa.repository.Query;
 
 import java.io.ByteArrayInputStream;
@@ -32,6 +33,8 @@ public interface EmployeeService {
 
     ByteArrayInputStream getDataDowloadedExcel() throws IOException;
 
+
+    void validateEmployee(EmployeeDto request);
 
 
 

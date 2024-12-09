@@ -7,6 +7,7 @@ import com.globits.da.dto.request.ProvinceDto;
 import com.globits.da.dto.response.ApiResponse;
 import com.globits.da.dto.response.ProvinceResponse;
 import com.globits.da.dto.search.EmployeeSearchDto;
+import com.globits.da.exception.ErrorCodeException;
 import com.globits.da.service.EmployeeService;
 import com.globits.da.service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,9 +50,6 @@ public class RestProvinceController {
 
 
 
-
-
-
     @PostMapping("/add-province")
     public ProvinceResponse createProvince(@RequestBody ProvinceDto request){
       return  provinceService.addProvince(request);
@@ -73,9 +71,18 @@ public class RestProvinceController {
     @PostMapping("/add-province-districts")
     public ResponseEntity<ApiResponse<ProvinceResponse>> createProvinceAndDistricts(@RequestBody ProvinceDto request){
         ApiResponse<ProvinceResponse>response = new ApiResponse<>();
-        response.setCode(200);
+        response.setCode(ErrorCodeException.SUCCESS_CODE.getCode());
         response.setMessage("add successfully!");
         response.setResult(provinceService.createProvinceAndDistricts(request));
+        return  ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/add-province-districts-communes")
+    public ResponseEntity<ApiResponse<ProvinceResponse>> createProvinceAndDistrictAndCommune(@RequestBody ProvinceDto request){
+        ApiResponse<ProvinceResponse>response = new ApiResponse<>();
+        response.setCode(ErrorCodeException.SUCCESS_CODE.getCode());
+        response.setMessage("add successfully!");
+        response.setResult(provinceService.createProvinceAndDistrictAndCommune(request));
         return  ResponseEntity.ok(response);
     }
 
@@ -84,7 +91,7 @@ public class RestProvinceController {
             @PathVariable("provinceId") Integer provinceId
             ,@RequestBody ProvinceDto request){
         ApiResponse<ProvinceResponse>response = new ApiResponse<>();
-        response.setCode(200);
+        response.setCode(ErrorCodeException.SUCCESS_CODE.getCode());
         response.setMessage("update successfully!");
         response.setResult(provinceService.updateProvince(provinceId,request));
         return  ResponseEntity.ok(response);
@@ -95,7 +102,7 @@ public class RestProvinceController {
             @PathVariable("provinceId") Integer provinceId
             ,@RequestBody ProvinceDto request){
         ApiResponse<ProvinceResponse>response = new ApiResponse<>();
-        response.setCode(200);
+        response.setCode(ErrorCodeException.SUCCESS_CODE.getCode());
         response.setMessage("update successfully!");
         response.setResult(provinceService.updateProvinceAndCRUDDistrict(provinceId,request));
         return  ResponseEntity.ok(response);
