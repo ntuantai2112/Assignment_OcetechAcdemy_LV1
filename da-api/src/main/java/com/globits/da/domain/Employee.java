@@ -1,9 +1,17 @@
 package com.globits.da.domain;
 
+import lombok.*;
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "tbl_employee")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,55 +28,16 @@ public class Employee {
     @Column(name = "age")
     private int age;
 
-    public Employee() {
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "commune_id",nullable = false,referencedColumnName = "id")
+    @JsonManagedReference
+    private Commune commune;
 
-    public int getId() {
-        return id;
-    }
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
+    private List<Certificate> certificates;
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
-    public String getCode() {
-        return code;
-    }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 }
 

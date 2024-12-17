@@ -67,17 +67,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="DAApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="da-app" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.globits.DAApplication" />
@@ -120,6 +109,13 @@
       <workItem from="1733538355259" duration="1327000" />
       <workItem from="1733626985746" duration="591000" />
       <workItem from="1733710872233" duration="19321000" />
+      <workItem from="1733819276374" duration="596000" />
+      <workItem from="1734056240511" duration="13423000" />
+      <workItem from="1734315722844" duration="3871000" />
+      <workItem from="1734319739880" duration="1758000" />
+      <workItem from="1734321796768" duration="9689000" />
+      <workItem from="1734404468708" duration="2752000" />
+      <workItem from="1734408873127" duration="5436000" />
     </task>
     <servers />
   </component>
@@ -141,6 +137,11 @@
           <url>file://$PROJECT_DIR$/da-api/src/main/java/com/globits/da/service/impl/DistrictServiceImpl.java</url>
           <line>81</line>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/da-api/src/main/java/com/globits/da/service/impl/CertificateServiceImpl.java</url>
+          <line>83</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

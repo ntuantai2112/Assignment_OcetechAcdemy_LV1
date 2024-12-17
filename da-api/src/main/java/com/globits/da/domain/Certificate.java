@@ -13,7 +13,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "tbl_certificate")
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -35,6 +36,17 @@ public class Certificate {
     private LocalDateTime createdAt = LocalDateTime.now();
     @Column(name = "updated_at")
     private LocalDateTime  updatedAt = LocalDateTime.now();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "province_id",referencedColumnName = "id")
+    private Province province;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id",referencedColumnName = "id")
+    private Employee employee;
+
+
+
 
 
 }

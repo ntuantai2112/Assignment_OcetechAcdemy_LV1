@@ -32,7 +32,7 @@ public class District {
     private LocalDateTime  updatedAt = LocalDateTime.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "province_id",nullable = false)
+    @JoinColumn(name = "province_id",nullable = false,referencedColumnName = "id")
     private Province province;
 
     @OneToMany(mappedBy = "district",cascade = CascadeType.ALL,orphanRemoval = true)

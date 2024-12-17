@@ -18,6 +18,12 @@ public interface CommuneRepository extends JpaRepository<Commune,Integer> {
     @Query("SELECT C FROM Commune C WHERE lower(C.name) LIKE lower(concat('%', :name , '%'))")
     List<Commune> findByNameQuery(@Param("name") String name);
 
+    @Query("SELECT C FROM Commune C WHERE lower(C.name) LIKE lower(concat('%', :name , '%'))")
+    Optional<Commune> findCommuneByName(@Param("name") String name);
+
+
+    Optional<Commune> findByName(String name);
+
     @Query("SELECT C FROM Commune C WHERE C.district.id = :districtId")
     List<Commune> findCommunesByDistrictId(@Param("districtId") Integer districtId);
 

@@ -1,29 +1,20 @@
 package com.globits.da.rest;
 
 import com.globits.da.domain.Employee;
-import com.globits.da.dto.EmployeeDto;
+import com.globits.da.dto.request.EmployeeDto;
 import com.globits.da.dto.response.ApiResponse;
+import com.globits.da.dto.response.EmployeeResponse;
 import com.globits.da.dto.search.EmployeeSearchDto;
-import com.globits.da.exception.EmployeeAppException;
-import com.globits.da.exception.EmployeeCodeException;
-import com.globits.da.exception.ErrorCodeException;
-import com.globits.da.exception.ValidationException;
 import com.globits.da.service.EmployeeService;
-import com.globits.da.utils.ExcelUtil;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -34,20 +25,21 @@ public class RestEmployeeController {
 
 
     @GetMapping("/get-all-employee")
-    public List<Employee> getAll() {
+    public List<EmployeeResponse> getAll() {
+
         return empService.getAllEmployee();
     }
 
     @PostMapping("/search-employees")
-    public ResponseEntity<List<Employee>> searchEmployees(@RequestBody EmployeeSearchDto employeeSearchDto) {
-        List<Employee> employees = empService.searchEmployees(employeeSearchDto);
+    public ResponseEntity<List<EmployeeResponse>> searchEmployees(@RequestBody EmployeeSearchDto employeeSearchDto) {
+        List<EmployeeResponse> employees = empService.searchEmployees(employeeSearchDto);
         return ResponseEntity.ok(employees);
     }
 
     @PostMapping("/add-employee")
     public ResponseEntity<ApiResponse<?>> createEmployee(@RequestBody EmployeeDto request) {
 
-        ApiResponse<Employee> response = new ApiResponse<>();
+        ApiResponse<EmployeeResponse> response = new ApiResponse<>();
         response.setResult(empService.addEmployee(request));
         return ResponseEntity.ok(response);
     }
@@ -60,7 +52,7 @@ public class RestEmployeeController {
     }
 
     @PutMapping("/update-employee/{empId}")
-    public Employee updateEmployee(@PathVariable("empId") Integer id, @RequestBody EmployeeDto request) {
+    public EmployeeResponse updateEmployee(@PathVariable("empId") Integer id, @RequestBody EmployeeDto request) {
         return empService.updateEmployee(id, request);
     }
 

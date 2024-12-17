@@ -17,7 +17,11 @@ public enum ErrorCodeException {
     PROVINCE_NOT_FOUND(404, "The province not found!"),
     DISTRICT_NOT_FOUND(404, "The district not found!"),
     CERTIFICATE_NOT_FOUND(404, "The certificate not found!"),
-    COMMUNE_NOT_FOUND(404, "The commune not found!");
+    COMMUNE_NOT_FOUND(404, "The commune not found!"),
+
+    CERTIFICATE_ALREADY_EXITS(1005,"The certificate already exists in this province and is still valid!"),
+    CERTIFICATE_MAX(1006,"Employees must not have more than 3 valid diplomas of the same type!");
+
 
     private int code;
     private String message;

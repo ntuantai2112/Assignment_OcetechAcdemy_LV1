@@ -3,10 +3,13 @@ package com.globits.da.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tbl_commune")
@@ -31,6 +34,10 @@ public class Commune {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "district_id")
     private District district;
+
+    @OneToMany(mappedBy = "commune")
+    @JsonBackReference
+    private List<Employee> employees;
 
 
 }

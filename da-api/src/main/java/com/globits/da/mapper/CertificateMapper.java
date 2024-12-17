@@ -12,6 +12,8 @@ public interface CertificateMapper {
 
     Certificate toCertificate(CertificateDto certificateDto);
 
+    @Mapping(target = "employeeName", source = "employee.name")
+    @Mapping(target = "provinceName", source = "province.name")
     CertificateResponse toCertificateResponse(Certificate certificate);
 
     void updateCertificate(@MappingTarget Certificate certificate, CertificateDto certificateDto);

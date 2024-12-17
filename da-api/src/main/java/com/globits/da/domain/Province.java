@@ -34,6 +34,9 @@ public class Province implements Serializable {
     @OneToMany(mappedBy = "province",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<District> districts = new ArrayList<>();
 
+    @OneToMany(mappedBy = "province",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Certificate> certificates = new ArrayList<>();
+
 
 
 

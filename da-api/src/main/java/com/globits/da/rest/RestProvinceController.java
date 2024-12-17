@@ -1,24 +1,14 @@
 package com.globits.da.rest;
 
-import com.globits.da.domain.Employee;
-import com.globits.da.domain.Province;
-import com.globits.da.dto.EmployeeDto;
 import com.globits.da.dto.request.ProvinceDto;
 import com.globits.da.dto.response.ApiResponse;
 import com.globits.da.dto.response.ProvinceResponse;
-import com.globits.da.dto.search.EmployeeSearchDto;
 import com.globits.da.exception.ErrorCodeException;
-import com.globits.da.service.EmployeeService;
 import com.globits.da.service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.util.List;
 
 @RestController
