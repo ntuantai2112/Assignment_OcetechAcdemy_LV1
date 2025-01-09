@@ -40,7 +40,7 @@
 		<uuid-generator.version>3.1.4</uuid-generator.version>
 		<apache-tika.version>1.9</apache-tika.version>
 		<jodatime-hibernate.version>1.4</jodatime-hibernate.version>
-		<user-type.joda-time.version>6.0.1.GA</user-type.joda-time.version>
+		<userEntity-type.joda-time.version>6.0.1.GA</userEntity-type.joda-time.version>
 		<hibernate.version>5.3.7.Final</hibernate.version>
 		<imgscalr-lib.version>4.2</imgscalr-lib.version>
 
@@ -57,6 +57,8 @@
 			<version>1.18.34</version>
 			<scope>provided</scope>
 		</dependency>
+
+
 
 
 		<dependency>
@@ -341,12 +343,12 @@
 		</dependency>
 
 		<!-- <dependency> <groupId>org.jadira.usertype</groupId> <artifactId>usertype.jodatime</artifactId> 
-			<version>${user-type.joda-time.version}</version> </dependency> -->
+			<version>${userEntity-type.joda-time.version}</version> </dependency> -->
 
 		<dependency>
 			<groupId>org.jadira.usertype</groupId>
 			<artifactId>usertype.core</artifactId>
-			<version>${user-type.joda-time.version}</version>
+			<version>${userEntity-type.joda-time.version}</version>
 		</dependency>
 
 		<!-- HTML Encoder to prevent Cross-site Scripting -->

@@ -63,7 +63,7 @@ class Intro1 extends Component {
             <Grid item md={6}>
               <div className="section-intro1__product">
                 <a
-                  href="https://themeforest.net/user/mh_rafi/portfolio"
+                  href="https://themeforest.net/userEntity/mh_rafi/portfolio"
                   className="section-intro1__product__link"
                   target="_blank"
                   rel="noopener noreferrer"

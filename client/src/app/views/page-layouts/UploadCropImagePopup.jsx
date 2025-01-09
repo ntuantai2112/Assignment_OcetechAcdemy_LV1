@@ -266,13 +266,13 @@ class UploadCropImagePopup extends React.Component {
       }
     }
     return axios.post(url, formData, config).then(response => {
-      let user = response.data;
-      this.setState({ user: user });
-      //console.log(user);
+      let userEntity = response.data;
+      this.setState({ userEntity: userEntity });
+      //console.log(userEntity);
     });
   }
   render() {
-    const { t, i18n, handleClose, handleSelect, selectedItem, open, user, handleUpdate } = this.props;
+    const { t, i18n, handleClose, handleSelect, selectedItem, open, userEntity, handleUpdate } = this.props;
     let { dragClass, files, queProgress } = this.state;
 
     let isEmpty = files.length === 0;
@@ -352,7 +352,7 @@ class UploadCropImagePopup extends React.Component {
             className="mb-16 mr-8 align-bottom"
             variant="contained"
             color="secondary"
-            onClick={() => handleClose(this.state.user)}>{t('general.close')}
+            onClick={() => handleClose(this.state.userEntity)}>{t('general.close')}
           </Button>
           <Button
             className="mb-16 mr-32 align-bottom"

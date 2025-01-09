@@ -218,7 +218,7 @@ class User extends Component {
         />
       },
       { title: t("username"), field: "username", width: "150" },
-      { title: t("user.displayName"), field: "person.displayName", width: "150" },
+      { title: t("userEntity.displayName"), field: "person.displayName", width: "150" },
       { title: t("general.email"), field: "email", align: "left", width: "150" },
     ];
 
@@ -226,7 +226,7 @@ class User extends Component {
       <div className="m-sm-30">
 
         <div className="mb-sm-30">
-          <Breadcrumb routeSegments={[{ name: t("Dashboard.manage"), path: "/directory/apartment" },{ name: t('user.title') }]} />
+          <Breadcrumb routeSegments={[{ name: t("Dashboard.manage"), path: "/directory/apartment" },{ name: t('userEntity.title') }]} />
         </div>
 
         <Grid container spacing={3}>

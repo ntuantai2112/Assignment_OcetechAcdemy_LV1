@@ -56,15 +56,15 @@ class ChangePasswordPopup extends React.Component {
       return true
     })
   }
-  async handleChangePassword(user, handleClose) {
+  async handleChangePassword(userEntity, handleClose) {
     let { t } = this.props;
-    user.password = this.state.password;
-    user.oldPassword = this.state.oldPassword;
-    user.confirmPassword = this.state.confirmPassword;
+    userEntity.password = this.state.password;
+    userEntity.oldPassword = this.state.oldPassword;
+    userEntity.confirmPassword = this.state.confirmPassword;
     const url = ConstantList.API_ENPOINT + "/api/users/password/self";
     let isChangedOK = false;
 
-    await axios.put(url, user).then(response => {
+    await axios.put(url, userEntity).then(response => {
       // console.log(response);
       isChangedOK = true;
       toast.success(t('general.success_update_password'));
@@ -84,7 +84,7 @@ class ChangePasswordPopup extends React.Component {
     });
   };
   render() {
-    const { t, i18n, handleClose, handleSelect, selectedItem, open, user } = this.props;
+    const { t, i18n, handleClose, handleSelect, selectedItem, open, userEntity } = this.props;
     return (
       <Dialog onClose={handleClose} open={open} PaperProps={{
         style: {
@@ -96,7 +96,7 @@ class ChangePasswordPopup extends React.Component {
         },
       }} PaperComponent={PaperComponent} maxWidth={'md'} fullWidth={true} >
         <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-          <span className="styleColor">{t("user.changePass")}</span>
+          <span className="styleColor">{t("userEntity.changePass")}</span>
         </DialogTitle>
         <ValidatorForm ref="form">
           <DialogContent>
@@ -104,7 +104,7 @@ class ChangePasswordPopup extends React.Component {
               <Grid item md={12} sm={12} xs={12}>
                 <FormControl fullWidth margin="dense">
                   <TextValidator
-                    label={<span className="font"><span style={{ color: "red" }}> * </span>{t('user.current_password')}</span>}
+                    label={<span className="font"><span style={{ color: "red" }}> * </span>{t('userEntity.current_password')}</span>}
                     id="password-current"
                     className="w-100"
                     size="small"
@@ -122,7 +122,7 @@ class ChangePasswordPopup extends React.Component {
               <Grid item md={12} sm={12} xs={12}>
                 <FormControl fullWidth margin="dense">
                   <TextValidator
-                    label={<span className="font"><span style={{ color: "red" }}> * </span>{t('user.pass')}</span>}
+                    label={<span className="font"><span style={{ color: "red" }}> * </span>{t('userEntity.pass')}</span>}
                     id="password-current"
                     size = "small"
                     variant = "outlined"
@@ -140,7 +140,7 @@ class ChangePasswordPopup extends React.Component {
               <Grid item md={12} sm={12} xs={12}>
                 <FormControl fullWidth margin="dense">
                   <TextValidator
-                    label={<span className="font"><span style={{ color: "red" }}> * </span>{t('user.confirm_password')}</span>}
+                    label={<span className="font"><span style={{ color: "red" }}> * </span>{t('userEntity.confirm_password')}</span>}
                     size = "small"
                     variant = "outlined"
                     id="confirm-password"
@@ -170,7 +170,7 @@ class ChangePasswordPopup extends React.Component {
               className="mb-16 mr-16 align-bottom"
               variant="contained"
               color="primary"
-              onClick={() => this.handleChangePassword(user, handleClose)}>{t('general.update')}
+              onClick={() => this.handleChangePassword(userEntity, handleClose)}>{t('general.update')}
             </Button>
           </DialogActions>
         </ValidatorForm>

@@ -1,0 +1,6 @@
+
+g	java:S112Q"FDefine and throw a dedicated exception instead of using a generic one.(®ñªûÿÿÿÿ8Å¥¹©Ä2
+C
+java:S1452)"&Remove usage of generic wildcard type.(¼™¼¤8•¦¹©Ä2
+]
+java:S1128";Remove this unused import 'com.globits.da.domain.Employee'.(¸ƒƒ˜ûÿÿÿÿ8µ¦¹©Ä2

@@ -1,0 +1,13 @@
+
+{
+java:S2293."YReplace the type specification in this constructor call with the diamond operator ("<>").(•È«õüÿÿÿÿ8Ê˜²ªÄ2
+k
+java:S4488 "NReplace "@RequestMapping(method = RequestMethod.DELETE)" with "@DeleteMapping"(ðŒžÎ8¾™²ªÄ2
+j
+java:S4488*"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ÇÌµ‘þÿÿÿÿ8Î™²ªÄ2
+f
+java:S4488:"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ó¸åJ8Ú™²ªÄ2
+g
+java:S4488D"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(Ž³¤º8à™²ªÄ2
+j
+java:S4488J"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(„£´Ïùÿÿÿÿ8ä™²ªÄ2

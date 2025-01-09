@@ -91,7 +91,7 @@ class Layout2Topbar extends Component {
                     <img
                       className="mx-8 text-middle circular-image-small cursor-pointer"
                       src={ConstantList.ROOT_PATH+ "assets/images/avatar.jpg"}
-                      alt="user"
+                      alt="userEntity"
                     />
                   }
                 >

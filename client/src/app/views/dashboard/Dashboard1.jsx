@@ -228,7 +228,7 @@ class Analytics extends Component {
                       <img
                         className="circular-image-small"
                         src={buyer.imgUrl}
-                        alt="user"
+                        alt="userEntity"
                       />
                       <div className="pl-8 capitalize">
                         <p className="m-0">{buyer.name}</p>

@@ -26,13 +26,13 @@ function ShoppingCart(props) {
     getCartList,
     deleteProductFromCart,
     updateCartAmount,
-    user
+    userEntity
   } = props;
 
   const [panelOpen, setPanelOpen] = React.useState(false);
 
   if (!cartListLoaded) {
-    getCartList(user.userId);
+    getCartList(userEntity.userId);
     cartListLoaded = true;
   }
 
@@ -84,7 +84,7 @@ function ShoppingCart(props) {
                   size="small"
                   onClick={() =>
                     updateCartAmount(
-                      user.userId,
+                      userEntity.userId,
                       product.id,
                       product.amount + 1
                     )
@@ -97,7 +97,7 @@ function ShoppingCart(props) {
                   size="small"
                   onClick={() =>
                     updateCartAmount(
-                      user.userId,
+                      userEntity.userId,
                       product.id,
                       product.amount - 1
                     )
@@ -117,7 +117,7 @@ function ShoppingCart(props) {
               </div>
               <IconButton
                 size="small"
-                onClick={() => deleteProductFromCart(user.userId, product.id)}
+                onClick={() => deleteProductFromCart(userEntity.userId, product.id)}
               >
                 <Icon fontSize="small">clear</Icon>
               </IconButton>
@@ -140,7 +140,7 @@ const mapStateToProps = state => ({
   deleteProductFromCart: PropTypes.func.isRequired,
   updateCartAmount: PropTypes.func.isRequired,
   cartList: state.ecommerce.cartList,
-  user: state.user
+  userEntity: state.userEntity
 });
 
 export default withStyles({}, { withTheme: true })(

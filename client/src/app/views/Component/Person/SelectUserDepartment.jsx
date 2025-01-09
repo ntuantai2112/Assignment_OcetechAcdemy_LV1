@@ -77,8 +77,8 @@ class SelectUserDepartment extends React.Component {
 
   handleClick = (event, item) => {
     //alert(item);
-    if (item.user.person.id != null) {
-      this.setState({ selectedValue: item.user.person.id, selectedItem: item });
+    if (item.userEntity.person.id != null) {
+      this.setState({ selectedValue: item.userEntity.person.id, selectedItem: item });
     } else {
       this.setState({ selectedValue: null, selectedItem: null });
     }
@@ -150,11 +150,11 @@ class SelectUserDepartment extends React.Component {
         cellStyle: {
           padding:'0px'
         },
-        render: rowData => <Radio id={`radio${rowData.id}`} name="radSelected" value={rowData.user.person.id} checked={this.state.selectedValue === rowData.user.person.id} onClick={(event) => this.handleClick(event, rowData)}
+        render: rowData => <Radio id={`radio${rowData.id}`} name="radSelected" value={rowData.userEntity.person.id} checked={this.state.selectedValue === rowData.userEntity.person.id} onClick={(event) => this.handleClick(event, rowData)}
         />
       },
       // { title: t("general.code"), field: "userId", align: "left", width: "150" },
-      { title: t("general.name"), field: "user.displayName", width: "150" },
+      { title: t("general.name"), field: "userEntity.displayName", width: "150" },
       { title: t("component.department.text"), field: "department.name", width: "150" },
     ];
     return (

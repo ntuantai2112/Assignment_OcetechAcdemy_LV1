@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 
 public class EmployeeDto {
 
+    @NotBlank(message = "EMPLOYEE_NOT_NULL")
     private String code;
     private String name;
     private String email;

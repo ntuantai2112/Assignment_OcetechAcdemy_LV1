@@ -1,16 +1,16 @@
 package com.globits.da.model;
 
 
-public class User {
+public class UserModel {
     private String code;
     private String name;
     private int age;
 
 
-    public User() {
+    public UserModel() {
     }
 
-    public User(String code, String name, int age) {
+    public UserModel(String code, String name, int age) {
         this.code = code;
         this.name = name;
         this.age = age;

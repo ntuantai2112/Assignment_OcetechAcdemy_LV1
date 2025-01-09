@@ -10,6 +10,8 @@
 		<relativePath></relativePath>
 	</parent>
 
+
+
 	<groupId>com.globits</groupId>
 	<artifactId>da</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
@@ -42,7 +44,7 @@
 
 		<jodatime-hibernate.version>1.4</jodatime-hibernate.version>
 		<hibernate.version>5.3.7.Final</hibernate.version>
-		<user-type.joda-time.version>6.0.1.GA</user-type.joda-time.version>
+		<userEntity-type.joda-time.version>6.0.1.GA</userEntity-type.joda-time.version>
 		<joda-time.version>2.10</joda-time.version>
 		<antisamy.version>1.5.3</antisamy.version>
 		<imgscalr-lib.version>4.2</imgscalr-lib.version>

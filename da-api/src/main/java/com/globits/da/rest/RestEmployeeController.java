@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
@@ -31,7 +32,7 @@ public class RestEmployeeController {
     }
 
     @PostMapping("/search-employees")
-    public ResponseEntity<List<EmployeeResponse>> searchEmployees(@RequestBody EmployeeSearchDto employeeSearchDto) {
+    public ResponseEntity<List<EmployeeResponse>> searchEmployees(@RequestBody @Valid EmployeeSearchDto employeeSearchDto) {
         List<EmployeeResponse> employees = empService.searchEmployees(employeeSearchDto);
         return ResponseEntity.ok(employees);
     }

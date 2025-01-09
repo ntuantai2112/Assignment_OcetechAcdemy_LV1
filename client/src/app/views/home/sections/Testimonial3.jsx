@@ -7,7 +7,7 @@ class Testimonial3 extends Component {
       title: "Amazed by the product",
       text:
         "Lorem ipsum dolor sit amet, vim quidam blandit voluptaria no, has eu lorem convenire incorrupte. Vis mutat altera percipit ad.",
-      user: {
+      userEntity: {
         imageUrl: "./assets/images/face-1.jpg",
         name: "Dan Shwartz",
         position: "Software engineer"
@@ -17,7 +17,7 @@ class Testimonial3 extends Component {
       title: "Very nice support",
       text:
         "Lorem ipsum dolor sit amet, vim quidam blandit voluptaria no, has eu lorem convenire incorrupte. Vis mutat altera percipit ad.",
-      user: {
+      userEntity: {
         imageUrl: "./assets/images/face-4.jpg",
         name: "Hellen Miller",
         position: "Accountant"
@@ -27,7 +27,7 @@ class Testimonial3 extends Component {
       title: "My tasks are now painless",
       text:
         "Lorem ipsum dolor sit amet, vim quidam blandit voluptaria no, has eu lorem convenire incorrupte. Vis mutat altera percipit ad.",
-      user: {
+      userEntity: {
         imageUrl: "./assets/images/face-3.jpg",
         name: "Jane Guzmann",
         position: "CEO"
@@ -37,7 +37,7 @@ class Testimonial3 extends Component {
       title: "My income has doubled",
       text:
         "Lorem ipsum dolor sit amet, vim quidam blandit voluptaria no, has eu lorem convenire incorrupte. Vis mutat altera percipit ad.",
-      user: {
+      userEntity: {
         imageUrl: "./assets/images/face-2.jpg",
         name: "Anthony Leblanc",
         position: "ounder at Hereby"
@@ -63,11 +63,11 @@ class Testimonial3 extends Component {
                   <p>{card.text}</p>
                   <Grid container spacing={2} alignItems="center">
                     <Grid item>
-                      <img src={card.user.imageUrl} alt="face" />
+                      <img src={card.userEntity.imageUrl} alt="face" />
                     </Grid>
                     <Grid item>
-                      <strong>{card.user.name}</strong>
-                      <p className="m-0"> {card.user.position} </p>
+                      <strong>{card.userEntity.name}</strong>
+                      <p className="m-0"> {card.userEntity.position} </p>
                     </Grid>
                   </Grid>
                 </Card>

@@ -31,12 +31,12 @@ class AuthGuard extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    const { location, user } = props;
+    const { location, userEntity } = props;
     const { pathname } = location;
     const matched = state.routes.find(r => r.path === pathname);
     const authenticated =
       matched && matched.auth && matched.auth.length
-        ? matched.auth.includes(user.role)
+        ? matched.auth.includes(userEntity.role)
         : true;
 
     return {
@@ -68,7 +68,7 @@ class AuthGuard extends Component {
 AuthGuard.contextType = AppContext;
 
 const mapStateToProps = state => ({
-  user: state.user
+  userEntity: state.userEntity
 });
 
 export default withRouter(connect(mapStateToProps)(AuthGuard));

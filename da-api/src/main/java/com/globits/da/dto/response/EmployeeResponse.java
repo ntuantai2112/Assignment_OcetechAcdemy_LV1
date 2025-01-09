@@ -17,10 +17,9 @@ public class EmployeeResponse {
     private String phone;
     private Integer age;
 //    private ProvinceResponse province;
-//    private DistrictResponse district;
-//    private CommuneResponse commune;
-    private String communeName;
-    private String districtName;
     private String provinceName;
+    private String districtName;
+    private String communeName;
+
 
 }

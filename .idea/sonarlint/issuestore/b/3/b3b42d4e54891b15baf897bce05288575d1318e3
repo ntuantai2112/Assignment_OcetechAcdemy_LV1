@@ -1,0 +1,34 @@
+
+o
+java:S2293""YReplace the type specification in this constructor call with the diamond operator ("<>").(§ÅÚ¡
+o
+java:S2293)"YReplace the type specification in this constructor call with the diamond operator ("<>").(ù‘ñ
+o
+java:S22930"YReplace the type specification in this constructor call with the diamond operator ("<>").(ù‘ñ
+o
+java:S22937"YReplace the type specification in this constructor call with the diamond operator ("<>").(ù‘ñ
+t
+java:S2293>"YReplace the type specification in this constructor call with the diamond operator ("<>").(ºÃ¼Õıÿÿÿÿ
+n
+java:S2293E"YReplace the type specification in this constructor call with the diamond operator ("<>").(Äå'
+t
+java:S2293L"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ê’õÂıÿÿÿÿ
+t
+java:S2293T"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÿî»øÿÿÿÿ
+^
+java:S4488"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(œ ß
+e
+java:S4488&"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(ßƒµ¢şÿÿÿÿ
+^
+java:S4488-"HReplace "@RequestMapping(method = RequestMethod.PUT)" with "@PutMapping"(Õç¼ñ
+^
+java:S44884"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ğÄâÿ
+d
+java:S4488;"NReplace "@RequestMapping(method = RequestMethod.DELETE)" with "@DeleteMapping"(•“ÛÏ
+^
+java:S4488B"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ç¼
+e
+java:S4488I"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(öıéİùÿÿÿÿ
+c
+java:S4488P"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ääîªşÿÿÿÿ
+Q	java:S125Z"<This block of commented-out lines of code should be removed.(Ú°à¬

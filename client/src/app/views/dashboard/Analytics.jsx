@@ -40,7 +40,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 //let isAdmin=false;
 class Dashboard1 extends Component {
   state = {
-    user: {},
+    userEntity: {},
     isAdmin: false,
     isHealthOrg: false,
     isUser: false,
@@ -59,8 +59,8 @@ class Dashboard1 extends Component {
   }
   checkIsAdmin = ()=>{
     this.setState({isAdmin:false})
-    if(this.state.user!=null && this.state.user.roles!=null && this.state.user.roles.length>0){
-      this.state.user.roles.forEach(element => {
+    if(this.state.userEntity!=null && this.state.userEntity.roles!=null && this.state.userEntity.roles.length>0){
+      this.state.userEntity.roles.forEach(element => {
         if(element.name=='ROLE_ADMIN'){
           //isAdmin=true;
           this.setState({isAdmin:true})
@@ -129,8 +129,8 @@ class Dashboard1 extends Component {
   };
  
   async componentWillMount() {
-    let  user=JwtAuthService.getLoginUser();
-    if (user != null && user.roles != null && user.roles.length > 0) {
+    let  userEntity=JwtAuthService.getLoginUser();
+    if (userEntity != null && userEntity.roles != null && userEntity.roles.length > 0) {
  
       //this.setState({ isAdmin: false });    
       this.setState({
@@ -138,7 +138,7 @@ class Dashboard1 extends Component {
         isAdmin: false,
         isUser: false
       });      
-      user.roles.forEach(role => {      
+      userEntity.roles.forEach(role => {
         //alert(role.name);      
         if (role.name == "ROLE_ADMIN") {
           this.setState({ isAdmin: true });
@@ -150,7 +150,7 @@ class Dashboard1 extends Component {
       });
       
       // this.setState({ isAdmin: false });          
-      // user.roles.forEach(role => {            
+      // userEntity.roles.forEach(role => {
       //   if (role.name == "ROLE_ADMIN") {
       //     this.setState({ isAdmin: true });
       //   } else if (role.name == "ROLE_HEALTH_ORG") {
@@ -168,11 +168,11 @@ class Dashboard1 extends Component {
     }
 
     // getCurrentUser().then(({ data }) => {
-    //   this.setState({ user: data }, () => {
-    //     let { user } = this.state;
-    //     if (user != null && user.roles != null && user.roles.length > 0) {
+    //   this.setState({ userEntity: data }, () => {
+    //     let { userEntity } = this.state;
+    //     if (userEntity != null && userEntity.roles != null && userEntity.roles.length > 0) {
     //       this.setState({ isAdmin: false });
-    //       user.roles.forEach(role => {            
+    //       userEntity.roles.forEach(role => {
     //         if (role.name == "ROLE_ADMIN") {
     //           this.setState({ isAdmin: true });
     //         } else if (role.name == "ROLE_HEALTH_ORG") {
@@ -191,7 +191,7 @@ class Dashboard1 extends Component {
     //   });
     // });
 
-        //let { user } = localStorageService.getLoginUser();
+        //let { userEntity } = localStorageService.getLoginUser();
     const numberOfCorrectSampleTube = (await countNumberOfCorrectSampleTube())
       .data;
     const numberOfIncorrectSampleTube = (

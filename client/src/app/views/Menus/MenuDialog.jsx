@@ -208,7 +208,7 @@ class SupplierDialog extends React.Component {
         }
       }
       if (isCheck) {
-        toast.warning(t("user.warning_parent"))
+        toast.warning(t("userEntity.warning_parent"))
         return
       }
     }
@@ -568,18 +568,18 @@ class SupplierDialog extends React.Component {
                       <TextValidator
                         {...params}
                         value={roles}
-                        // label={t('user.role')}
+                        // label={t('userEntity.role')}
                         label={
                           <span className="font">
                             <span style={{ color: "red" }}>*</span>
-                            {t("user.role")}
+                            {t("userEntity.role")}
                           </span>
                         }
                         size = "small"
                         variant = "outlined"
                         fullWidth
                         validators={["required"]}
-                        errorMessages={[t("user.please_select_permission")]}
+                        errorMessages={[t("userEntity.please_select_permission")]}
                       />
                     )}
                   />

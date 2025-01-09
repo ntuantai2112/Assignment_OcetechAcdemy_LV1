@@ -1,0 +1,11 @@
+
+t
+java:S2293<"YReplace the type specification in this constructor call with the diamond operator ("<>").(‹Ø¢üÿÿÿÿ
+P
+java:S1141)"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+m
+java:S2259%"RA "NullPointerException" could be thrown; "getOriginalFilename()" can return null.(—ù‘İûÿÿÿÿ
+`
+java:S4488"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(øœâ•
+S	java:S106-"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ
+S	java:S1069"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ

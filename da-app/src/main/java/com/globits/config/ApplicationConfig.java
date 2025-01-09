@@ -17,7 +17,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 // @EnableScheduling
 @EnableCaching
 @EnableAspectJAutoProxy
-@ComponentScan({ "com.globits.config.listeners", "com.globits.core.utils" })
+@ComponentScan({ "com.globits.config.listeners", "com.globits.core.utils" ,"com.globits.da.domain"})
 public class ApplicationConfig extends CachingConfigurerSupport {
 
 	@Bean

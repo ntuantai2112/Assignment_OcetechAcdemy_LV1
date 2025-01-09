@@ -1841,7 +1841,7 @@
   <commands xmi:id="_8etM8Vu1Eeu2Mvba9O3yvg" elementId="org.eclipse.wst.xml.ui.previousSibling" commandName="Previous Sibling" description="Go to Previous Sibling" category="_8eo7gFu1Eeu2Mvba9O3yvg"/>
   <commands xmi:id="_8etM8lu1Eeu2Mvba9O3yvg" elementId="org.eclipse.egit.ui.RepositoriesViewConfigurePush" commandName="Configure Push..." category="_8epiuVu1Eeu2Mvba9O3yvg"/>
   <commands xmi:id="_8etM81u1Eeu2Mvba9O3yvg" elementId="org.eclipse.ui.edit.findIncrementalReverse" commandName="Incremental Find Reverse" description="Incremental find reverse" category="_8eo7gFu1Eeu2Mvba9O3yvg"/>
-  <commands xmi:id="_8etM9Fu1Eeu2Mvba9O3yvg" elementId="org.eclipse.epp.mpc.ui.command.importFavoritesWizard" commandName="Import Marketplace Favorites" description="Import another user's Marketplace Favorites List" category="_8epio1u1Eeu2Mvba9O3yvg">
+  <commands xmi:id="_8etM9Fu1Eeu2Mvba9O3yvg" elementId="org.eclipse.epp.mpc.ui.command.importFavoritesWizard" commandName="Import Marketplace Favorites" description="Import another userEntity's Marketplace Favorites List" category="_8epio1u1Eeu2Mvba9O3yvg">
     <parameters xmi:id="_8etM9Vu1Eeu2Mvba9O3yvg" elementId="favoritesUrl" name="favoritesUrl"/>
   </commands>
   <commands xmi:id="_8etM9lu1Eeu2Mvba9O3yvg" elementId="org.eclipse.ant.ui.antShortcut.run" commandName="Run Ant Build" description="Run Ant Build" category="_8epimlu1Eeu2Mvba9O3yvg"/>
@@ -2239,7 +2239,7 @@
   <commands xmi:id="_8evpdlu1Eeu2Mvba9O3yvg" elementId="org.eclipse.text.quicksearch.commands.quicksearchCommand" commandName="Quick Search" category="_8epillu1Eeu2Mvba9O3yvg"/>
   <commands xmi:id="_8evpd1u1Eeu2Mvba9O3yvg" elementId="org.eclipse.egit.ui.team.PushTags" commandName="Push Tags..." category="_8epiuVu1Eeu2Mvba9O3yvg"/>
   <commands xmi:id="_8evpeFu1Eeu2Mvba9O3yvg" elementId="org.eclipse.egit.ui.ContinueRebase" commandName="Continue Rebase" category="_8epiuVu1Eeu2Mvba9O3yvg"/>
-  <commands xmi:id="_8evpeVu1Eeu2Mvba9O3yvg" elementId="org.eclipse.help.ui.closeTray" commandName="Close User Assistance Tray" description="Close the user assistance tray containing context help information and cheat sheets." category="_8epitVu1Eeu2Mvba9O3yvg"/>
+  <commands xmi:id="_8evpeVu1Eeu2Mvba9O3yvg" elementId="org.eclipse.help.ui.closeTray" commandName="Close User Assistance Tray" description="Close the userEntity assistance tray containing context help information and cheat sheets." category="_8epitVu1Eeu2Mvba9O3yvg"/>
   <commands xmi:id="_8evpelu1Eeu2Mvba9O3yvg" elementId="org.eclipse.egit.ui.history.CreatePatch" commandName="Create Patch..." category="_8epio1u1Eeu2Mvba9O3yvg"/>
   <commands xmi:id="_8evpe1u1Eeu2Mvba9O3yvg" elementId="org.eclipse.debug.ui.commands.Resume" commandName="Resume" description="Resume" category="_8epimlu1Eeu2Mvba9O3yvg"/>
   <commands xmi:id="_8evpfFu1Eeu2Mvba9O3yvg" elementId="org.eclipse.wst.jsdt.ui.edit.text.java.toggle.comment" commandName="Toggle Comment" description="Toggle comment the selected lines" category="_8epikFu1Eeu2Mvba9O3yvg"/>

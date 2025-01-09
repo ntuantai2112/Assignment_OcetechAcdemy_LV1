@@ -94,7 +94,7 @@ export default function TabsHealthOrgRegisterForm(props) {
           >
             <Tab label={t('Intro.title')} {...a11yProps(0)} />
             {/* <Tab label={t('HealthOrgRegisterForm.tab1')} {...a11yProps(1)} /> */}
-            <Tab label={t('user.healthOrg')} {...a11yProps(1)} />
+            <Tab label={t('userEntity.healthOrg')} {...a11yProps(1)} />
             <Tab label={t('Technician.title')} {...a11yProps(2)} />
           </Tabs>
         </AppBar>

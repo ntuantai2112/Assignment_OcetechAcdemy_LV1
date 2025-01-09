@@ -66,9 +66,9 @@ class Layout1Topbar extends Component {
 
   render() {
     let imagePath =ConstantList.ROOT_PATH+"assets/images/avatar.jpg"
-    let user = authService.getLoginUser();
-    if(user!=null && user.imagePath!=null){
-      imagePath =ConstantList.API_ENPOINT + user.imagePath;
+    let userEntity = authService.getLoginUser();
+    if(userEntity!=null && userEntity.imagePath!=null){
+      imagePath =ConstantList.API_ENPOINT + userEntity.imagePath;
     }
     const { t, i18n } = this.props;
     let { theme, settings } = this.props;
@@ -126,7 +126,7 @@ class Layout1Topbar extends Component {
                     <img
                       className="mx-8 text-middle circular-image-small cursor-pointer"
                       src={imagePath}
-                      alt="user"
+                      alt="userEntity"
                     />
                   }
                 >
@@ -139,7 +139,7 @@ class Layout1Topbar extends Component {
                   <MenuItem style={{ minWidth: 185 }}>
                     <Link
                       className="flex flex-middle"
-                      to="/page-layouts/user-profile"
+                      to="/page-layouts/userEntity-profile"
                     >
                       <Icon> person </Icon>
                       <span className="pl-16"> {t('Dashboard.profile')} </span>

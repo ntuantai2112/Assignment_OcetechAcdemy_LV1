@@ -48,7 +48,7 @@ toast.configure({
 class UserProfile extends Component {
   state = {
     open: true,
-    user: {},
+    userEntity: {},
     healthOrg: {},
     shouldOpenImageDialog: false,
     shouldOpenPasswordDialog: false,
@@ -124,12 +124,12 @@ class UserProfile extends Component {
         });
       }
 
-      this.setState({ user: data, checkHealthOrg: checkHealthOrg }, () => {
-        // console.log(this.state.user)
+      this.setState({ userEntity: data, checkHealthOrg: checkHealthOrg }, () => {
+        // console.log(this.state.userEntity)
       });
       this.setState({ ...data });
     });
-    //let user = localStorageService.getLoginUser();
+    //let userEntity = localStorageService.getLoginUser();
     if (window.innerWidth < 768) {
       this.setState({ open: false });
     }
@@ -215,10 +215,10 @@ class UserProfile extends Component {
     });
   };
   componentWillUnmount() {
-    let user = localStorageService.getLoginUser();
+    let userEntity = localStorageService.getLoginUser();
     getCurrentUser();
-    this.setState({ user: user });
-    this.setState(user);
+    this.setState({ userEntity: userEntity });
+    this.setState(userEntity);
     if (window) window.removeEventListener("resize", this.windowResizeListener);
   }
   handleOpenUploadDialog = () => {
@@ -262,9 +262,9 @@ class UserProfile extends Component {
       .post(url, formData, config)
       .then((response) => {
         toast.success(t("update_success_message"));
-        let user = response.data;
-        this.setState({ user: user });
-        authService.setLoginUser(user);
+        let userEntity = response.data;
+        this.setState({ userEntity: userEntity });
+        authService.setLoginUser(userEntity);
         this.handleDialogClose();
       })
       .catch(() => {
@@ -341,7 +341,7 @@ class UserProfile extends Component {
       email,
       contactPhone,
       contactName,
-      user,
+      userEntity,
       healthOrg,
       shouldOpenImageDialog,
       shouldOpenPasswordDialog,
@@ -366,7 +366,7 @@ class UserProfile extends Component {
       { id: "F", name: "Nữ" },
       { id: "U", name: "Không rõ" },
     ];
-    // console.log(user);
+    // console.log(userEntity);
     //alert('Render');
     return (
       <div className="m-sm-30">
@@ -390,21 +390,21 @@ class UserProfile extends Component {
             open={this.state.shouldOpenPasswordDialog}
             uploadUrl={API_PATH + "avatarUpload"}
             acceptType="png;jpg;gif;jpeg"
-            user={user}
+            userEntity={userEntity}
           />
         )}
         <div>
           {
             <span className="styleColor">
-              {checkHealthOrg ? t("user.healthOrg") : t("user.person_info")}
+              {checkHealthOrg ? t("userEntity.healthOrg") : t("userEntity.person_info")}
             </span>
           }
         </div>
-        <div className="user-profile__sidenav flex-column flex-middle">
-          {this.state.user && this.state.user ? (
+        <div className="userEntity-profile__sidenav flex-column flex-middle">
+          {this.state.userEntity && this.state.userEntity ? (
             <Avatar
               className="avatar mb-20"
-              src={ConstantList.API_ENPOINT + this.state.user.imagePath}
+              src={ConstantList.API_ENPOINT + this.state.userEntity.imagePath}
               onClick={this.handleOpenUploadDialog}
             />
           ) : (
@@ -416,7 +416,7 @@ class UserProfile extends Component {
               />
             </div>
           )}
-          {/* {user.displayName} */}
+          {/* {userEntity.displayName} */}
           {
             <span className="title">
               {" "}
@@ -444,7 +444,7 @@ class UserProfile extends Component {
                     label={
                       <span className="font">
                         <span style={{ color: "red" }}> * </span>
-                        {t("user.firstName")}
+                        {t("userEntity.firstName")}
                       </span>
                     }
                     value={
@@ -469,7 +469,7 @@ class UserProfile extends Component {
                     label={
                       <span className="font">
                         <span style={{ color: "red" }}> * </span>
-                        {t("user.lastName")}
+                        {t("userEntity.lastName")}
                       </span>
                     }
                     size="small"
@@ -494,7 +494,7 @@ class UserProfile extends Component {
                     label={
                       <span className="font">
                         <span style={{ color: "red" }}> * </span>
-                        {t("user.displayName")}
+                        {t("userEntity.displayName")}
                       </span>
                     }
                     size="small"
@@ -514,7 +514,7 @@ class UserProfile extends Component {
               <Grid className="mb-10" container spacing={3}>
                 {/* <Grid item md={4} sm={12} xs={12}>
             <FormControl fullWidth={true}>
-              <TextField id="standard-basic"  label={t('user.email')} value={this.state.email != null ? user.email : ''} 
+              <TextField id="standard-basic"  label={t('userEntity.email')} value={this.state.email != null ? userEntity.email : ''}
                 onChange={this.handleChange}
               />
             </FormControl>
@@ -526,7 +526,7 @@ class UserProfile extends Component {
                     label={
                       <span className="font">
                         <span style={{ color: "red" }}> * </span>
-                        {t("user.email")}
+                        {t("userEntity.email")}
                       </span>
                     }
                     size="small"
@@ -545,7 +545,7 @@ class UserProfile extends Component {
                     className="w-100"
                     size="small"
                     variant="outlined"
-                    label={<span className="font">{t("user.username")}</span>}
+                    label={<span className="font">{t("userEntity.username")}</span>}
                     onChange={this.handleChange}
                     type="text"
                     name="username"
@@ -559,7 +559,7 @@ class UserProfile extends Component {
                 <Grid item lg={4} md={4} sm={12} xs={12}>
                   <FormControl fullWidth={true} size="small" variant="outlined">
                     <InputLabel htmlFor="gender-simple">
-                      {<span className="font">{t("user.gender")}</span>}
+                      {<span className="font">{t("userEntity.gender")}</span>}
                     </InputLabel>
                     <Select
                       value={this.state.person ? this.state.person.gender : ""}
@@ -596,7 +596,7 @@ class UserProfile extends Component {
                   type="button"
                   onClick={() => this.openPasswordDialog()}
                 >
-                  {t("user.changePass")}
+                  {t("userEntity.changePass")}
                 </Button>
               </Grid>
             </div>
@@ -755,7 +755,7 @@ class UserProfile extends Component {
                   type="button"
                   onClick={() => this.openPasswordDialog()}
                 >
-                  {t("user.changePass")}
+                  {t("userEntity.changePass")}
                 </Button>
               </Grid>
             </ValidatorForm>

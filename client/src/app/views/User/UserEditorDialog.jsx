@@ -393,7 +393,7 @@ class UserEditorDialog extends Component {
           <CircularProgress className="buttonProgress" size={24} />
         </div>
         <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-        <span className="mb-20 styleColor"> {(id ? t("update") : t("Add")) + " " + t("user.title")} </span>
+        <span className="mb-20 styleColor"> {(id ? t("update") : t("Add")) + " " + t("userEntity.title")} </span>
         <IconButton style={{ position: "absolute", right: "10px", top: "10px" }} onClick={() => handleClose()}><Icon color="error"
               title={t("close")}>
               close
@@ -413,7 +413,7 @@ class UserEditorDialog extends Component {
                   label={
                     <span className="font">
                       <span style={{ color: "red" }}> * </span>
-                      {t('user.displayName')}
+                      {t('userEntity.displayName')}
                     </span>
                   }
                   onChange={displayName => this.handleChange(displayName, "displayName")}
@@ -429,7 +429,7 @@ class UserEditorDialog extends Component {
               <Grid item lg={6} md={6} sm={12} xs={12}>
                 <FormControl fullWidth={true} variant="outlined"
                   size="small">
-                  <InputLabel htmlFor="gender-simple">{<span className="font">{t('user.gender')}</span>}</InputLabel>
+                  <InputLabel htmlFor="gender-simple">{<span className="font">{t('userEntity.gender')}</span>}</InputLabel>
                   <Select
                     value={person ? person.gender : ''}
                     onChange={gender => this.handleChange(gender, "gender")}
@@ -453,7 +453,7 @@ class UserEditorDialog extends Component {
                   label={
                     <span className="font">
                       <span style={{ color: "red" }}> * </span>
-                      {t('user.username')}
+                      {t('userEntity.username')}
                     </span>
                   }
                   onChange={this.handleChange}
@@ -509,12 +509,12 @@ class UserEditorDialog extends Component {
                       label={
                         <span className="font">
                           <span style={{ color: "red" }}> * </span>
-                          {t('user.role')}
+                          {t('userEntity.role')}
                         </span>
                       }
                       fullWidth
                       validators={["required"]}
-                      errorMessages={[t('user.please_select_permission')]}
+                      errorMessages={[t('userEntity.please_select_permission')]}
                       variant="outlined"
                       size="small"
                     />}
@@ -535,7 +535,7 @@ class UserEditorDialog extends Component {
                   control={<Checkbox
                     checked={changePass}
                   />}
-                  label={<span className="font">{t("user.changePass")}</span>}
+                  label={<span className="font">{t("userEntity.changePass")}</span>}
                 />
               </Grid>}
               <Grid item lg={6} md={6} sm={6} xs={12}>
@@ -549,7 +549,7 @@ class UserEditorDialog extends Component {
                   control={<Checkbox
                     checked={active}
                   />}
-                  label={<span className="font">{t("user.active")}</span>}
+                  label={<span className="font">{t("userEntity.active")}</span>}
                 />
               </Grid>
               {

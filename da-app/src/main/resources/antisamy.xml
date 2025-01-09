@@ -65,7 +65,7 @@
 		</attribute>
 
 		<attribute name="title"
-			description="The 'title' attribute provides text that shows up in a 'tooltip' when a user hovers their mouse over the element">
+			description="The 'title' attribute provides text that shows up in a 'tooltip' when a userEntity hovers their mouse over the element">
 
 			<regexp-list>
 				<regexp name="htmlTitle" />

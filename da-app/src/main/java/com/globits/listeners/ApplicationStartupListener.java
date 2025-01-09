@@ -84,7 +84,7 @@ public class ApplicationStartupListener implements ApplicationListener<ContextRe
 		userDto.setPassword("admin");
 		userDto.setEmail("admin@globits.net");
 		userDto.setActive(true);
-		userDto.setDisplayName("Admin User");
+		userDto.setDisplayName("Admin UserModel");
 
 		Role role = roleService.findByName(com.globits.core.Constants.ROLE_ADMIN);
 		
@@ -93,8 +93,8 @@ public class ApplicationStartupListener implements ApplicationListener<ContextRe
 		PersonDto person = new PersonDto();
 		person.setGender("M");
 		person.setFirstName("Admin");
-		person.setLastName("User");
-		person.setDisplayName("Admin User");
+		person.setLastName("UserModel");
+		person.setDisplayName("Admin UserModel");
 		
 		userDto.setPerson(person);
 		

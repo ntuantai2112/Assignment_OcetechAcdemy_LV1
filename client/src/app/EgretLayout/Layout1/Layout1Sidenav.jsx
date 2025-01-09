@@ -105,26 +105,26 @@ class Layout1Sidenav extends Component {
 
   renderUser = () => {
     const { t, i18n } = this.props;
-    //let { user } = this.props;
+    //let { userEntity } = this.props;
     let imagePath =ConstantList.ROOT_PATH+"assets/images/avatar.jpg"
-    //let user = authService.getLoginUser();
+    //let userEntity = authService.getLoginUser();
 
-    let user = authService.getLoginUser();
-    if(user!=null && user.imagePath!=null){
-      imagePath =ConstantList.API_ENPOINT + user.imagePath;
+    let userEntity = authService.getLoginUser();
+    if(userEntity!=null && userEntity.imagePath!=null){
+      imagePath =ConstantList.API_ENPOINT + userEntity.imagePath;
     }
 
-    if(user!=null && user.imagePath!=null){
-      imagePath =ConstantList.API_ENPOINT + user.imagePath;
+    if(userEntity!=null && userEntity.imagePath!=null){
+      imagePath =ConstantList.API_ENPOINT + userEntity.imagePath;
     }
     return (
       <div className="sidenav__user">
         <div className="username-photo">
-          <img src={imagePath} alt="user" />
+          <img src={imagePath} alt="userEntity" />
           <span className="username text-center">
-            {user? user.displayName : ''}
+            {userEntity? userEntity.displayName : ''}
             <br/>
-            {user? user.username: ''}
+            {userEntity? userEntity.username: ''}
           </span>
         </div>
         <div className="user__menu">
@@ -150,7 +150,7 @@ class Layout1Sidenav extends Component {
           <Tooltip title={t('Dashboard.profile')}>
             <Link
               className="flex flex-middle"
-              to="/page-layouts/user-profile"
+              to="/page-layouts/userEntity-profile"
             >
               <IconButtonWhite aria-label="Delete" className="" size="small">
                 <IconSmall>person</IconSmall>
@@ -200,7 +200,7 @@ Layout1Sidenav.propTypes = {
   setLayoutSettings: PropTypes.func.isRequired,
   setDefaultSettings: PropTypes.func.isRequired,
   logoutUser: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
+  userEntity: PropTypes.object.isRequired,
   settings: PropTypes.object.isRequired
 };
 
@@ -208,7 +208,7 @@ const mapStateToProps = state => ({
   setDefaultSettings: PropTypes.func.isRequired,
   setLayoutSettings: PropTypes.func.isRequired,
   logoutUser: PropTypes.func.isRequired,
-  user: state.user,
+  userEntity: state.userEntity,
   settings: state.layout.settings
 });
 

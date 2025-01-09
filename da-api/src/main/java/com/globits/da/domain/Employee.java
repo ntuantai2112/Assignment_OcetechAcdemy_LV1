@@ -30,8 +30,15 @@ public class Employee {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "commune_id",nullable = false,referencedColumnName = "id")
-    @JsonManagedReference
     private Commune commune;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "district_id",nullable = false,referencedColumnName = "id")
+    private District district;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "province_id",nullable = false,referencedColumnName = "id")
+    private Province province;
 
     @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
     private List<Certificate> certificates;

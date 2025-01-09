@@ -1,8 +1,14 @@
 package com.globits.da.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Component
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResponse <T>{

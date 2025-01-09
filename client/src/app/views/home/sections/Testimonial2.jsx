@@ -12,7 +12,7 @@ class Testimonial2 extends Component {
       elit. Fugit modi voluptas vero iusto fuga quos totam
       eius, atis magnam tempora doloribus ducimus dolorem
       culpa animi beatae tenetur! Sapiente, quia tempora."`,
-      user: {
+      userEntity: {
         imageUrl: "./assets/images/face-1.jpg",
         name: "John Doe",
         designation: "Product Manager"
@@ -24,7 +24,7 @@ class Testimonial2 extends Component {
       elit. Fugit modi voluptas vero iusto fuga quos totam
       eius, atis magnam tempora doloribus ducimus dolorem
       culpa animi beatae tenetur! Sapiente, quia tempora."`,
-      user: {
+      userEntity: {
         imageUrl: "./assets/images/face-2.jpg",
         name: "Adam Smith",
         designation: "CEO"
@@ -36,7 +36,7 @@ class Testimonial2 extends Component {
       elit. Fugit modi voluptas vero iusto fuga quos totam
       eius, atis magnam tempora doloribus ducimus dolorem
       culpa animi beatae tenetur! Sapiente, quia tempora."`,
-      user: {
+      userEntity: {
         imageUrl: "./assets/images/face-3.jpg",
         name: "John White",
         designation: "Software Engineer"
@@ -73,14 +73,14 @@ class Testimonial2 extends Component {
                     <div className="card__user">
                       <img
                         className="p-0 m-0"
-                        src={testimonial.user.imageUrl}
-                        alt="user"
+                        src={testimonial.userEntity.imageUrl}
+                        alt="userEntity"
                       />
                       <div className="pl-16">
                         <p className="m-0">
-                          <strong>{testimonial.user.name}</strong>
+                          <strong>{testimonial.userEntity.name}</strong>
                         </p>
-                        <p className="m-0">{testimonial.user.designation}</p>
+                        <p className="m-0">{testimonial.userEntity.designation}</p>
                       </div>
                     </div>
                   </CardContent>

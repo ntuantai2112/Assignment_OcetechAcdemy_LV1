@@ -12,7 +12,7 @@ class Auth extends Component {
   
   constructor(props) {
     super(props);
-    let user = localStorageService.getItem("auth_user");
+    let userEntity = localStorageService.getItem("auth_user");
     let token = localStorageService.getItem("jwt_token");
     //let tokenData = localStorageService.getSessionItem("token_data");
     //console.log(tokenData);
@@ -28,8 +28,8 @@ class Auth extends Component {
         isExpired=true;
       }
     }
-    if(user!=null && (isExpired==false)){      
-      this.props.setUserData(user);
+    if(userEntity!=null && (isExpired==false)){
+      this.props.setUserData(userEntity);
     }else {
       history.push(ConstantList.LOGIN_PAGE)
     }
@@ -39,18 +39,18 @@ class Auth extends Component {
   }
 
   checkJwtAuth = () => {
-    jwtAuthService.loginWithToken().then(user => {
-      this.props.setUserData(user);
+    jwtAuthService.loginWithToken().then(userEntity => {
+      this.props.setUserData(userEntity);
     });
   };
 
   checkFirebaseAuth = () => {
-    firebaseAuthService.checkAuthStatus(user => {
-      if (user) {
-        console.log(user.uid);
-        console.log(user.email);
-        console.log(user.emailVerified);
-        console.log(user.getItem);
+    firebaseAuthService.checkAuthStatus(userEntity => {
+      if (userEntity) {
+        console.log(userEntity.uid);
+        console.log(userEntity.email);
+        console.log(userEntity.emailVerified);
+        console.log(userEntity.getItem);
       } else {
         console.log("not logged in");
       }

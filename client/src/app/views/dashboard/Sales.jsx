@@ -179,7 +179,7 @@ class Sales extends Component {
                             <img
                               className="circular-image-small"
                               src={product.imgUrl}
-                              alt="user"
+                              alt="userEntity"
                             />
                             <p className="m-0 ml-8">{product.name}</p>
                           </div>
