@@ -59,8 +59,6 @@
 		</dependency>
 
 
-
-
 		<dependency>
 			<groupId>com.globits</groupId>
 			<artifactId>core-v2-api</artifactId>

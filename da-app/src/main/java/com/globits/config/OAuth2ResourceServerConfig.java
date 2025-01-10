@@ -52,11 +52,24 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
 				.antMatchers("/public/**").permitAll()
 				.antMatchers("/oauth/**").permitAll()
 
-				.antMatchers("/api/**").permitAll()
+//				.antMatchers("/api/**").permitAll()
+				.antMatchers("/api/user/generate-token").permitAll()
+				.antMatchers("/api/user/**").permitAll()
 
 				.anyRequest().authenticated()
 
 				.and().csrf().disable();
+
+
+		// Cấu hình truy cập API với Token
+//		http.oauth2ResourceServer(outh2 ->
+//				outh2.jwt(jwtConfigurer ->
+//						jwtConfigurer.decoder(customJwtDecoder)
+//								.jwtAuthenticationConverter(jwtAuthenticationConverter())
+//								.and().authenticationEntryPoint(new JwtAuthenticationEntryPoint())
+//				)
+//
+//		);
 
 	}
 

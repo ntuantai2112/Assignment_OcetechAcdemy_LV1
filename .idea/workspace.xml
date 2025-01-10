@@ -71,7 +71,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Document/nimbus-jose-jwt-9.37.3.jar" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -81,7 +81,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="vcs.Subversion" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -96,17 +96,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="DAApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="da-app" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.globits.DAApplication" />
@@ -170,7 +159,9 @@
       <workItem from="1736393319126" duration="371000" />
       <workItem from="1736393789438" duration="482000" />
       <workItem from="1736394351581" duration="1142000" />
-      <workItem from="1736395675337" duration="8265000" />
+      <workItem from="1736395675337" duration="13462000" />
+      <workItem from="1736476307859" duration="2478000" />
+      <workItem from="1736478908445" duration="280000" />
     </task>
     <servers />
   </component>
