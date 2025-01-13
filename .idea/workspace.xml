@@ -84,12 +84,15 @@
     <property name="settings.editor.selected.configurable" value="vcs.Subversion" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\OceanTech Academy Tranning\Level L1\Application\da-api\src\main\java\com\globits\da\config" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.globits.da.exception" />
       <recent name="com.globits.da.rest" />
       <recent name="com.globits.da.service.impl" />
       <recent name="com.globits.da.dto.response" />
       <recent name="com.globits.da.service" />
-      <recent name="com.globits.da.repository" />
     </key>
     <key name="ImportMappingsDialog.RecentPackages">
       <recent name="com.globits.da.domain" />
@@ -161,7 +164,8 @@
       <workItem from="1736394351581" duration="1142000" />
       <workItem from="1736395675337" duration="13462000" />
       <workItem from="1736476307859" duration="2478000" />
-      <workItem from="1736478908445" duration="280000" />
+      <workItem from="1736478908445" duration="4889000" />
+      <workItem from="1736736956671" duration="2428000" />
     </task>
     <servers />
   </component>
@@ -191,7 +195,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/da-api/src/main/java/com/globits/da/service/impl/AuthenticationServiceImpl.java</url>
-          <line>72</line>
+          <line>74</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">

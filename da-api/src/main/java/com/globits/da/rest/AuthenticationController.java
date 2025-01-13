@@ -5,6 +5,8 @@ import com.globits.da.dto.request.IntrospectRequest;
 import com.globits.da.dto.response.ApiResponse;
 import com.globits.da.dto.response.AuthenticationResponse;
 import com.globits.da.dto.response.IntrospectResponse;
+import com.globits.da.exception.CodeConfig;
+import com.globits.da.exception.ErrorCodeException;
 import com.globits.da.service.AuthenticationService;
 import com.nimbusds.jose.JOSEException;
 import lombok.AccessLevel;
@@ -32,6 +34,7 @@ public class AuthenticationController {
 
         AuthenticationResponse result = service.authenticated(request);
         return ApiResponse.<AuthenticationResponse>builder()
+                .code(CodeConfig.SUCCESS_CODE.getCode())
                 .result(result)
                 .build();
     }
