@@ -27,10 +27,12 @@ java:S3776D"RRefactor this method to reduce its Cognitive Complexity from 23 to
 java:S2147v"ECombine this catch with the one at line 116, which has the same body.(ï­£Ä
 V	java:S125H"<This block of commented-out lines of code should be removed.(œ ûýüÿÿÿÿ
 Q	java:S125M"<This block of commented-out lines of code should be removed.(°‚Û
+A
+java:S1168y"+Return an empty collection instead of null.(¥¹ï
 h
 java:S3776}"RRefactor this method to reduce its Cognitive Complexity from 51 to the 15 allowed.(ÛËÁñ
-B
-java:S1168×"+Return an empty collection instead of null.(¥¹ï
+I
+java:S1168×"+Return an empty collection instead of null.(¥¹ï8Í¿¾«Ö2
 R	java:S125Ý"<This block of commented-out lines of code should be removed.(ýý«‰
 I
 java:S1068".Remove this unused "dateFormat" private field.(àòÏõýÿÿÿÿ

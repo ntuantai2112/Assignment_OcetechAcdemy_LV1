@@ -61,8 +61,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 
 				.antMatchers("/login").permitAll()
-//				.antMatchers("/cms/api/user/generate-token").permitAll()
-//				.antMatchers("/cms/api/user/**").permitAll()
 
 				.antMatchers("/api/**").permitAll()
 				.antMatchers("/oauth/**").permitAll()

@@ -1,0 +1,14 @@
+
+]
+java:S2259™"FA "NullPointerException" could be thrown; "province" is nullable here.(æ×®ñ
+R
+java:S3984—"6Throw this exception or remove this useless statement.(Áå§‰ùÿÿÿÿ
+Y
+java:S1128"CRemove this unused import 'com.globits.da.dto.request.ProvinceDto'.(«©µÔ
+d
+java:S1128
+"IRemove this unused import 'com.globits.da.dto.response.ProvinceResponse'.(êë´…üÿÿÿÿ
+Z
+java:S1128"?Remove this unused import 'com.globits.da.service.CrudService'.(­ø¸úúÿÿÿÿ
+Y
+java:S1128"CRemove this unused import 'com.globits.da.service.ProvinceService'.(ËðÖí

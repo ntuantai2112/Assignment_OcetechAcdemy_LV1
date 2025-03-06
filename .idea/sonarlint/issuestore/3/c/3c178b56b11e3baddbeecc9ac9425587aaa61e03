@@ -1,0 +1,17 @@
+
+‚
+java:S1488;"lImmediately return this expression instead of assigning it to the temporary variable "certificateResponses".(ê¹„Â
+Q	java:S1252"<This block of commented-out lines of code should be removed.(œ§÷Š
+Q
+java:S1128";Remove this unused import 'com.globits.da.domain.District'.(òá·§
+^
+java:S1128"CRemove this unused import 'com.globits.da.dto.request.DistrictDto'.(‚ÕÝñþÿÿÿÿ
+d
+java:S1128
+"IRemove this unused import 'com.globits.da.dto.response.DistrictResponse'.(¬œúŒþÿÿÿÿ
+\
+java:S1128"ARemove this unused import 'com.globits.da.mapper.DistrictMapper'.(ªó¢éúÿÿÿÿ
+_
+java:S1128"IRemove this unused import 'com.globits.da.repository.DistrictRepository'.(†ï³“
+Y
+java:S1128"CRemove this unused import 'com.globits.da.service.DistrictService'.(ÙÎÊò

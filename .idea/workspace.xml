@@ -71,7 +71,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../DemoSpringBoot/demo" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -81,7 +81,10 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="vcs.Subversion" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RebelAgentSelection">
+    <selection>jr</selection>
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -98,7 +101,46 @@
       <recent name="com.globits.da.domain" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.DAApplication">
+    <configuration name="Animal" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.globits.da.main.Animal" />
+      <module name="da-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.globits.da.main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.globits.da.main.App" />
+      <module name="da-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.globits.da.main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DAApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="da-app" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.globits.DAApplication" />
@@ -106,6 +148,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.App" />
+        <item itemvalue="Application.Animal" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration" cleanupOnStartRun="true">
@@ -165,7 +213,21 @@
       <workItem from="1736395675337" duration="13462000" />
       <workItem from="1736476307859" duration="2478000" />
       <workItem from="1736478908445" duration="4889000" />
-      <workItem from="1736736956671" duration="2428000" />
+      <workItem from="1736736956671" duration="9027000" />
+      <workItem from="1736820193214" duration="4826000" />
+      <workItem from="1736908455114" duration="2527000" />
+      <workItem from="1736994776147" duration="1142000" />
+      <workItem from="1737107303878" duration="496000" />
+      <workItem from="1737427641585" duration="1659000" />
+      <workItem from="1740370256150" duration="763000" />
+      <workItem from="1740451892751" duration="1589000" />
+      <workItem from="1740493199978" duration="3187000" />
+      <workItem from="1740585375601" duration="18192000" />
+      <workItem from="1740710996918" duration="779000" />
+      <workItem from="1741052912509" duration="5167000" />
+      <workItem from="1741062671454" duration="3232000" />
+      <workItem from="1741140358114" duration="12415000" />
+      <workItem from="1741186227317" duration="17055000" />
     </task>
     <servers />
   </component>
@@ -190,13 +252,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/da-api/src/main/java/com/globits/da/service/impl/CertificateServiceImpl.java</url>
-          <line>83</line>
+          <line>81</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/da-api/src/main/java/com/globits/da/service/impl/AuthenticationServiceImpl.java</url>
-          <line>74</line>
-          <option name="timeStamp" value="12" />
+          <url>file://$PROJECT_DIR$/da-api/src/main/java/com/globits/da/rest/AuthenticationController.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />

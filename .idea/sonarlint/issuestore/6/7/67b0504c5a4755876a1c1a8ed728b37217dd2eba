@@ -1,0 +1,13 @@
+
+»
+java:S4449H"˜Annotate the parameter with @javax.annotation.Nullable in method 'setDriverClassName' declaration, or make sure that null can not be passed as argument.(ã´ìÓüÿÿÿÿ8š³Á¤Ö2
+¦
+java:S4449S"ˆAnnotate the parameter with @javax.annotation.Nullable in constructor declaration, or make sure that null can not be passed as argument.(æÍë–8š³Á¤Ö2
+]	java:S1259"<This block of commented-out lines of code should be removed.(ŞÜé„ùÿÿÿÿ8¦³Á¤Ö2
+]	java:S125?"<This block of commented-out lines of code should be removed.(ø•ø×ùÿÿÿÿ8¨³Á¤Ö2
+S
+java:S1128"1Remove this unused import 'javax.sql.DataSource'.(ÉòÂ¿úÿÿÿÿ8É³Á¤Ö2
+}
+java:S1128"[Remove this unused import 'org.springframework.jdbc.datasource.init.DataSourceInitializer'.(ĞææŞøÿÿÿÿ8Ë³Á¤Ö2
+S
+java:S11447"6Remove this unused private "databasePopulator" method.(ğóõÛ8Î³Á¤Ö2

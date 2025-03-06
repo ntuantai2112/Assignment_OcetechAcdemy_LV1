@@ -32,9 +32,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-
 public class CertificateServiceImpl implements CertificateService {
-
 
     @Autowired
     private CertificateRepository repository;
@@ -95,7 +93,6 @@ public class CertificateServiceImpl implements CertificateService {
         if (repository.findValidCertificatesByName(request.getEmployeeId(), request.getName(), currentDate).size() >= 3) {
             throw new AppException(ErrorCodeException.CERTIFICATE_MAX);
         }
-
 
 
         Employee employee = employeeRepository.findById(request.getEmployeeId()).orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.EMPLOYEE_NOT_FOUND));

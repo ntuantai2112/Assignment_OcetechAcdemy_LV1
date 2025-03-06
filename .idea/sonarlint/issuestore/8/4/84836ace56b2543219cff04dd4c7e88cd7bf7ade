@@ -1,0 +1,10 @@
+
+n
+java:S3305"QInject this field value directly into "tokenStore", the only method that uses it.(â–ŠĞ8¦şÁ¤Ö2
+˜
+java:S46019"{Reorder the URL patterns from most to less specific, the pattern "/api/user/generate-token" should occurs before "/api/**".(ˆùı¼8çşÁ¤Ö2
+‘
+java:S4601:"oReorder the URL patterns from most to less specific, the pattern "/api/user/**" should occurs before "/api/**".(º¾Ìúÿÿÿÿ8éşÁ¤Ö2
+X	java:S125X"<This block of commented-out lines of code should be removed.(‘ø·8ÈÖÃ¤Ö2
+h
+java:S1128"LRemove this unused import 'com.nimbusds.openid.connect.sdk.util.JWTDecoder'.(¦™;8ÉÖÃ¤Ö2

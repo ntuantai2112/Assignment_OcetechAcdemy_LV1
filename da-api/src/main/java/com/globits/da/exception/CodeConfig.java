@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public enum CodeConfig {
-    SUCCESS_CODE(1000, "Success fully!");
-
+    SUCCESS_CODE(200, "Success fully!");
 
     private int code;
     private String message;

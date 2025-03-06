@@ -1,0 +1,20 @@
+
+\
+java:S1118":Add a private constructor to hide the implicit public one.(“³±ûÿÿÿÿ8ÖÛÄ«Ö2
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(©äÔ8×ÛÄ«Ö2
+{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ğµ’¶úÿÿÿÿ8×ÛÄ«Ö2
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(©‰ö•8ØÛÄ«Ö2
+t
+java:S2786"RRemove this redundant "static" qualifier; nested enum types are implicitly static.(¨¨êÆøÿÿÿÿ8ØÛÄ«Ö2
+{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(­ŠûŞüÿÿÿÿ8ÜÛÄ«Ö2
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(İÂ–Ğ8ÜÛÄ«Ö2
+{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(£¿¥©øÿÿÿÿ8ÜÛÄ«Ö2
+{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(“’˜ïşÿÿÿÿ8ÜÛÄ«Ö2
+o
+java:S2786"RRemove this redundant "static" qualifier; nested enum types are implicitly static.(¡ÙŒÉ8İÛÄ«Ö2
+v	java:S115("ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ç¢„–8àÛÄ«Ö2
+{	java:S115)"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(€³† ùÿÿÿÿ8àÛÄ«Ö2
+{	java:S115*"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(…í±»şÿÿÿÿ8áÛÄ«Ö2
+{	java:S115+"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Ø—³„ÿÿÿÿÿ8áÛÄ«Ö2
+o
+java:S2786'"RRemove this redundant "static" qualifier; nested enum types are implicitly static.(ÜÌ¨ı8äÛÄ«Ö2

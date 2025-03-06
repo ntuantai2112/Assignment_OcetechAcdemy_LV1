@@ -1,12 +1,17 @@
 package com.globits.da.utils;
 
 import com.globits.da.domain.Employee;
+import com.globits.da.dto.request.EmployeeDto;
+import com.globits.da.exception.EmployeeAppException;
+import com.globits.da.exception.EmployeeCodeException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExcelUtil {
@@ -68,5 +73,18 @@ public class ExcelUtil {
         return style;
 
     }
+
+
+//    public static List<EmployeeDto> parseExcel(MultipartFile multipartFile){
+//        List<EmployeeDto> employeeDtos = new ArrayList<>();
+//        try{
+//
+//        }catch (Exception e){
+//            throw  new EmployeeAppException(EmployeeCodeException.INVALID_FILE_EXCEL);
+//        }
+//
+//
+//
+//    }
 
 }

@@ -107,7 +107,7 @@ public class RestExceptionController {
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    ResponseEntity<ApiResponse<String>> handlingValidationException(MethodArgumentNotValidException e) {
+    ResponseEntity<ApiResponse> handlingValidationException(MethodArgumentNotValidException e) {
 
         String enumKey = e.getBindingResult().getFieldError().getDefaultMessage();
         EmployeeCodeException errorCode = EmployeeCodeException.INVALID_KEY;
@@ -115,6 +115,7 @@ public class RestExceptionController {
         try {
             errorCode = EmployeeCodeException.valueOf(enumKey);
         } catch (IllegalStateException exception) {
+            exception.printStackTrace();
         }
 
         ApiResponse<String> response = new ApiResponse<>();

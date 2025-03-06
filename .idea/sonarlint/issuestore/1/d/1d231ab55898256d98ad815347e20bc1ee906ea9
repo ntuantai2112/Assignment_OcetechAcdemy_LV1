@@ -1,0 +1,11 @@
+
+d
+java:S2095"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(ìÇï«
+E
+java:S1481"(Remove this unused "app" local variable.(îÈ¸8¾Š—¢Ö2
+Z
+java:S2147$"DCombine this catch with the one at line 34, which has the same body.(ï­£Ä
+\	java:S899"BDo something with the "boolean" value returned by "createNewFile".(Ğ’Íùÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(Øú¼Ğúÿÿÿÿ
+E
+java:S2093"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ

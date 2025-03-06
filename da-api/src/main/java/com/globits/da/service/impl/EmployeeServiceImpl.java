@@ -20,6 +20,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -28,6 +30,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class EmployeeServiceImpl implements EmployeeService {
@@ -38,9 +41,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeResponse> getAllEmployee() {
-        List<EmployeeResponse> employees = employeeRepo.findAll().stream().
+        return employeeRepo.findAll().stream().
                 map(employeeMapper::toEmployeeResponse).collect(Collectors.toList());
-        return employees;
     }
 
 
@@ -185,6 +187,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (request.getAge() <= 0 || Integer.valueOf(request.getAge()) == null) {
             throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_AGE_VALUE);
         }
+
+
+    }
+
+    @Override
+    public void importEmployee(MultipartFile file) {
 
 
     }

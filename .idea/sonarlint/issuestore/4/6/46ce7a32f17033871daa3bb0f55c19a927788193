@@ -1,0 +1,11 @@
+
+g	java:S112#"FDefine and throw a dedicated exception instead of using a generic one.(åÔ¾’ûÿÿÿÿ8ÿøÃ¤Ö2
+Ž
+java:S1130#"lRemove the declaration of thrown exception 'java.lang.Exception', as it cannot be thrown from method's body.(åÔ¾’ûÿÿÿÿ8µùÃ¤Ö2
+X	java:S1254"<This block of commented-out lines of code should be removed.(þ·À¤8ÃùÃ¤Ö2
+†
+java:S4601F"jReorder the URL patterns from most to less specific, the pattern "/api/**" should occurs before "/api/**".(üìÌ8ÊùÃ¤Ö2
+
+java:S1128"_Remove this unused import 'org.springframework.boot.autoconfigure.security.SecurityProperties'.(š©˜àÿÿÿÿÿ8ÌùÃ¤Ö2
+c
+java:S1128"FRemove this unused import 'org.springframework.core.annotation.Order'.(ÖŽ¨æ8ÍùÃ¤Ö2

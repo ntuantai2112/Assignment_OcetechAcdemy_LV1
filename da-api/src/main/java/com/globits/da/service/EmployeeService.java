@@ -3,6 +3,7 @@ package com.globits.da.service;
 import com.globits.da.dto.request.EmployeeDto;
 import com.globits.da.dto.response.EmployeeResponse;
 import com.globits.da.dto.search.EmployeeSearchDto;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -32,6 +33,9 @@ public interface EmployeeService {
 
 
     void validateEmployee(EmployeeDto request);
+
+
+    void importEmployee(MultipartFile file);
 
 
 

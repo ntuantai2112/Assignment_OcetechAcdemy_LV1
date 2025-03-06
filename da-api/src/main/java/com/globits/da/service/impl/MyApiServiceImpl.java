@@ -1,16 +1,18 @@
 package com.globits.da.service.impl;
 
-import com.globits.da.dto.MyApiDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.globits.da.dto.request.MyApiDTO;
 import com.globits.da.service.MyApiService;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -18,76 +20,69 @@ import java.util.Iterator;
 import java.util.Map;
 
 @Service
+@Transactional
 public class MyApiServiceImpl implements MyApiService {
 
 
     @Override
-    public String myFirstApi() {
-        return "MyFirstApiService";
+    public String myFirstApiService() {
+        return "My First Api Service";
     }
 
     @Override
-    public String myFirstApiDTO(MyApiDto myApiDto) {
-        return myApiDto.toString();
+    public MyApiDTO createMyApiDTO(MyApiDTO myApiDTO) {
+        return myApiDTO;
     }
 
     @Override
-    public Map<String, Object> myApiFormData(MyApiDto myApiDto) {
+    public MyApiDTO createMyApiFormData(MyApiDTO myApiDTO) {
+        return myApiDTO;
+    }
 
+    @Override
+    public Map<String, Object> myApiFormData(MyApiDTO myApiDto) {
 
-        String fileName = myApiDto.getFile().getOriginalFilename();
-        Long fileSize = myApiDto.getFile().getSize();
-
+//        String fileName = myApiDto.getFile().getOriginalFilename();
+//        Long fileSize = myApiDto.getFile().getSize();
         Map<String, Object> response = new HashMap<>();
         response.put("name", myApiDto.getName());
         response.put("age", myApiDto.getAge());
-        response.put("fileName", fileName);
-        response.put("fileSize", fileSize);
+//        response.put("fileName", fileName);
+//        response.put("fileSize", fileSize);
         return response;
     }
 
     @Override
-    public ResponseEntity<MyApiDto> getMyApiFormData(MyApiDto myApiDto) {
+    public ResponseEntity<MyApiDTO> getMyApiFormData(MyApiDTO myApiDto) {
         return ResponseEntity.ok(myApiDto);
     }
 
     @Override
-    public ResponseEntity<String> getMyApiPathVariable(String name, Integer age) {
-        return ResponseEntity.ok("Response {" + " name: " + name + " age: " + age + "}");
+    public MyApiDTO createMyApiPathVariable(String code, String name, Integer age) {
+        return new MyApiDTO(code, name, age);
     }
 
     @Override
-    public ResponseEntity<String> getMyFirstAPI(HttpServletRequest request) {
+    public MyApiDTO postMyFirstAPI(HttpServletRequest request) {
+        //Thực hiện đọc dữ lieu trong body với Json
         try {
-            //Thực hiện đọc dữ lieu trong body với Json
-//            StringBuilder requestBody = new StringBuilder();
-//            BufferedReader reader = request.getReader();
-//            String line;
-//            while ( (line = reader.readLine()) != null){
-//                requestBody.append(line);
-//            }
-
-
-            // Thực hiện đọc dữ liệu trong form-data
-
-            Enumeration<String> parameterNames = request.getParameterNames();
-            StringBuilder formData = new StringBuilder();
-
-            while (parameterNames.hasMoreElements()) {
-                String paramName = parameterNames.nextElement();
-                formData.append(paramName).append("=").append(request.getParameter(paramName)).append("\n");
+            StringBuilder requestBody = new StringBuilder();
+            BufferedReader reader = request.getReader();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                requestBody.append(line);
             }
 
-            return ResponseEntity.ok(
-                    "Form-data:\n" + formData.toString()
-//                            "\nRaw JSON:\n" + requestBody.toString()
-            );
-
-
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+            // Chuyển đổi Json thành đối tượng DTO
+            ObjectMapper objectMapper = new ObjectMapper();
+            MyApiDTO myApiDTO = objectMapper.readValue(requestBody.toString(), MyApiDTO.class);
+            return myApiDTO;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        // Thực hiện đọc dữ liệu trong form-data
 
+        return null;
     }
 
     @Override
@@ -101,7 +96,7 @@ public class MyApiServiceImpl implements MyApiService {
     }
 
     @Override
-    public ResponseEntity<MyApiDto> getMyApiNoRequestBody(MyApiDto myApiDto) {
+    public ResponseEntity<MyApiDTO> getMyApiNoRequestBody(MyApiDTO myApiDto) {
         return ResponseEntity.ok(myApiDto);
     }
 

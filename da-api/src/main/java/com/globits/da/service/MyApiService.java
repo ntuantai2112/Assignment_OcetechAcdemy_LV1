@@ -1,29 +1,32 @@
 package com.globits.da.service;
 
-import com.globits.da.dto.MyApiDto;
+import com.globits.da.dto.request.MyApiDTO;
+import com.globits.da.dto.response.ApiResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.Map;
 
 public interface MyApiService {
 
-    String myFirstApi();
+    String myFirstApiService();
 
-    String myFirstApiDTO( MyApiDto myApiDto);
+    MyApiDTO createMyApiDTO(MyApiDTO myApiDto);
 
-    Map<String,Object> myApiFormData(MyApiDto myApiDto);
+    MyApiDTO createMyApiFormData(MyApiDTO myApiDto);
 
-    ResponseEntity<MyApiDto> getMyApiFormData(MyApiDto myApiDto);
+    Map<String, Object> myApiFormData(MyApiDTO myApiDto);
 
-    ResponseEntity<String> getMyApiPathVariable(String name, Integer age);
+    ResponseEntity<MyApiDTO> getMyApiFormData(MyApiDTO myApiDto);
 
-    ResponseEntity<String> getMyFirstAPI(HttpServletRequest request);
+    MyApiDTO createMyApiPathVariable(String code, String name, Integer age);
+
+    MyApiDTO postMyFirstAPI(HttpServletRequest request) throws IOException;
 
     ResponseEntity<String> processFile(MultipartFile file);
 
 
-    ResponseEntity<MyApiDto> getMyApiNoRequestBody(MyApiDto myApiDto);
+    ResponseEntity<MyApiDTO> getMyApiNoRequestBody(MyApiDTO myApiDto);
 }

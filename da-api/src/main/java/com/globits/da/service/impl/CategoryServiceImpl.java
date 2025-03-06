@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.globits.core.service.impl.GenericServiceImpl;
@@ -20,6 +21,7 @@ import com.globits.da.dto.search.SearchDto;
 import com.globits.da.repository.CategoryRepository;
 import com.globits.da.service.CategoryService;
 @Service
+@Transactional
 public class CategoryServiceImpl extends GenericServiceImpl<Category, UUID> implements CategoryService{
 	@Autowired
 	CategoryRepository repos;

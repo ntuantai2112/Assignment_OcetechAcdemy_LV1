@@ -5,8 +5,10 @@ import com.globits.da.dto.request.AuthenticationRequest;
 import com.globits.da.dto.request.IntrospectRequest;
 import com.globits.da.dto.response.AuthenticationResponse;
 import com.globits.da.dto.response.IntrospectResponse;
+import com.globits.da.dto.response.UserResponse;
 import com.globits.da.exception.AppException;
 import com.globits.da.exception.ErrorCodeException;
+import com.globits.da.mapper.UserMapper;
 import com.globits.da.repository.UserEntityRepository;
 import com.globits.da.service.AuthenticationService;
 import com.nimbusds.jose.*;
@@ -20,6 +22,8 @@ import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +46,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     PasswordEncoder passwordEncoder;
 
+    UserMapper userMapper;
+
 
     @NonFinal
     @Value("${jwt.signerKey}")
@@ -62,6 +68,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
 
         String token = generateToke(user);
+
+
 
         return AuthenticationResponse.builder()
                 .token(token)
@@ -101,6 +109,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         JWSObject jwsObject = new JWSObject(header, payload);
 
+
         try {
             jwsObject.sign(new MACSigner(SIGNER_KEY.getBytes()));
             return jwsObject.serialize();
@@ -108,6 +117,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             log.error("Cannot create token:", e);
             throw new RuntimeException(e);
         }
+
+
 
 
     }
@@ -119,6 +130,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             user.getRoles().forEach(s -> stringJoiner.add(s.getRoleName()));
         }
         return stringJoiner.toString();
+    }
+
+
+    public UserResponse getMyInfo() {
+        SecurityContext context = SecurityContextHolder.getContext();
+        String username = context.getAuthentication().getName();
+        UserEntity user = userEntityRepository.findByUsername(username).orElseThrow(
+                () -> new AppException(ErrorCodeException.USER_NOT_FOUND)
+        );
+        return userMapper.toUserResponse(user);
     }
 
 

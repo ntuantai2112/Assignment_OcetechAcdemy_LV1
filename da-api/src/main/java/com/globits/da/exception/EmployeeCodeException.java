@@ -29,7 +29,8 @@ public enum EmployeeCodeException {
     EMPLOYEE_NOT_FOUND(113,"THE EMPLOYEE NOT FOUND!"),
 
     COMMUNE_NOT_FOUND(111,"COMMUNE NOT FOUND!"),
-    INVALID_KEY(115,"INVALID KEY !"),
+    INVALID_KEY(115,"INVALID KEY!"),
+    INVALID_FILE_EXCEL(116,"Failed to parse Excel file!"),
     DISTRICT_OR_PROVINCE_NOT_FOUND(112,"Invalid district or province hierarchy!");
 
 

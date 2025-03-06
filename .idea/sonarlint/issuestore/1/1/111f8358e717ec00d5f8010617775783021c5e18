@@ -1,0 +1,17 @@
+
+|
+java:S1488~"aImmediately return this expression instead of assigning it to the temporary variable "responses".(Œ‚×Øùÿÿÿÿ
+R
+java:S3655t"7Call "Optional#isPresent()" before accessing the value.(ãå•µÿÿÿÿÿ
+R
+java:S3655i"7Call "Optional#isPresent()" before accessing the value.(ãå•µÿÿÿÿÿ
+R
+java:S3655K"7Call "Optional#isPresent()" before accessing the value.(ãå•µÿÿÿÿÿ
+U
+java:S1117J"?Rename "apiResponse" which hides the field declared at line 41.(ŠÒ§ã
+U
+java:S1117g"?Rename "apiResponse" which hides the field declared at line 41.(ŠÒ§ã
+U
+java:S1117s"?Rename "apiResponse" which hides the field declared at line 41.(ŠÒ§ã
+R
+java:S1128"7Remove this unused import 'java.util.stream.Collector'.(ß‹ÎÓøÿÿÿÿ
