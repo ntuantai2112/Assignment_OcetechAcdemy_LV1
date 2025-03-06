@@ -28,7 +28,6 @@ public class RestMyAPIController {
     //           2. Trả về 1 String MyFirstApi
     @GetMapping("/my-api")
     public ApiResponse<String> getMyFirstApi() {
-
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.setMessage("Successfully");
         apiResponse.setResult("Rest My First API");
@@ -89,9 +88,8 @@ public class RestMyAPIController {
     public ApiResponse<MyApiDTO> createMyApiPathVariable(
             @PathVariable("code") String code,
             @PathVariable("name") String name,
-            @PathVariable("age") Integer age
+            @PathVariable("age") Integer age) {
 
-    ) {
         MyApiDTO myApiDto = new MyApiDTO(code, name, age);
         return apiResponse(myApiService.createMyApiFormData(myApiDto));
     }
@@ -112,13 +110,10 @@ public class RestMyAPIController {
     }
 
 
-
     // Câu 12 1. Thực hiện postman POST api MyFirstApi với 1 file text/excel
     //2. Debug file gửi lên System Out Print các dòng có trong file text
-
-
     @PostMapping("/my-api-file")
-    public ResponseEntity<String> getMyApiFile(@RequestParam MultipartFile file) {
+    public ApiResponse<String> postMyApiFile(@RequestParam("file") MultipartFile file) {
         return myApiService.processFile(file);
     }
 

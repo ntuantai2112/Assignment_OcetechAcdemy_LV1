@@ -2,18 +2,24 @@ package com.globits.da.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.globits.da.dto.request.MyApiDTO;
+import com.globits.da.dto.response.ApiResponse;
+import com.globits.da.exception.CodeConfig;
 import com.globits.da.service.MyApiService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -21,6 +27,8 @@ import java.util.Map;
 
 @Service
 @Transactional
+@Slf4j
+//@Consumes(MediaType.APPLICATION_JSON)
 public class MyApiServiceImpl implements MyApiService {
 
 
@@ -78,7 +86,7 @@ public class MyApiServiceImpl implements MyApiService {
             MyApiDTO myApiDTO = objectMapper.readValue(requestBody.toString(), MyApiDTO.class);
             return myApiDTO;
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Error processing request body: {}", e.getMessage(), e);
         }
         // Thực hiện đọc dữ liệu trong form-data
 
@@ -86,12 +94,21 @@ public class MyApiServiceImpl implements MyApiService {
     }
 
     @Override
-    public ResponseEntity<String> processFile(MultipartFile file) {
+    public ApiResponse<String> processFile(MultipartFile file) {
+
+        ApiResponse<String> apiResponse = new ApiResponse();
+        CodeConfig code = CodeConfig.SUCCESS_CODE;
+        apiResponse.setCode(code.getCode());
+        apiResponse.setMessage(code.getMessage());
         try {
             readFile(file);
-            return ResponseEntity.ok("Read file success fully");
+            apiResponse.setResult("Read file successfully: " + file.getOriginalFilename());
+            return apiResponse;
         } catch (Exception ex) {
-            return ResponseEntity.badRequest().body("Error processing file:" + ex.getMessage());
+            apiResponse.setResult("Error processing file:" + ex.getMessage());
+            return apiResponse;
+
+
         }
     }
 
@@ -124,7 +141,7 @@ public class MyApiServiceImpl implements MyApiService {
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line;
             while ((line = reader.readLine()) != null) {
-                System.out.println("Text read line:" + line);
+                System.out.println(line);
             }
 
         } catch (Exception e) {
@@ -135,25 +152,28 @@ public class MyApiServiceImpl implements MyApiService {
 
 
     private void readFileExcel(MultipartFile file) {
-        try {
-            Workbook workbook = new XSSFWorkbook(file.getInputStream());
+
+        try (Workbook workbook = new XSSFWorkbook(file.getInputStream())) {
             Sheet sheet = workbook.getSheetAt(0);
-            Iterator<Row> rowIterator = sheet.iterator();
-            while (rowIterator.hasNext()) {
 
-                Row row = rowIterator.next();
-                Iterator<Cell> cellIterator = row.cellIterator();
-
+            for (Row row : sheet) {
                 StringBuilder rowContent = new StringBuilder();
-                while (cellIterator.hasNext()) {
-                    Cell cell = cellIterator.next();
-                    rowContent.append(getCellValue(cell)).append("\t");
-                }
-                System.out.println(rowContent);
+                boolean hasData = false;
 
+                for (Cell cell : row) {
+                    String cellValue = getCellValue(cell);
+                    if (!cellValue.trim().isEmpty()) {
+                        hasData = true; // ✅ Kiểm tra xem có ô nào chứa dữ liệu không
+                    }
+                    rowContent.append(cellValue).append(" | ");
+                }
+
+                if (hasData) {
+                    log.info("Row: {}", rowContent); // ✅ Chỉ in nếu có dữ liệu
+                }
             }
         } catch (Exception e) {
-            throw new RuntimeException("Error " + e.getMessage());
+            log.error("Error reading Excel file: {}", e.getMessage(), e);
         }
 
     }
@@ -166,10 +186,12 @@ public class MyApiServiceImpl implements MyApiService {
                 return cell.getStringCellValue();
             case NUMERIC:
                 if (DateUtil.isCellDateFormatted(cell)) {
-                    // Nếu ô là kiểu ngày, chuyển đổi sang định dạng ngày
-                    return cell.getDateCellValue().toString();
+                    // Nếu là kiểu ngày tháng, định dạng lại
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    return sdf.format(cell.getDateCellValue());
                 } else {
-                    return String.valueOf(cell.getNumericCellValue());
+                    // Nếu là số, chuyển về chuỗi, loại bỏ số khoa học
+                    return String.valueOf((long) cell.getNumericCellValue());
                 }
             case BOOLEAN:
                 return String.valueOf(cell.getBooleanCellValue());

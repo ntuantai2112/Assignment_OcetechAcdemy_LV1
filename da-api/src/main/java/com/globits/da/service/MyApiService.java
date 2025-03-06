@@ -25,7 +25,7 @@ public interface MyApiService {
 
     MyApiDTO postMyFirstAPI(HttpServletRequest request) throws IOException;
 
-    ResponseEntity<String> processFile(MultipartFile file);
+    ApiResponse<String> processFile(MultipartFile file);
 
 
     ResponseEntity<MyApiDTO> getMyApiNoRequestBody(MyApiDTO myApiDto);
