@@ -27,6 +27,5 @@ public interface MyApiService {
 
     ApiResponse<String> processFile(MultipartFile file);
 
-
-    ResponseEntity<MyApiDTO> getMyApiNoRequestBody(MyApiDTO myApiDto);
+    MyApiDTO createMyApiNotRequestBody(MyApiDTO myApiDto);
 }

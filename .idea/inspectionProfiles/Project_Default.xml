@@ -2,7 +2,18 @@
   <profile version="1.0">
     <option name="myName" value="Project Default" />
     <inspection_tool class="ContextJavaBeanUnresolvedMethodsInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JpaAttributeMemberSignatureInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JpaAttributeTypeInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JpaDataSourceORMDomInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JpaDataSourceORMInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JpaDomInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JpaEntityListenerInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JpaMissingIdInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JpaModelReferenceInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JpaORMDomInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JpaObjectClassSignatureInspection" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="JpaQlInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JpaQueryApiInspection" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SpringCacheableComponentsInspection" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SpringComponentScan" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SpringConfigurationProxyMethods" enabled="true" level="WARNING" enabled_by_default="true" />

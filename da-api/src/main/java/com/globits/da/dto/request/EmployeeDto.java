@@ -1,8 +1,10 @@
 package com.globits.da.dto.request;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
@@ -10,18 +12,19 @@ import javax.validation.constraints.NotBlank;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class EmployeeDTO {
 
-public class EmployeeDto {
-
+    int rowIndex;
     @NotBlank(message = "EMPLOYEE_NOT_NULL")
-    private String code;
-    private String name;
-    private String email;
-    private String phone;
-    private int age;
-    private int provinceId;
-    private int districtId;
-    private int communeId;
-    private String communeName;
+    String code;
+    String name;
+    String email;
+    String phone;
+    int age;
+    int provinceId;
+    int districtId;
+    int communeId;
+    String communeName;
 
 }

@@ -26,7 +26,7 @@ public class RestMyAPIController {
 
     //    Câu 4: 1. Tạo REST GET api MyFirstApi với source code vừa clone
     //           2. Trả về 1 String MyFirstApi
-    @GetMapping("/my-api")
+    @GetMapping("/get-my-api")
     public ApiResponse<String> getMyFirstApi() {
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.setMessage("Successfully");
@@ -121,9 +121,9 @@ public class RestMyAPIController {
     //1. Thực hiện postman post raw json với API khi xóa @RequestBody
     //2. Ghi lại kết quả và tìm hiểu lý do
 
-    @PostMapping("/my-api-no-request-body")
-    public ResponseEntity<MyApiDTO> getMyApiNoRequestBody(MyApiDTO myApiDto) {
-        return myApiService.getMyApiNoRequestBody(myApiDto);
+    @PostMapping("/my-api-not-request-body")
+    public ApiResponse<MyApiDTO> createMyApiNotRequestBody(MyApiDTO myApiDto) {
+        return apiResponse(myApiService.createMyApiNotRequestBody(myApiDto));
 
     }
 

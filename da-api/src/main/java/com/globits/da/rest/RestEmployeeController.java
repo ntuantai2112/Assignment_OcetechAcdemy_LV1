@@ -1,14 +1,18 @@
 package com.globits.da.rest;
 
-import com.globits.da.domain.Employee;
-import com.globits.da.dto.request.EmployeeDto;
+import com.globits.da.dto.request.EmployeeDTO;
 import com.globits.da.dto.response.ApiResponse;
 import com.globits.da.dto.response.EmployeeResponse;
 import com.globits.da.dto.search.EmployeeSearchDto;
+import com.globits.da.exception.CodeConfig;
 import com.globits.da.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -17,69 +21,84 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class RestEmployeeController {
 
-    @Autowired
-    private EmployeeService empService;
+    EmployeeService empService;
 
 
+    // Câu 19 : Tạo api lấy tất cả employee
     @GetMapping("/get-all-employee")
-    public List<EmployeeResponse> getAll() {
+    public ApiResponse<List<EmployeeResponse>> getAll() {
 
-        return empService.getAllEmployee();
+        return apiResponse(empService.getAllEmployee());
     }
 
+    // Câu 20: Tạo api lấy tất cả employee theo điều kiện tìm kiếm EmployeeSearchDTO gửi lên
     @PostMapping("/search-employees")
-    public ResponseEntity<List<EmployeeResponse>> searchEmployees(@RequestBody @Valid EmployeeSearchDto employeeSearchDto) {
+    public ApiResponse<List<EmployeeResponse>> searchEmployees(@RequestBody @Valid EmployeeSearchDto employeeSearchDto) {
         List<EmployeeResponse> employees = empService.searchEmployees(employeeSearchDto);
-        return ResponseEntity.ok(employees);
+        return apiResponse(employees);
     }
 
     @PostMapping("/add-employee")
-    public ResponseEntity<ApiResponse<?>> createEmployee(@RequestBody EmployeeDto request) {
+    public ResponseEntity<ApiResponse<?>> createEmployee(@RequestBody EmployeeDTO request) {
 
         ApiResponse<EmployeeResponse> response = new ApiResponse<>();
         response.setResult(empService.addEmployee(request));
         return ResponseEntity.ok(response);
     }
 
+    // Cấu 21: Tạo api xóa 1 Employee
     @DeleteMapping("/delete-employee/{id}")
-    public String deleteEmployee(@PathVariable("id") Integer id) {
+    public ApiResponse<String> deleteEmployee(@PathVariable("id") Integer id) {
 
-        return empService.deleteEmployee(id);
+        return apiResponse(empService.deleteEmployee(id));
 
     }
 
     @PutMapping("/update-employee/{empId}")
-    public EmployeeResponse updateEmployee(@PathVariable("empId") Integer id, @RequestBody EmployeeDto request) {
+    public EmployeeResponse updateEmployee(@PathVariable("empId") Integer id, @RequestBody EmployeeDTO request) {
         return empService.updateEmployee(id, request);
     }
 
 
     // Câu 22: Tạo API xuất file excel:
     @GetMapping("/export-excel")
-    public void exportExcelEmployee(HttpServletResponse response) throws IOException {
-        // Thiết lập header cho response
-        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.setHeader("Content-Disposition", "attachment; filename=employees.xlsx");
+    public void exportToExcel(HttpServletResponse response) throws IOException {
+        empService.exportExcel(response);
+    }
 
-        // Gọi service để lấy dữ liệu Excel
-        ByteArrayInputStream inputStream = empService.getDataDowloadedExcel();
-
-        // Ghi dữ liệu từ ByteArrayInputStream vào response output stream
-        try (ServletOutputStream outputStream = response.getOutputStream()) {
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
-            }
-            outputStream.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Lỗi khi export file Excel", e);
+    // Câu 32: Import Excel
+    @PostMapping("/import-excel")
+    public ApiResponse<String> importEmployees(@RequestParam("file") MultipartFile file) {
+        ApiResponse apiResponse = new ApiResponse<>();
+        try {
+            empService.importExcelEmployee(file);
+            CodeConfig codeConfig = CodeConfig.SUCCESS_CODE;
+            apiResponse.setCode(codeConfig.getCode());
+            apiResponse.setMessage(codeConfig.getMessage());
+            apiResponse.setResult("Import File Excel Successfully!");
+        } catch (Exception e) {
+            log.error(e.getMessage());
         }
+
+        return apiResponse;
+
+    }
+
+
+    private <T> ApiResponse<T> apiResponse(T result) {
+        ApiResponse<T> apiResponse = new ApiResponse<>();
+        CodeConfig codeConfig = CodeConfig.SUCCESS_CODE;
+        apiResponse.setCode(codeConfig.getCode());
+        apiResponse.setMessage(codeConfig.getMessage());
+        apiResponse.setResult(result);
+        return apiResponse;
     }
 
 

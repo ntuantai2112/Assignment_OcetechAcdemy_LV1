@@ -1,24 +1,24 @@
 
-h	java:S112†"FDefine and throw a dedicated exception instead of using a generic one.(ªİåÛøÿÿÿÿ8¦é€¤Ö2
-}
-java:S14883"aImmediately return this expression instead of assigning it to the temporary variable "employees".(Ş¦œ!8®é€¤Ö2
-~
-java:S1488:"aImmediately return this expression instead of assigning it to the temporary variable "employees".(æ¼‡É8°é€¤Ö2
-~
-java:S1488A"aImmediately return this expression instead of assigning it to the temporary variable "employees".(ôÉ Â8²é€¤Ö2
-ƒ
-java:S1488|"aImmediately return this expression instead of assigning it to the temporary variable "employees".(Áü”ˆıÿÿÿÿ8²é€¤Ö2
+i
+java:S1192Œ"MDefine a constant instead of duplicating this literal "Lá»—i dÃ²ng " 3 times.(Œˆ÷ÿüÿÿÿÿ
+v
+java:S14888"aImmediately return this expression instead of assigning it to the temporary variable "employees".(Ş¦œ!
+w
+java:S1488?"aImmediately return this expression instead of assigning it to the temporary variable "employees".(æ¼‡É
+w
+java:S1488F"aImmediately return this expression instead of assigning it to the temporary variable "employees".(ôÉ Â
+M
+java:S3655`"7Call "Optional#isPresent()" before accessing the value.(¨•¢¶
 T
-java:S3655["7Call "Optional#isPresent()" before accessing the value.(¨•¢¶8ÀÔ«Ö2
-[
-java:S2589…"8Remove this expression which always evaluates to "false"(£±È¶ùÿÿÿÿ8ÁÔ«Ö2
-Ÿ
-java:S1186Ã"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(–¢­à8ÃÔ«Ö2
-]
-java:S1854":Remove this useless assignment to local variable "errors".(Ñğõ·ûÿÿÿÿ8 Õ«Ö2
-N
-java:S1481"+Remove this unused "errors" local variable.(Ñğõ·ûÿÿÿÿ8¤Õ«Ö2
-j
-java:S1128"HRemove this unused import 'com.globits.da.dto.response.CommuneResponse'.(Õ›ß…ùÿÿÿÿ8¿Õ«Ö2
-u
-java:S1128"SRemove this unused import 'org.springframework.beans.factory.annotation.Autowired'.(¡¸Îùÿÿÿÿ8ÑÕ«Ö2
+java:S2589–"8Remove this expression which always evaluates to "false"(£±È¶ùÿÿÿÿ
+
+java:S1186Ô"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(§…àúÿÿÿÿ
+V
+java:S1854":Remove this useless assignment to local variable "errors".(Ñğõ·ûÿÿÿÿ
+G
+java:S1481"+Remove this unused "errors" local variable.(Ñğõ·ûÿÿÿÿ
+^	java:S125Ù"<This block of commented-out lines of code should be removed.(¥ñ…åøÿÿÿÿ8õé…€×2
+U
+java:S1144î"2Remove this unused private "readExcelFile" method.(É­Éşÿÿÿÿÿ8¬ê…€×2
+T
+java:S1144ˆ"6Remove this unused private "validateEmployees" method.(¦ù÷Ñ8­ê…€×2

@@ -113,8 +113,8 @@ public class MyApiServiceImpl implements MyApiService {
     }
 
     @Override
-    public ResponseEntity<MyApiDTO> getMyApiNoRequestBody(MyApiDTO myApiDto) {
-        return ResponseEntity.ok(myApiDto);
+    public MyApiDTO createMyApiNotRequestBody(MyApiDTO myApiDto) {
+        return myApiDto;
     }
 
 
@@ -163,7 +163,7 @@ public class MyApiServiceImpl implements MyApiService {
                 for (Cell cell : row) {
                     String cellValue = getCellValue(cell);
                     if (!cellValue.trim().isEmpty()) {
-                        hasData = true; // ✅ Kiểm tra xem có ô nào chứa dữ liệu không
+                        hasData = true; //  Kiểm tra xem có ô nào chứa dữ liệu không
                     }
                     rowContent.append(cellValue).append(" | ");
                 }

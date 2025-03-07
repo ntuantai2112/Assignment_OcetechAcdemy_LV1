@@ -2,8 +2,8 @@ package com.globits.da.service.impl;
 
 import com.globits.da.domain.Commune;
 import com.globits.da.domain.Employee;
-import com.globits.da.dto.request.EmployeeDto;
-import com.globits.da.dto.response.CommuneResponse;
+import com.globits.da.dto.request.EmployeeDTO;
+import com.globits.da.dto.request.EmployeeImportDTO;
 import com.globits.da.dto.response.EmployeeResponse;
 import com.globits.da.dto.search.EmployeeSearchDto;
 import com.globits.da.exception.EmployeeAppException;
@@ -18,17 +18,22 @@ import com.globits.da.utils.ValidationUtil;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -68,7 +73,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeResponse addEmployee(EmployeeDto request) {
+    public EmployeeResponse addEmployee(EmployeeDTO request) {
 
         validateEmployee(request);
 
@@ -98,12 +103,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeResponse updateEmployee(Integer id, EmployeeDto request) {
+    public EmployeeResponse updateEmployee(Integer id, EmployeeDTO request) {
 
         Employee employee = employeeRepo.findById(id).orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.EMPLOYEE_NOT_FOUND));
         employeeMapper.updateEmployee(employee, request);
 
-        if(Integer.valueOf(request.getCommuneId()) != null){
+        if (Integer.valueOf(request.getCommuneId()) != null) {
             Commune commune = communeRepository.findByName(request.getName()).
                     orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.COMMUNE_NOT_FOUND));
 
@@ -121,23 +126,35 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<EmployeeResponse> searchEmployees(EmployeeSearchDto employeeSearchDto) {
 
-        List<EmployeeResponse> employees = employeeRepo.searchEmployees(employeeSearchDto.getCode(), employeeSearchDto.getName(), employeeSearchDto.getName(), employeeSearchDto.getPhone()).stream().
-                map(employeeMapper::toEmployeeResponse).collect(Collectors.toList());
+        List<EmployeeResponse> employees = employeeRepo.searchEmployees(
+                employeeSearchDto.getCode(),
+                employeeSearchDto.getName(),
+                employeeSearchDto.getEmail(),
+                employeeSearchDto.getPhone(),
+                employeeSearchDto.getMinAge(),
+                employeeSearchDto.getMaxAge())
+                .stream().map(employeeMapper::toEmployeeResponse).collect(Collectors.toList());
+
+        if (employees.isEmpty()) {
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEES_NOT_FOUND);
+        }
+
         return employees;
 
     }
 
+
     @Override
-    public ByteArrayInputStream getDataDowloadedExcel() throws IOException {
-        List<Employee> employees = employeeRepo.findAll(); // Hoặc dữ liệu cần export
+    public void exportExcel(HttpServletResponse httpServletResponse) throws IOException {
+        List<Employee> employees = employeeRepo.findAll();
         if (employees == null || employees.isEmpty()) {
-            throw new RuntimeException("No employees found for export");
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEES_NOT_IMPLEMENT_EXPORT);
         }
-        return ExcelUtil.exportToExcel(employees);
+        ExcelUtil.exportToExcel(employees, httpServletResponse);
     }
 
     @Override
-    public void validateEmployee(EmployeeDto request) {
+    public void validateEmployee(EmployeeDTO request) {
         List<ValidationException> errors = new ArrayList<>();
 
         // Validate Code employee
@@ -192,9 +209,72 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void importEmployee(MultipartFile file) {
+    public void importExcelEmployee(MultipartFile file) throws IOException {
 
 
+    }
+
+//    public void importEmployees(MultipartFile file) throws IOException {
+//        try {
+//            List<EmployeeImportDTO> employees = readExcelFile(file);
+//
+//            // Kiểm tra lỗi trước khi lưu
+//            List<String> errors = validateEmployees(employees);
+//            if (!errors.isEmpty()) {
+//                throw new EmployeeAppException(EmployeeCodeException.INVALID_EMPLOYEE_IMPORT);
+//            }
+//
+//            // Chuyển DTO thành Entity và lưu vào DB
+//            List<Employee> employeeEntities = employees.stream()
+//                    .map(employeeMapper::toEmployeeImport)
+//                    .collect(Collectors.toList());
+//
+//            employeeRepo.saveAll(employeeEntities);
+//        } catch (Exception e) {
+//            log.error(e.getMessage());
+//        }
+//    }
+
+    private List<EmployeeImportDTO> readExcelFile(MultipartFile file) throws IOException {
+        List<EmployeeImportDTO> employees = new ArrayList<>();
+        Workbook workbook = new XSSFWorkbook(file.getInputStream());
+        Sheet sheet = workbook.getSheetAt(0);
+
+        for (int i = 1; i <= sheet.getLastRowNum(); i++) { // Bỏ qua hàng tiêu đề (index 0)
+            Row row = sheet.getRow(i);
+            if (row == null) continue;
+
+            EmployeeImportDTO dto = new EmployeeImportDTO();
+            dto.setRowIndex(i + 1);
+            dto.setName(row.getCell(1).getStringCellValue());
+            dto.setCode(row.getCell(2).getStringCellValue());
+            dto.setEmail(row.getCell(3).getStringCellValue());
+            dto.setPhone(row.getCell(4).getStringCellValue());
+            dto.setAge((int) row.getCell(5).getNumericCellValue());
+            dto.setProvince(row.getCell(6).getStringCellValue());
+            dto.setDistrict(row.getCell(7).getStringCellValue());
+            dto.setCommune(row.getCell(8).getStringCellValue());
+
+            employees.add(dto);
+        }
+        workbook.close();
+        return employees;
+    }
+
+    private List<String> validateEmployees(List<EmployeeImportDTO> employees) {
+        List<String> errors = new ArrayList<>();
+        for (EmployeeImportDTO dto : employees) {
+            if (dto.getName().isEmpty()) {
+                errors.add("Lỗi dòng " + dto.getRowIndex() + ": Tên không được để trống.");
+            }
+            if (!dto.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+                errors.add("Lỗi dòng " + dto.getRowIndex() + ": Email không hợp lệ.");
+            }
+            if (dto.getAge() <= 0) {
+                errors.add("Lỗi dòng " + dto.getRowIndex() + ": Tuổi phải là số dương.");
+            }
+        }
+        return errors;
     }
 
 

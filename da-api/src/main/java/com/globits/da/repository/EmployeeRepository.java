@@ -24,15 +24,21 @@ public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
     List<Employee> searchEmployeeByName(@Param("name") String name);
 
 
-    @Query(" SELECT  e FROM Employee e " +
-            "WHERE(:code IS NULL OR e.code LIKE %:code% ) " +
-            "AND (:name  IS NULL OR e.name LIKE %:name% ) " +
-            "AND (:email IS NULL OR e.email LIKE %:email% )" +
-            "AND (:phone IS NULL OR e.phone LIKE %:phone% )")
-    List<Employee> searchEmployees(@Param("code") String code,
-                                   @Param("name") String name,
-                                   @Param("email") String email,
-                                   @Param("phone") String phone);
+    @Query("SELECT e FROM Employee e " +
+            "WHERE (:code IS NULL OR e.code LIKE %:code%) " +
+            "AND (:name IS NULL OR e.name LIKE %:name%) " +
+            "AND (:email IS NULL OR e.email LIKE %:email%) " +
+            "AND (:phone IS NULL OR e.phone LIKE %:phone%) " +
+            "AND (:minAge IS NULL OR e.age >= :minAge) " +
+            "AND (:maxAge IS NULL OR e.age <= :maxAge)")
+    List<Employee> searchEmployees(
+            @Param("code") String code,
+            @Param("name") String name,
+            @Param("email") String email,
+            @Param("phone") String phone,
+            @Param("minAge") Integer minAge,
+            @Param("maxAge") Integer maxAge
+    );
 
 
     Optional<Employee> findByCode(String code);

@@ -1,50 +1,32 @@
 package com.globits.da.dto.search;
 
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmployeeSearchDto {
-    private Integer id;
+
+    //    @NotBlank(message = "Please enter your employee code")
     private String code;
+    //    @NotBlank(message = "Please enter employee name")
     private String name;
+    //    @NotNull(message = "Please enter your email")
     private String email;
+    //    @NotNull(message = "Please enter your phone")
     private String phone;
+    @Min(value = 18, message = "Minimum age is 18")
+    private Integer minAge;
+
+    @Max(value = 60, message = "Maximum age is 60")
+    private Integer maxAge;
 
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 }

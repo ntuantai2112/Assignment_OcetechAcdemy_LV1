@@ -81,6 +81,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RebelAgentSelection">
@@ -91,11 +92,11 @@
       <recent name="D:\OceanTech Academy Tranning\Level L1\Application\da-api\src\main\java\com\globits\da\config" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.globits.da.mapper" />
       <recent name="com.globits.da.exception" />
       <recent name="com.globits.da.rest" />
       <recent name="com.globits.da.service.impl" />
       <recent name="com.globits.da.dto.response" />
-      <recent name="com.globits.da.service" />
     </key>
     <key name="ImportMappingsDialog.RecentPackages">
       <recent name="com.globits.da.domain" />
@@ -128,15 +129,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -228,6 +227,7 @@
       <workItem from="1741062671454" duration="3232000" />
       <workItem from="1741140358114" duration="12415000" />
       <workItem from="1741186227317" duration="23113000" />
+      <workItem from="1741271289093" duration="23169000" />
     </task>
     <servers />
   </component>
