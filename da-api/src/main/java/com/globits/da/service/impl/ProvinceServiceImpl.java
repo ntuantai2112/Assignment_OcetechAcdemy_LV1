@@ -65,6 +65,9 @@ public class ProvinceServiceImpl implements ProvinceService {
     public List<ProvinceResponse> getProvinceByName(String name) {
 
         List<Province> provinces = provinceRepo.findByNameQuery(name);
+        if (provinces == null || provinces.isEmpty()) {
+            throw new AppException(ErrorCodeException.PROVINCE_NOT_FOUND);
+        }
         List<ProvinceResponse> provinceResponses = new ArrayList<>();
         for (Province province : provinces) {
             provinceResponses.add(provinceMapper.toProvinceResponse(province));
@@ -80,10 +83,9 @@ public class ProvinceServiceImpl implements ProvinceService {
 
     @Override
     public ProvinceResponse addProvince(ProvinceDto provinceDto) {
-
         Province province = provinceMapper.toProvince(provinceDto);
-        if(provinceRepo.existsByName(provinceDto.getName())){
-            throw  new AppException(ErrorCodeException.PROVINCE_NAME_EXISTS);
+        if (provinceRepo.existsByName(provinceDto.getName())) {
+            throw new AppException(ErrorCodeException.PROVINCE_NAME_EXISTS);
         }
         return provinceMapper.toProvinceResponse(provinceRepo.save(province));
     }
@@ -114,8 +116,8 @@ public class ProvinceServiceImpl implements ProvinceService {
 
         Province province = provinceMapper.toProvince(provinceRequest);
 
-        if(provinceRepo.existsByName(provinceRequest.getName())){
-            throw  new AppException(ErrorCodeException.PROVINCE_NAME_EXISTS);
+        if (provinceRepo.existsByName(provinceRequest.getName())) {
+            throw new AppException(ErrorCodeException.PROVINCE_NAME_EXISTS);
         }
 
         List<District> newDistricts = provinceRequest.getDistricts().stream()
@@ -124,29 +126,25 @@ public class ProvinceServiceImpl implements ProvinceService {
                     district.setProvince(province);
                     return district;
                 }).collect(Collectors.toList());
-
         province.setDistricts(newDistricts);
-
         return provinceMapper.toProvinceResponse(provinceRepo.save(province));
     }
 
+
     @Override
     public ProvinceResponse updateProvinceAndDistrict(Integer provinceId, ProvinceDto request) {
-        Province province = provinceRepo.findById(provinceId).orElseThrow(() -> new AppException(ErrorCodeException.PROVINCE_NOT_FOUND));
+        Province province = provinceRepo.findById(provinceId).orElseThrow(()
+                -> new AppException(ErrorCodeException.PROVINCE_NOT_FOUND));
 
         provinceMapper.updateProvince(province, request);
-
         List<District> existingDistricts = province.getDistricts();
-
         List<Integer> requestDistrictIds = request.getDistricts()
                 .stream()
                 .map(DistrictDto::getId)
                 .collect(Collectors.toList());
-
         existingDistricts.removeIf(d -> !requestDistrictIds.contains(d.getId()));
 
         for (DistrictDto districtRequest : request.getDistricts()) {
-
             District district = existingDistricts.stream()
                     .filter(d -> d.getId() == districtRequest.getId())
                     .findFirst()
@@ -163,9 +161,11 @@ public class ProvinceServiceImpl implements ProvinceService {
         return provinceMapper.toProvinceResponse(provinceRepo.save(province));
     }
 
+    // Sửa tỉnh và CRUD huyện cùng 1 lúc
     @Override
     public ProvinceResponse updateProvinceAndCRUDDistrict(Integer provinceId, ProvinceDto provinceRequest) {
-        Province province = provinceRepo.findById(provinceId).orElseThrow(() -> new AppException(ErrorCodeException.PROVINCE_NOT_FOUND));
+        Province province = provinceRepo.findById(provinceId).orElseThrow(()
+                -> new AppException(ErrorCodeException.PROVINCE_NOT_FOUND));
 
         provinceMapper.updateProvince(province, provinceRequest);
 
@@ -202,53 +202,47 @@ public class ProvinceServiceImpl implements ProvinceService {
         return provinceMapper.toProvinceResponse(provinceRepo.save(province));
     }
 
+    // Thêm Tỉnh huyện xã cùng 1 lúc
     @Override
     public ProvinceResponse createProvinceAndDistrictAndCommune(ProvinceDto request) {
 
-
         Province province = provinceMapper.toProvince(request);
-        if(provinceRepo.existsByName(request.getName())){
-            throw  new RuntimeException("The province name already exists");
+        if (provinceRepo.existsByName(request.getName())) {
+            throw new AppException(ErrorCodeException.PROVINCE_NAME_EXISTS);
         }
         // Xử lý danh sách Huyện
         List<District> districts = request.getDistricts().stream()
                 .map(districtRequest -> {
-
                     // Validate District exists in the same province
-                    Optional<District> existsDistrict = districtRepo.findByNameAndProvinceId(districtRequest.getName(), province.getId());
-                    if(existsDistrict.isPresent()){
-                        throw new AppException(ErrorCodeException.DISTRICT_NOT_FOUND);
+                    Optional<District> existsDistrict =
+                            districtRepo.findByNameAndProvinceId(districtRequest.getName(), province.getId());
+
+                    if (existsDistrict.isPresent()) {
+                        throw new AppException(ErrorCodeException.DISTRICT_NAME_EXISTS);
                     }
 
                     District district = new District();
                     districtMapper.updateDistrict(district, districtRequest);
                     district.setProvince(province);
-
                     // Xử lý danh sách xã
                     List<Commune> communes = districtRequest.getCommunes().stream()
                             .map(communeRequest -> {
-
-                                Optional<Commune> existsCommune = communeRepo.findByNameAndDistrictId(communeRequest.getName(), district.getId());
-                                if(existsCommune.isPresent()){
-                                    throw new AppException(ErrorCodeException.COMMUNE_NOT_FOUND);
+                                Optional<Commune> existsCommune =
+                                        communeRepo.findByNameAndDistrictId(communeRequest.getName(), district.getId());
+                                if (existsCommune.isPresent()) {
+                                    throw new AppException(ErrorCodeException.COMMUNE_NAME_EXISTS);
                                 }
-
                                 Commune commune = new Commune();
                                 communeMapper.updateCommune(commune, communeRequest);
                                 commune.setDistrict(district);
                                 return commune;
                             }).collect(Collectors.toList());
-
                     district.setCommunes(communes);
                     return district;
-
                 }).collect(Collectors.toList());
-
         province.setDistricts(districts);
         return provinceMapper.toProvinceResponse(provinceRepo.save(province));
     }
-
-
 
 
 }

@@ -28,7 +28,7 @@ public class RestCommuneController {
     }
 
     @GetMapping("/search-by-name")
-    public ResponseEntity< ApiResponse<List<CommuneResponse>>> searchDistricts(@RequestParam String name){
+    public ResponseEntity<ApiResponse<List<CommuneResponse>>> searchDistricts(@RequestParam String name){
         return ResponseEntity.ok(service.getCommuneByName(name));
     }
 

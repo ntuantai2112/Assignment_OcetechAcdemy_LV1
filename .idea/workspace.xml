@@ -92,8 +92,8 @@
       <recent name="D:\OceanTech Academy Tranning\Level L1\Application\da-api\src\main\java\com\globits\da\config" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.globits.da.mapper" />
       <recent name="com.globits.da.exception" />
+      <recent name="com.globits.da.mapper" />
       <recent name="com.globits.da.rest" />
       <recent name="com.globits.da.service.impl" />
       <recent name="com.globits.da.dto.response" />
@@ -129,13 +129,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -228,6 +230,7 @@
       <workItem from="1741140358114" duration="12415000" />
       <workItem from="1741186227317" duration="23113000" />
       <workItem from="1741271289093" duration="23169000" />
+      <workItem from="1741572754473" duration="24421000" />
     </task>
     <servers />
   </component>
@@ -238,32 +241,10 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/da-api/src/main/java/com/globits/da/service/impl/DistrictServiceImpl.java</url>
-          <line>119</line>
-          <properties>
-            <option name="lambda-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="4" />
+          <url>file://$PROJECT_DIR$/da-api/src/main/java/com/globits/da/service/impl/EmployeeServiceImpl.java</url>
+          <line>231</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/da-api/src/main/java/com/globits/da/service/impl/DistrictServiceImpl.java</url>
-          <line>81</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/da-api/src/main/java/com/globits/da/service/impl/CertificateServiceImpl.java</url>
-          <line>81</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/da-api/src/main/java/com/globits/da/rest/AuthenticationController.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.NullPointerException" package="java.lang" />
-          <option name="timeStamp" value="11" />
-        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

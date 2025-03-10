@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CommuneRepository extends JpaRepository<Commune,Integer> {
+public interface CommuneRepository extends JpaRepository<Commune, Integer> {
 
     @Query("SELECT C FROM Commune C WHERE lower(C.name) LIKE lower(concat('%', :name , '%'))")
     List<Commune> findByNameQuery(@Param("name") String name);
@@ -30,5 +30,5 @@ public interface CommuneRepository extends JpaRepository<Commune,Integer> {
     @Query("SELECT C FROM Commune C WHERE lower(C.name) LIKE lower(concat('%', :communeName , '%')) AND C.district.id =:districtId")
     Optional<Commune> findByNameAndDistrictId(@Param("communeName") String communeName, @Param("districtId") Integer districtId);
 
-
+    Optional<Commune> findByIdAndDistrictId(Integer id, Integer districtId);
 }

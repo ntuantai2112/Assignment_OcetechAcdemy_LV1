@@ -5,12 +5,16 @@ import com.globits.da.dto.response.ApiResponse;
 import com.globits.da.dto.response.EmployeeResponse;
 import com.globits.da.dto.search.EmployeeSearchDto;
 import com.globits.da.exception.CodeConfig;
+import com.globits.da.exception.EmployeeAppException;
+import com.globits.da.exception.EmployeeCodeException;
 import com.globits.da.service.EmployeeService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +24,7 @@ import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -40,15 +45,21 @@ public class RestEmployeeController {
 
     // Câu 20: Tạo api lấy tất cả employee theo điều kiện tìm kiếm EmployeeSearchDTO gửi lên
     @PostMapping("/search-employees")
-    public ApiResponse<List<EmployeeResponse>> searchEmployees(@RequestBody @Valid EmployeeSearchDto employeeSearchDto) {
+    public ApiResponse<List<EmployeeResponse>> searchEmployees(@Valid @RequestBody EmployeeSearchDto employeeSearchDto) {
         List<EmployeeResponse> employees = empService.searchEmployees(employeeSearchDto);
+        if (employees.isEmpty() || employees == null) {
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEES_NOT_FOUND);
+        }
         return apiResponse(employees);
     }
 
     @PostMapping("/add-employee")
-    public ResponseEntity<ApiResponse<?>> createEmployee(@RequestBody EmployeeDTO request) {
+    public ResponseEntity<ApiResponse<?>> createEmployee(@Valid @RequestBody EmployeeDTO request, BindingResult result) {
+
 
         ApiResponse<EmployeeResponse> response = new ApiResponse<>();
+        response.setCode(CodeConfig.SUCCESS_CODE.getCode());
+        response.setMessage(CodeConfig.SUCCESS_CODE.getMessage());
         response.setResult(empService.addEmployee(request));
         return ResponseEntity.ok(response);
     }
@@ -62,7 +73,7 @@ public class RestEmployeeController {
     }
 
     @PutMapping("/update-employee/{empId}")
-    public EmployeeResponse updateEmployee(@PathVariable("empId") Integer id, @RequestBody EmployeeDTO request) {
+    public EmployeeResponse updateEmployee(@PathVariable("empId") Integer id, @Valid @RequestBody EmployeeDTO request) {
         return empService.updateEmployee(id, request);
     }
 

@@ -1,40 +1,40 @@
 
-o
-java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(òïîÚ
-t
-java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(¾æòşÿÿÿÿ
-t
-java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(µŒÇˆşÿÿÿÿ
-o
-java:S2293G"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÎÄ¾Ã
-a
-java:S1192."FDefine a constant instead of duplicating this literal "email" 4 times.(ŸàœÒÿÿÿÿÿ
-l
-java:S1149"VReplace the synchronized class "Hashtable" by an unsynchronized one such as "HashMap".(òïîÚ
-q
-java:S1149"VReplace the synchronized class "Hashtable" by an unsynchronized one such as "HashMap".(¾æòşÿÿÿÿ
-q
-java:S1149"VReplace the synchronized class "Hashtable" by an unsynchronized one such as "HashMap".(µŒÇˆşÿÿÿÿ
-r
-java:S1149„"VReplace the synchronized class "Hashtable" by an unsynchronized one such as "HashMap".(ä¥Ò±ùÿÿÿÿ
-U
-java:S1118":Add a private constructor to hide the implicit public one.(¥ş”äúÿÿÿÿ
-B
-java:S2885"'Make "dateFormat" an instance variable.(àòÏõıÿÿÿÿ
-m
-java:S3776D"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(åáôúÿÿÿÿ
-[
-java:S2147v"ECombine this catch with the one at line 116, which has the same body.(ï­£Ä
-V	java:S125H"<This block of commented-out lines of code should be removed.(œ ûıüÿÿÿÿ
-Q	java:S125M"<This block of commented-out lines of code should be removed.(°‚Û
-A
-java:S1168y"+Return an empty collection instead of null.(¥¹ï
+v
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(òïîÚ8ˆˆ‰ğ×2
+{
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(¾æòşÿÿÿÿ8˜ˆ‰ğ×2
+{
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(µŒÇˆşÿÿÿÿ8¨ˆ‰ğ×2
+v
+java:S2293G"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÎÄ¾Ã8·ˆ‰ğ×2
 h
-java:S3776}"RRefactor this method to reduce its Cognitive Complexity from 51 to the 15 allowed.(ÛËÁñ
+java:S1192."FDefine a constant instead of duplicating this literal "email" 4 times.(ŸàœÒÿÿÿÿÿ8Æˆ‰ğ×2
+s
+java:S1149"VReplace the synchronized class "Hashtable" by an unsynchronized one such as "HashMap".(òïîÚ8Î©‰ğ×2
+x
+java:S1149"VReplace the synchronized class "Hashtable" by an unsynchronized one such as "HashMap".(¾æòşÿÿÿÿ8Ó©‰ğ×2
+x
+java:S1149"VReplace the synchronized class "Hashtable" by an unsynchronized one such as "HashMap".(µŒÇˆşÿÿÿÿ8Ó©‰ğ×2
+y
+java:S1149„"VReplace the synchronized class "Hashtable" by an unsynchronized one such as "HashMap".(ä¥Ò±ùÿÿÿÿ8Ô©‰ğ×2
+\
+java:S1118":Add a private constructor to hide the implicit public one.(¥ş”äúÿÿÿÿ8ã©‰ğ×2
 I
-java:S1168×"+Return an empty collection instead of null.(¥¹ï8Í¿¾«Ö2
-R	java:S125İ"<This block of commented-out lines of code should be removed.(ıı«‰
+java:S2885"'Make "dateFormat" an instance variable.(àòÏõıÿÿÿÿ8ê©‰ğ×2
+t
+java:S3776D"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(åáôúÿÿÿÿ8Áª‰ğ×2
+b
+java:S2147v"ECombine this catch with the one at line 116, which has the same body.(ï­£Ä8Æª‰ğ×2
+]	java:S125H"<This block of commented-out lines of code should be removed.(œ ûıüÿÿÿÿ8Êª‰ğ×2
+X	java:S125M"<This block of commented-out lines of code should be removed.(°‚Û8›«‰ğ×2
+H
+java:S1168y"+Return an empty collection instead of null.(¥¹ï8¿«‰ğ×2
+o
+java:S3776}"RRefactor this method to reduce its Cognitive Complexity from 51 to the 15 allowed.(ÛËÁñ8Ú«‰ğ×2
 I
-java:S1068".Remove this unused "dateFormat" private field.(àòÏõıÿÿÿÿ
-T
-java:S1144">Remove this unused private "scanStaffColumnExcelIndex" method.(´ûÁÿ
+java:S1168×"+Return an empty collection instead of null.(¥¹ï8ò¬‰ğ×2
+Y	java:S125İ"<This block of commented-out lines of code should be removed.(ıı«‰8÷¬‰ğ×2
+P
+java:S1068".Remove this unused "dateFormat" private field.(àòÏõıÿÿÿÿ8ú¬‰ğ×2
+[
+java:S1144">Remove this unused private "scanStaffColumnExcelIndex" method.(´ûÁÿ8ü¬‰ğ×2

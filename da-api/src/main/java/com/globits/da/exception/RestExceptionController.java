@@ -118,7 +118,7 @@ public class RestExceptionController {
             exception.printStackTrace();
         }
 
-        ApiResponse<String> response = new ApiResponse<>();
+        ApiResponse response = new ApiResponse();
         response.setCode(errorCode.getCode());
         response.setMessage(errorCode.getMessage());
         return ResponseEntity.badRequest().body(response);

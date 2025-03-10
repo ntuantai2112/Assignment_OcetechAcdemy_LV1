@@ -1,24 +1,24 @@
 
 i
-java:S1192Œ"MDefine a constant instead of duplicating this literal "Lá»—i dÃ²ng " 3 times.(Œˆ÷ÿüÿÿÿÿ
+java:S1192®"MDefine a constant instead of duplicating this literal "Lá»—i dÃ²ng " 3 times.(Œˆ÷ÿüÿÿÿÿ
 v
-java:S14888"aImmediately return this expression instead of assigning it to the temporary variable "employees".(Ş¦œ!
+java:S1488?"aImmediately return this expression instead of assigning it to the temporary variable "employees".(Ş¦œ!
 w
-java:S1488?"aImmediately return this expression instead of assigning it to the temporary variable "employees".(æ¼‡É
+java:S1488F"aImmediately return this expression instead of assigning it to the temporary variable "employees".(æ¼‡É
 w
-java:S1488F"aImmediately return this expression instead of assigning it to the temporary variable "employees".(ôÉ Â
+java:S1488M"aImmediately return this expression instead of assigning it to the temporary variable "employees".(ôÉ Â
 M
-java:S3655`"7Call "Optional#isPresent()" before accessing the value.(¨•¢¶
+java:S3655h"7Call "Optional#isPresent()" before accessing the value.(¨•¢¶
 T
-java:S2589–"8Remove this expression which always evaluates to "false"(£±È¶ùÿÿÿÿ
+java:S2589£"8Remove this expression which always evaluates to "false"(£±È¶ùÿÿÿÿ
 
-java:S1186Ô"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(§…àúÿÿÿÿ
-V
-java:S1854":Remove this useless assignment to local variable "errors".(Ñğõ·ûÿÿÿÿ
-G
-java:S1481"+Remove this unused "errors" local variable.(Ñğõ·ûÿÿÿÿ
-^	java:S125Ù"<This block of commented-out lines of code should be removed.(¥ñ…åøÿÿÿÿ8õé…€×2
-U
-java:S1144î"2Remove this unused private "readExcelFile" method.(É­Éşÿÿÿÿÿ8¬ê…€×2
-T
-java:S1144ˆ"6Remove this unused private "validateEmployees" method.(¦ù÷Ñ8­ê…€×2
+java:S1186ö"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(§…àúÿÿÿÿ
+n
+java:S3776ª"RRefactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.(ÎšıÊúÿÿÿÿ
+W	java:S125û"<This block of commented-out lines of code should be removed.(¥ñ…åøÿÿÿÿ
+f
+java:S1128"IRemove this unused import 'com.globits.da.exception.ValidationException'.(ëØıÕ8í «ı×2
+N
+java:S1144"2Remove this unused private "readExcelFile" method.(É­Éşÿÿÿÿÿ
+M
+java:S1144ª"6Remove this unused private "validateEmployees" method.(¦ù÷Ñ

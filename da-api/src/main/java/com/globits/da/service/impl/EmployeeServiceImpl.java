@@ -1,7 +1,9 @@
 package com.globits.da.service.impl;
 
 import com.globits.da.domain.Commune;
+import com.globits.da.domain.District;
 import com.globits.da.domain.Employee;
+import com.globits.da.domain.Province;
 import com.globits.da.dto.request.EmployeeDTO;
 import com.globits.da.dto.request.EmployeeImportDTO;
 import com.globits.da.dto.response.EmployeeResponse;
@@ -11,7 +13,9 @@ import com.globits.da.exception.EmployeeCodeException;
 import com.globits.da.exception.ValidationException;
 import com.globits.da.mapper.EmployeeMapper;
 import com.globits.da.repository.CommuneRepository;
+import com.globits.da.repository.DistrictRepository;
 import com.globits.da.repository.EmployeeRepository;
+import com.globits.da.repository.ProvinceRepository;
 import com.globits.da.service.EmployeeService;
 import com.globits.da.utils.ExcelUtil;
 import com.globits.da.utils.ValidationUtil;
@@ -31,6 +35,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -43,6 +48,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     EmployeeRepository employeeRepo;
     EmployeeMapper employeeMapper;
     CommuneRepository communeRepository;
+    ProvinceRepository provinceRepo;
+    DistrictRepository districtRepository;
 
     @Override
     public List<EmployeeResponse> getAllEmployee() {
@@ -74,20 +81,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeResponse addEmployee(EmployeeDTO request) {
-
         validateEmployee(request);
 
+        Province province = provinceRepo.findById(request.getProvinceId())
+                .orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.PROVINCE_NOT_FOUND));
 
-        Commune commune = communeRepository.findByName(request.getName()).
-                orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.COMMUNE_NOT_FOUND));
+        District district = districtRepository.findByIdAndProvinceId(request.getDistrictId(), request.getProvinceId())
+                .orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.DISTRICT_NOT_FOUND));
 
-        if (commune.getDistrict() == null || commune.getDistrict().getProvince() == null) {
-            throw new EmployeeAppException(EmployeeCodeException.DISTRICT_OR_PROVINCE_NOT_FOUND);
-        }
+        Commune commune = communeRepository.findByIdAndDistrictId(request.getCommuneId(), request.getDistrictId())
+                .orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.COMMUNE_NOT_FOUND));
 
         Employee employee = employeeMapper.toEmployee(request);
+        employee.setProvince(province);
+        employee.setDistrict(district);
         employee.setCommune(commune);
-
         return employeeMapper.toEmployeeResponse(employeeRepo.save(employee));
     }
 
@@ -104,21 +112,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeResponse updateEmployee(Integer id, EmployeeDTO request) {
-
-        Employee employee = employeeRepo.findById(id).orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.EMPLOYEE_NOT_FOUND));
+        validateEmployee(request);
+        Employee employee = employeeRepo.findById(id).orElseThrow(()
+                -> new EmployeeAppException(EmployeeCodeException.EMPLOYEE_NOT_FOUND));
         employeeMapper.updateEmployee(employee, request);
+        if (request.getProvinceId() != 0 && request.getDistrictId()
+                != 0 && request.getCommuneId() != 0) {
 
-        if (Integer.valueOf(request.getCommuneId()) != null) {
-            Commune commune = communeRepository.findByName(request.getName()).
-                    orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.COMMUNE_NOT_FOUND));
+            Province province = provinceRepo.findById(request.getProvinceId())
+                    .orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.PROVINCE_NOT_FOUND));
 
-            if (commune.getDistrict() == null || commune.getDistrict().getProvince() == null) {
-                throw new EmployeeAppException(EmployeeCodeException.DISTRICT_OR_PROVINCE_NOT_FOUND);
-            }
+            District district = districtRepository.findByIdAndProvinceId(request.getDistrictId(), request.getProvinceId())
+                    .orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.DISTRICT_NOT_FOUND));
 
+            Commune commune = communeRepository.findByIdAndDistrictId(request.getCommuneId(), request.getDistrictId())
+                    .orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.COMMUNE_NOT_FOUND));
+
+            employee.setProvince(province);
+            employee.setDistrict(district);
             employee.setCommune(commune);
         }
-
 
         return employeeMapper.toEmployeeResponse(employeeRepo.save(employee));
     }
@@ -155,11 +168,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void validateEmployee(EmployeeDTO request) {
-        List<ValidationException> errors = new ArrayList<>();
 
         // Validate Code employee
         if (request.getCode().trim() == null || request.getCode().trim().isEmpty()) {
             throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_CODE_NOT_NULL);
+        }
+
+        if (!ValidationUtil.isValidCode(request.getCode().trim())) {
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_CODE_NOT_SPACE);
         }
 
         if (employeeRepo.findByCode(request.getCode().trim()).isPresent()) {
@@ -186,23 +202,41 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_EMAIL_NOT_NULL);
         }
 
-        if (!ValidationUtil.isValidEmail(request.getEmail())) {
+        if (!ValidationUtil.isValidEmail(request.getEmail().trim())) {
             throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_EMAIL_FORMAT);
         }
 
         // Validate phone employee
         if (request.getPhone().trim() == null || request.getPhone().trim().isEmpty()) {
             throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_PHONE_NOT_NULL);
-        }
-
-        if (!ValidationUtil.isPhone(request.getPhone())) {
+        } else if (!ValidationUtil.isPhone(request.getPhone().trim())) {
             throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_PHONE_FORMAT);
 
         }
 
-        // Validate age employee
-        if (request.getAge() <= 0 || Integer.valueOf(request.getAge()) == null) {
-            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_AGE_VALUE);
+        // Validate Age Empolyee
+        if (Objects.isNull(request.getAge())) {
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_AGE_NOT_NULL);
+        } else {
+            // Validate age employee
+            if (request.getAge() <= 0 || Integer.valueOf(request.getAge()) == null) {
+                throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_AGE_VALUE);
+            } else if (request.getAge() < 18) {
+                throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_AGE_MIN);
+            } else if (request.getAge() > 60) {
+                throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_AGE_MAX);
+            }
+        }
+
+
+        if (Objects.isNull(request.getProvinceId()) || request.getProvinceId() == 0) {
+            throw new EmployeeAppException(EmployeeCodeException.PROVINCE_NOT_NULL);
+        }
+        if (Objects.isNull(request.getDistrictId()) || request.getDistrictId() == 0) {
+            throw new EmployeeAppException(EmployeeCodeException.DISTRICT_NOT_NULL);
+        }
+        if (Objects.isNull(request.getCommuneId()) || request.getCommuneId() == 0) {
+            throw new EmployeeAppException(EmployeeCodeException.COMMUNE_NOT_NULL);
         }
 
 

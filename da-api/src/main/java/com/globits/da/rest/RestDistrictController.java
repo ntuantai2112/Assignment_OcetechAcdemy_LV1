@@ -7,6 +7,7 @@ import com.globits.da.dto.response.ApiResponse;
 import com.globits.da.dto.response.DistrictResponse;
 import com.globits.da.dto.response.DistrictResponse;
 import com.globits.da.dto.response.ProvinceResponse;
+import com.globits.da.exception.CodeConfig;
 import com.globits.da.exception.ErrorCodeException;
 import com.globits.da.service.DistrictService;
 import com.globits.da.service.ProvinceService;
@@ -25,27 +26,28 @@ public class RestDistrictController {
 
 
     @GetMapping("/get-all")
-    public List<DistrictResponse> getAll() {
-        return service.getAllDistrict();
+    public ApiResponse<List<DistrictResponse>> getAll() {
+        List<DistrictResponse> list = service.getAllDistrict();
+        return apiResponse(list);
     }
 
     @GetMapping("/search-by-name")
-    public ResponseEntity<List<DistrictResponse>> searchDistricts(@RequestParam String name) {
-        return ResponseEntity.ok(service.getDistrictByName(name));
+    public ApiResponse<List<DistrictResponse>> searchDistricts(@RequestParam String name) {
+        return apiResponse(service.getDistrictByName(name));
     }
 
     @GetMapping("/search-by-id/{id}")
-    public ResponseEntity<DistrictResponse> searchProvinces(@PathVariable("id") Integer id) {
+    public ApiResponse<DistrictResponse> searchProvinces(@PathVariable("id") Integer id) {
         DistrictResponse response = service.getDistrictById(id);
 
         // Nếu tìm thấy, trả về dữ liệu tỉnh dưới dạng JSON
         if (response == null) {
             throw new RuntimeException("Not Found!");
         }
-        return ResponseEntity.ok(response);
+        return apiResponse(response);
     }
 
-
+    // Thêm huyện xác định Huyện đó thuộc tỉnh nào
     @PostMapping("/add/{provinceId}")
     public ApiResponse<DistrictResponse> create(@PathVariable("provinceId") Integer provinceId, @RequestBody DistrictDto request) {
         ApiResponse<DistrictResponse> response = new ApiResponse<>();
@@ -67,10 +69,8 @@ public class RestDistrictController {
 
     // Khi thực hiện xóa huyện , thì có xã có id Huyện cũng bị xóa theo
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Integer id) {
-
-        return service.deleteDistrict(id);
-
+    public ApiResponse<String> delete(@PathVariable("id") Integer id) {
+        return apiResponse(service.deleteDistrict(id));
     }
 
     @PutMapping("/update/{id}")
@@ -128,6 +128,15 @@ public class RestDistrictController {
         response.setResult(service.createDistrictAndCRUDCommune(districtId, districtRequest));
         return response;
 
+    }
+
+    private <T> ApiResponse<T> apiResponse(T result) {
+        ApiResponse<T> apiResponse = new ApiResponse<>();
+        CodeConfig codeConfig = CodeConfig.SUCCESS_CODE;
+        apiResponse.setCode(codeConfig.getCode());
+        apiResponse.setMessage(codeConfig.getMessage());
+        apiResponse.setResult(result);
+        return apiResponse;
     }
 
 

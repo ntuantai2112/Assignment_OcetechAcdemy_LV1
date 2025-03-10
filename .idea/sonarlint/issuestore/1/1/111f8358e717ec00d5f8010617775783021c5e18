@@ -2,11 +2,11 @@
 |
 java:S1488~"aImmediately return this expression instead of assigning it to the temporary variable "responses".(‚ΧΨωÿÿÿÿ
 R
+java:S3655K"7Call "Optional#isPresent()" before accessing the value.(γε•µÿÿÿÿÿ
+R
 java:S3655t"7Call "Optional#isPresent()" before accessing the value.(γε•µÿÿÿÿÿ
 R
 java:S3655i"7Call "Optional#isPresent()" before accessing the value.(γε•µÿÿÿÿÿ
-R
-java:S3655K"7Call "Optional#isPresent()" before accessing the value.(γε•µÿÿÿÿÿ
 U
 java:S1117J"?Rename "apiResponse" which hides the field declared at line 41.(Ò§γ
 U
