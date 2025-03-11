@@ -8,9 +8,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface ProvinceRepository extends JpaRepository<Province,Integer> {
+public interface ProvinceRepository extends JpaRepository<Province, Integer> {
 
     @Query("SELECT P FROM Province P WHERE lower(P.name) LIKE lower(concat('%', :name , '%'))")
     List<Province> findByNameQuery(@Param("name") String name);
@@ -21,6 +22,8 @@ public interface ProvinceRepository extends JpaRepository<Province,Integer> {
     @Query("SELECT P FROM Province P WHERE lower(P.name) LIKE lower(concat('%', :provinceName , '%'))")
     Province findProvinceByNameQuery(@Param("provinceName") String provinceName);
 
+    @Query("SELECT P FROM Province P WHERE lower(P.name) LIKE lower(concat('%', :provinceName , '%'))")
+    Optional<Province> findByName(@Param("provinceName") String provinceName);
     boolean existsByName(String proviceName);
 
 }

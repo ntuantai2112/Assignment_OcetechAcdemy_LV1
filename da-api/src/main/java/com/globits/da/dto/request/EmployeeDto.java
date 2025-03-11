@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.Column;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -17,18 +18,17 @@ import javax.validation.constraints.NotNull;
 public class EmployeeDTO {
 
     int rowIndex;
-    @NotBlank(message = "EMPLOYEE_NOT_NULL")
     String code;
     String name;
+    @Email
     String email;
     String phone;
     int age;
-    @NotNull(message = "Province ID is required")
     int provinceId;
-    @NotNull(message = "District ID is required")
     int districtId;
-    @NotNull(message = "Commune ID is required")
     int communeId;
+    String provinceName;
+    String districtName;
     String communeName;
 
 }

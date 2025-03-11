@@ -5,12 +5,10 @@ import com.globits.da.domain.District;
 import com.globits.da.domain.Employee;
 import com.globits.da.domain.Province;
 import com.globits.da.dto.request.EmployeeDTO;
-import com.globits.da.dto.request.EmployeeImportDTO;
 import com.globits.da.dto.response.EmployeeResponse;
 import com.globits.da.dto.search.EmployeeSearchDto;
 import com.globits.da.exception.EmployeeAppException;
 import com.globits.da.exception.EmployeeCodeException;
-import com.globits.da.exception.ValidationException;
 import com.globits.da.mapper.EmployeeMapper;
 import com.globits.da.repository.CommuneRepository;
 import com.globits.da.repository.DistrictRepository;
@@ -23,19 +21,17 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -81,7 +77,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeResponse addEmployee(EmployeeDTO request) {
-        validateEmployee(request);
+        validateEmployeeAdd(request);
+
 
         Province province = provinceRepo.findById(request.getProvinceId())
                 .orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.PROVINCE_NOT_FOUND));
@@ -90,6 +87,26 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.DISTRICT_NOT_FOUND));
 
         Commune commune = communeRepository.findByIdAndDistrictId(request.getCommuneId(), request.getDistrictId())
+                .orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.COMMUNE_NOT_FOUND));
+
+        Employee employee = employeeMapper.toEmployee(request);
+        employee.setProvince(province);
+        employee.setDistrict(district);
+        employee.setCommune(commune);
+        return employeeMapper.toEmployeeResponse(employeeRepo.save(employee));
+    }
+
+    @Override
+    public EmployeeResponse addEmployeeAndAddressByName(EmployeeDTO request) {
+        validateEmployeeAdd(request);
+
+        Province province = provinceRepo.findByName(request.getProvinceName())
+                .orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.PROVINCE_NOT_FOUND));
+
+        District district = districtRepository.findByNameAndProvinceId(request.getDistrictName(), province.getId())
+                .orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.DISTRICT_NOT_FOUND));
+
+        Commune commune = communeRepository.findByNameAndDistrictId(request.getCommuneName(), district.getId())
                 .orElseThrow(() -> new EmployeeAppException(EmployeeCodeException.COMMUNE_NOT_FOUND));
 
         Employee employee = employeeMapper.toEmployee(request);
@@ -112,7 +129,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeResponse updateEmployee(Integer id, EmployeeDTO request) {
-        validateEmployee(request);
+        validateEmployeeUpdate(request);
         Employee employee = employeeRepo.findById(id).orElseThrow(()
                 -> new EmployeeAppException(EmployeeCodeException.EMPLOYEE_NOT_FOUND));
         employeeMapper.updateEmployee(employee, request);
@@ -167,7 +184,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void validateEmployee(EmployeeDTO request) {
+    public void validateEmployeeAdd(EmployeeDTO request) {
 
         // Validate Code employee
         if (request.getCode().trim() == null || request.getCode().trim().isEmpty()) {
@@ -228,7 +245,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             }
         }
 
-
+        // Validate địa chỉ
         if (Objects.isNull(request.getProvinceId()) || request.getProvinceId() == 0) {
             throw new EmployeeAppException(EmployeeCodeException.PROVINCE_NOT_NULL);
         }
@@ -239,73 +256,171 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new EmployeeAppException(EmployeeCodeException.COMMUNE_NOT_NULL);
         }
 
+        if (Objects.isNull(request.getProvinceName())) {
+            throw new EmployeeAppException(EmployeeCodeException.PROVINCE_NOT_NULL);
+        }
+        if (Objects.isNull(request.getDistrictName())) {
+            throw new EmployeeAppException(EmployeeCodeException.DISTRICT_NOT_NULL);
+        }
+        if (Objects.isNull(request.getCommuneName())) {
+            throw new EmployeeAppException(EmployeeCodeException.COMMUNE_NOT_NULL);
+        }
+
+
+    }
+
+    public void validateEmployeeUpdate(EmployeeDTO request) {
+
+        // Validate Code employee
+        if (request.getCode().trim() == null || request.getCode().trim().isEmpty()) {
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_CODE_NOT_NULL);
+        }
+
+        if (!ValidationUtil.isValidCode(request.getCode().trim())) {
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_CODE_NOT_SPACE);
+        }
+
+        String code = request.getCode().trim();
+
+        if (code.length() < 6) {
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_CODE_MIN_LENGTH);
+        }
+
+        if (code.length() > 10) {
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_CODE_MAX_LENGTH);
+        }
+
+        // Validate Name employee
+        if (request.getName().trim() == null || request.getName().trim().isEmpty()) {
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_NAME_NOT_NULL);
+        }
+
+        // Validate email employee
+        if (request.getEmail().trim() == null || request.getEmail().trim().isEmpty()) {
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_EMAIL_NOT_NULL);
+        }
+
+        if (!ValidationUtil.isValidEmail(request.getEmail().trim())) {
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_EMAIL_FORMAT);
+        }
+
+        // Validate phone employee
+        if (request.getPhone().trim() == null || request.getPhone().trim().isEmpty()) {
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_PHONE_NOT_NULL);
+        } else if (!ValidationUtil.isPhone(request.getPhone().trim())) {
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_PHONE_FORMAT);
+
+        }
+
+        // Validate Age Empolyee
+        if (Objects.isNull(request.getAge())) {
+            throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_AGE_NOT_NULL);
+        } else {
+            // Validate age employee
+            if (request.getAge() <= 0 || Integer.valueOf(request.getAge()) == null) {
+                throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_AGE_VALUE);
+            } else if (request.getAge() < 18) {
+                throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_AGE_MIN);
+            } else if (request.getAge() > 60) {
+                throw new EmployeeAppException(EmployeeCodeException.EMPLOYEE_AGE_MAX);
+            }
+        }
+
 
     }
 
     @Override
-    public void importExcelEmployee(MultipartFile file) throws IOException {
-
-
-    }
-
-//    public void importEmployees(MultipartFile file) throws IOException {
-//        try {
-//            List<EmployeeImportDTO> employees = readExcelFile(file);
-//
-//            // Kiểm tra lỗi trước khi lưu
-//            List<String> errors = validateEmployees(employees);
-//            if (!errors.isEmpty()) {
-//                throw new EmployeeAppException(EmployeeCodeException.INVALID_EMPLOYEE_IMPORT);
-//            }
-//
-//            // Chuyển DTO thành Entity và lưu vào DB
-//            List<Employee> employeeEntities = employees.stream()
-//                    .map(employeeMapper::toEmployeeImport)
-//                    .collect(Collectors.toList());
-//
-//            employeeRepo.saveAll(employeeEntities);
-//        } catch (Exception e) {
-//            log.error(e.getMessage());
-//        }
-//    }
-
-    private List<EmployeeImportDTO> readExcelFile(MultipartFile file) throws IOException {
-        List<EmployeeImportDTO> employees = new ArrayList<>();
-        Workbook workbook = new XSSFWorkbook(file.getInputStream());
-        Sheet sheet = workbook.getSheetAt(0);
-
-        for (int i = 1; i <= sheet.getLastRowNum(); i++) { // Bỏ qua hàng tiêu đề (index 0)
-            Row row = sheet.getRow(i);
-            if (row == null) continue;
-
-            EmployeeImportDTO dto = new EmployeeImportDTO();
-            dto.setRowIndex(i + 1);
-            dto.setName(row.getCell(1).getStringCellValue());
-            dto.setCode(row.getCell(2).getStringCellValue());
-            dto.setEmail(row.getCell(3).getStringCellValue());
-            dto.setPhone(row.getCell(4).getStringCellValue());
-            dto.setAge((int) row.getCell(5).getNumericCellValue());
-            dto.setProvince(row.getCell(6).getStringCellValue());
-            dto.setDistrict(row.getCell(7).getStringCellValue());
-            dto.setCommune(row.getCell(8).getStringCellValue());
-
-            employees.add(dto);
-        }
-        workbook.close();
-        return employees;
-    }
-
-    private List<String> validateEmployees(List<EmployeeImportDTO> employees) {
+    public List<String> importExcelEmployee(MultipartFile file) {
         List<String> errors = new ArrayList<>();
-        for (EmployeeImportDTO dto : employees) {
-            if (dto.getName().isEmpty()) {
-                errors.add("Lỗi dòng " + dto.getRowIndex() + ": Tên không được để trống.");
+        try (InputStream is = file.getInputStream()) {
+            List<EmployeeDTO> employeeList = ExcelUtil.excelToEmployeeDtoList(is);
+
+            // Validate dữ liệu
+            errors = validateEmployees(employeeList);
+            if (!errors.isEmpty()) {
+                return errors; // Nếu có lỗi, trả về danh sách lỗi
             }
-            if (!dto.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-                errors.add("Lỗi dòng " + dto.getRowIndex() + ": Email không hợp lệ.");
+            // Convert từ DTO sang Entity
+            List<Employee> employeesToSave = new ArrayList<>();
+            for (EmployeeDTO dto : employeeList) {
+                Employee employee = employeeMapper.toEmployee(dto);
+                employee.setProvince(provinceRepo.findById(dto.getProvinceId()).get());
+                employee.setDistrict(districtRepository.findById(dto.getDistrictId()).get());
+                employee.setCommune(communeRepository.findById(dto.getCommuneId()).get());
+                employeesToSave.add(employee);
             }
-            if (dto.getAge() <= 0) {
-                errors.add("Lỗi dòng " + dto.getRowIndex() + ": Tuổi phải là số dương.");
+            employeeRepo.saveAll(employeesToSave);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            List<String> errorList = new ArrayList<>();
+            errorList.add("Lỗi khi xử lý file!");
+            return errorList;
+        }
+        return errors;
+    }
+
+    private List<String> validateEmployees(List<EmployeeDTO> employeeList) {
+        List<String> errors = new ArrayList<>();
+
+        for (EmployeeDTO dto : employeeList) {
+            StringBuilder errorMsg = new StringBuilder("Dòng " + dto.getRowIndex() + ": ");
+
+            // Kiểm tra các giá trị bắt buộc
+            if (dto.getCode() == null || dto.getCode().isEmpty()) {
+                errorMsg.append("Mã nhân viên không được để trống. ");
+            }
+            if (dto.getName() == null || dto.getName().isEmpty()) {
+                errorMsg.append("Tên không được để trống. ");
+            }
+            if (dto.getPhone() == null || dto.getPhone().isEmpty()) {
+                errorMsg.append("Số điện thoại không được để trống. ");
+            }
+
+            if (dto.getPhone() != null && !ValidationUtil.isPhone(dto.getPhone())) {
+                errorMsg.append("Số điện thoại không được để trống. ");
+            }
+
+            if (dto.getEmail() == null || dto.getEmail().isEmpty()) {
+                errorMsg.append("Email không được để trống. ");
+            }
+
+            if (dto.getEmail() != null && !ValidationUtil.isValidEmail(dto.getEmail())) {
+                errorMsg.append("Email không hợp lệ. ");
+            }
+
+            if (dto.getAge() < 18) {
+                errorMsg.append("Tuổi phải lớn hơn hoặc bằng 18. ");
+            }
+
+
+            // Kiểm tra tỉnh
+            Optional<Province> province = provinceRepo.findByName(dto.getProvinceName());
+            if (province == null || Objects.isNull(province)) {
+                errorMsg.append("Không tìm thấy tỉnh: ").append(dto.getProvinceName()).append(". ");
+                continue;
+            } else {
+                dto.setProvinceId(province.get().getId());
+            }
+
+            Optional<District> district = districtRepository.findByNameAndProvinceId(dto.getDistrictName(), dto.getProvinceId());
+            if (district == null || Objects.isNull(district)) {
+                errorMsg.append("Không tìm thấy huyện: ").append(dto.getDistrictName()).append(". ");
+            } else {
+                dto.setDistrictId(district.get().getId());
+            }
+
+            Optional<Commune> commune = communeRepository.findByNameAndDistrictId(dto.getCommuneName(), dto.getDistrictId());
+            if (commune == null || Objects.isNull(commune)) {
+                errorMsg.append("Không tìm thấy xã: ").append(dto.getCommuneName()).append(". ");
+                continue;
+            } else {
+                dto.setCommuneId(commune.get().getId());
+            }
+
+
+            // Nếu có lỗi, thêm vào danh sách lỗi
+            if (!errorMsg.toString().equals("Dòng " + dto.getRowIndex() + ": ")) {
+                errors.add(errorMsg.toString());
             }
         }
         return errors;

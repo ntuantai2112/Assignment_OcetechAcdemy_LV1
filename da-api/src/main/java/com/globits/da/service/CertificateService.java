@@ -18,6 +18,8 @@ public interface CertificateService {
 
     CertificateResponse addCertificate(CertificateDto request);
 
+    List<CertificateResponse> addListCertificate(List<CertificateDto> certificateRequests);
+
     String deleteCertificate(Integer id);
 
     CertificateResponse updateCertificate(Integer id,CertificateDto request);

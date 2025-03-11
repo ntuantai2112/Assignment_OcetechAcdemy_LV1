@@ -53,10 +53,10 @@ public class RestEmployeeController {
         return apiResponse(employees);
     }
 
+    // Câu 28-29-30:Employee sẽ có thêm 3 trường: Tỉnh, Huyện, Xã
+    // - Thêm mới employee phải có cả 3 trường này
     @PostMapping("/add-employee")
-    public ResponseEntity<ApiResponse<?>> createEmployee(@Valid @RequestBody EmployeeDTO request, BindingResult result) {
-
-
+    public ResponseEntity<ApiResponse<?>> createEmployee(@Valid @RequestBody EmployeeDTO request) {
         ApiResponse<EmployeeResponse> response = new ApiResponse<>();
         response.setCode(CodeConfig.SUCCESS_CODE.getCode());
         response.setMessage(CodeConfig.SUCCESS_CODE.getMessage());
@@ -72,9 +72,10 @@ public class RestEmployeeController {
 
     }
 
+    // Câu 30:Sửa: Nếu gửi thông tin sửa của cả 3 trường mới sửa, không thì bỏ qua
     @PutMapping("/update-employee/{empId}")
-    public EmployeeResponse updateEmployee(@PathVariable("empId") Integer id, @Valid @RequestBody EmployeeDTO request) {
-        return empService.updateEmployee(id, request);
+    public ApiResponse<EmployeeResponse> updateEmployee(@PathVariable("empId") Integer id, @Valid @RequestBody EmployeeDTO request) {
+        return apiResponse(empService.updateEmployee(id, request));
     }
 
 

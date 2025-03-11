@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,7 @@ public class RestCertificateController {
     private CertificateService service;
 
     @Autowired
-    private ApiResponse<CertificateResponse> response ;
+    private ApiResponse<CertificateResponse> response;
 
     @GetMapping("/get-all")
     public ApiResponse<List<CertificateResponse>> getAll() {
@@ -59,13 +60,23 @@ public class RestCertificateController {
 
 
     @PostMapping("/add")
-    public ApiResponse<CertificateResponse> create(@RequestBody CertificateDto request) {
+    public ApiResponse<CertificateResponse> create(@RequestBody @Valid CertificateDto request) {
         ApiResponse<CertificateResponse> response = new ApiResponse<>();
         response.setResult(service.addCertificate(request));
         response.setCode(ErrorCodeException.SUCCESS_CODE.getCode());
         response.setMessage("Add Certificate Successfully!");
         return response;
     }
+
+    @PostMapping("/add-certificates")
+    public ApiResponse<List<CertificateResponse>> createListCertifiacate(@RequestBody List<CertificateDto> request) {
+        ApiResponse<List<CertificateResponse>> response = new ApiResponse<>();
+        response.setResult(service.addListCertificate(request));
+        response.setCode(ErrorCodeException.SUCCESS_CODE.getCode());
+        response.setMessage("Add Certificates Successfully!");
+        return response;
+    }
+
 
     @DeleteMapping("/delete/{id}")
     public ApiResponse<String> delete(@PathVariable("id") Integer id) {
@@ -79,7 +90,7 @@ public class RestCertificateController {
     @PutMapping("/update/{id}")
     public ApiResponse<CertificateResponse> update(@PathVariable("id") Integer id, @RequestBody CertificateDto request) {
         ApiResponse<CertificateResponse> response = new ApiResponse<>();
-        response.setResult( service.updateCertificate(id, request));
+        response.setResult(service.updateCertificate(id, request));
         response.setCode(ErrorCodeException.SUCCESS_CODE.getCode());
         response.setMessage("Update Certificate Successfully!");
         return response;

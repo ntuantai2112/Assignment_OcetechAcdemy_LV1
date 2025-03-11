@@ -1,24 +1,36 @@
 
-i
-java:S1192®"MDefine a constant instead of duplicating this literal "Lá»—i dÃ²ng " 3 times.(Œˆ÷ÿüÿÿÿÿ
+t	java:S135í"YReduce the total number of break and continue statements in this loop to use at most one.(„¼ÉŒûÿÿÿÿ
 v
-java:S1488?"aImmediately return this expression instead of assigning it to the temporary variable "employees".(Ş¦œ!
+java:S1488;"aImmediately return this expression instead of assigning it to the temporary variable "employees".(Ş¦œ!
 w
-java:S1488F"aImmediately return this expression instead of assigning it to the temporary variable "employees".(æ¼‡É
+java:S1488B"aImmediately return this expression instead of assigning it to the temporary variable "employees".(æ¼‡É
 w
-java:S1488M"aImmediately return this expression instead of assigning it to the temporary variable "employees".(ôÉ Â
+java:S1488I"aImmediately return this expression instead of assigning it to the temporary variable "employees".(ôÉ Â
+]
+java:S2789"FEnsure this "Optional" could never be null and remove this null-check.(ÀÛ§å
+]
+java:S2789–"FEnsure this "Optional" could never be null and remove this null-check.(Ôè¿„
+]
+java:S2789"FEnsure this "Optional" could never be null and remove this null-check.(‚êÚ»
+U
+java:S3655İ"7Call "Optional#isPresent()" before accessing the value.(ö¦ã›8¢À¦Ø2
+U
+java:S3655Ü"7Call "Optional#isPresent()" before accessing the value.(ÇÏÄŸ8‘÷¿¦Ø2
+S
+java:S3655™"7Call "district.isPresent()" before accessing the value.(ˆÜ„Úüÿÿÿÿ
+R
+java:S3655¡"6Call "commune.isPresent()" before accessing the value.(Ã÷ı¿üÿÿÿÿ
+S
+java:S3655’"7Call "province.isPresent()" before accessing the value.(şÙÌóıÿÿÿÿ
 M
-java:S3655h"7Call "Optional#isPresent()" before accessing the value.(¨•¢¶
+java:S3655y"7Call "Optional#isPresent()" before accessing the value.(¨•¢¶
+Z
+java:S3655Û"7Call "Optional#isPresent()" before accessing the value.(˜¼Ò‘ıÿÿÿÿ8ìÈ½¦Ø2
 T
-java:S2589£"8Remove this expression which always evaluates to "false"(£±È¶ùÿÿÿÿ
-
-java:S1186ö"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(§…àúÿÿÿÿ
+java:S2589´"8Remove this expression which always evaluates to "false"(£±È¶ùÿÿÿÿ
 n
-java:S3776ª"RRefactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.(ÎšıÊúÿÿÿÿ
-W	java:S125û"<This block of commented-out lines of code should be removed.(¥ñ…åøÿÿÿÿ
-f
-java:S1128"IRemove this unused import 'com.globits.da.exception.ValidationException'.(ëØıÕ8í «ı×2
-N
-java:S1144"2Remove this unused private "readExcelFile" method.(É­Éşÿÿÿÿÿ
-M
-java:S1144ª"6Remove this unused private "validateEmployees" method.(¦ù÷Ñ
+java:S3776»"RRefactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.(àû”…şÿÿÿÿ
+i
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(º™…Ô
+n
+java:S3776ê"RRefactor this method to reduce its Cognitive Complexity from 35 to the 15 allowed.(Î¯¨âûÿÿÿÿ

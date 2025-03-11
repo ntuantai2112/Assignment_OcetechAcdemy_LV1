@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface DistrictRepository extends JpaRepository<District,Integer> {
+public interface DistrictRepository extends JpaRepository<District, Integer> {
 
     @Query("SELECT D FROM District D WHERE lower(D.name) LIKE lower(concat('%', :name , '%'))")
     List<District> findByNameQuery(@Param("name") String name);

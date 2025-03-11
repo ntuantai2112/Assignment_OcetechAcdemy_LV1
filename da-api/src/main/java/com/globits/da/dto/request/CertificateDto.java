@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 import org.joda.time.DateTime;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -23,8 +24,6 @@ public class CertificateDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     LocalDate validUntil;
     int status;
-
-
 
 
 }

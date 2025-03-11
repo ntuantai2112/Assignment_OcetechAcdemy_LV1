@@ -26,27 +26,24 @@ public class Certificate {
     int id;
     @Column(name = "name")
     String name;
-    @Column(name = "valid_from",nullable = false)
-    LocalDate validFrom ;
-    @Column(name = "valid_until",nullable = false)
-    LocalDate validUntil ;
+    @Column(name = "valid_from", nullable = false)
+    LocalDate validFrom;
+    @Column(name = "valid_until", nullable = false)
+    LocalDate validUntil;
     @Column(name = "status")
     int status;
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
     @Column(name = "updated_at")
-    private LocalDateTime  updatedAt = LocalDateTime.now();
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "province_id",referencedColumnName = "id")
+    @JoinColumn(name = "province_id", referencedColumnName = "id", nullable = false)
     private Province province;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id",referencedColumnName = "id")
+    @JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = false)
     private Employee employee;
-
-
-
 
 
 }

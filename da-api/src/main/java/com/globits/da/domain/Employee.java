@@ -29,21 +29,19 @@ public class Employee {
     private int age;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "commune_id",nullable = false,referencedColumnName = "id")
+    @JoinColumn(name = "commune_id", nullable = false, referencedColumnName = "id")
     private Commune commune;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "district_id",nullable = false,referencedColumnName = "id")
+    @JoinColumn(name = "district_id", nullable = false, referencedColumnName = "id")
     private District district;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "province_id",nullable = false,referencedColumnName = "id")
+    @JoinColumn(name = "province_id", nullable = false, referencedColumnName = "id")
     private Province province;
 
-    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<Certificate> certificates;
-
-
 
 
 }

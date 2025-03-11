@@ -1,10 +1,10 @@
 
-\	java:S112„"FDefine and throw a dedicated exception instead of using a generic one.(õ€
-\	java:S112”"FDefine and throw a dedicated exception instead of using a generic one.(†—Õ
-E
-java:S3740c"/Provide the parametrized type for this generic.(âşñ’
-v
-java:S1488V"`Immediately return this expression instead of assigning it to the temporary variable "myApiDTO".(Ï„öâ
-Q	java:S1255"<This block of commented-out lines of code should be removed.(€ºßñ
-Q	java:S125:"<This block of commented-out lines of code should be removed.(óèæ
-T	java:S106"9Replace this use of System.out or System.err by a logger.(ñ—¸½úÿÿÿÿ
+c	java:S112„"FDefine and throw a dedicated exception instead of using a generic one.(õ€8á¤ÈšØ2
+c	java:S112”"FDefine and throw a dedicated exception instead of using a generic one.(†—Õ8á¤ÈšØ2
+L
+java:S3740c"/Provide the parametrized type for this generic.(âşñ’8â¤ÈšØ2
+}
+java:S1488V"`Immediately return this expression instead of assigning it to the temporary variable "myApiDTO".(Ï„öâ8ä¤ÈšØ2
+X	java:S1255"<This block of commented-out lines of code should be removed.(€ºßñ8¬¥ÈšØ2
+X	java:S125:"<This block of commented-out lines of code should be removed.(óèæ8²¥ÈšØ2
+[	java:S106"9Replace this use of System.out or System.err by a logger.(ñ—¸½úÿÿÿÿ8Ş¥ÈšØ2

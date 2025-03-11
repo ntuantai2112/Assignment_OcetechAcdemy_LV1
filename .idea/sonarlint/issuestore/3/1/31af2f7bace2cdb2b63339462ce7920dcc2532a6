@@ -6,9 +6,9 @@ java:S1488x"^Immediately return this expression instead of assigning it to the 
 {
 java:S1488Œ"dImmediately return this expression instead of assigning it to the temporary variable "listCategory".(€íš
 M
-java:S2589F"7Remove this expression which always evaluates to "true"(¼éÄû
-M
 java:S25893"7Remove this expression which always evaluates to "true"(¼éÄû
+M
+java:S2589F"7Remove this expression which always evaluates to "true"(¼éÄû
 D
 java:S2447‚"-Null is returned but a "Boolean" is expected.(¥¹ï
 D

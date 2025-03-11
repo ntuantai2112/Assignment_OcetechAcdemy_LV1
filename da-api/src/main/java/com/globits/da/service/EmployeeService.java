@@ -23,6 +23,8 @@ public interface EmployeeService {
 
     EmployeeResponse addEmployee(EmployeeDTO employeeDto);
 
+    EmployeeResponse addEmployeeAndAddressByName(EmployeeDTO employeeDto);
+
     String deleteEmployee(Integer id);
 
     EmployeeResponse updateEmployee(Integer id, EmployeeDTO employeeDto);
@@ -33,10 +35,12 @@ public interface EmployeeService {
 
     void exportExcel(HttpServletResponse httpServletResponse) throws IOException;
 
-    void validateEmployee(EmployeeDTO request);
+    void validateEmployeeAdd(EmployeeDTO request);
+
+    void validateEmployeeUpdate(EmployeeDTO request);
 
 
-    void importExcelEmployee(MultipartFile file) throws IOException;
+    List<String> importExcelEmployee(MultipartFile file) throws IOException;
 
 
 }
