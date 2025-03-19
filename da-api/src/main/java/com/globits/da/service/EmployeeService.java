@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public interface EmployeeService {
 
@@ -40,7 +41,7 @@ public interface EmployeeService {
     void validateEmployeeUpdate(EmployeeDTO request);
 
 
-    List<String> importExcelEmployee(MultipartFile file) throws IOException;
+    Map<String, Object> importExcelEmployee(MultipartFile file) throws IOException;
 
 
 }

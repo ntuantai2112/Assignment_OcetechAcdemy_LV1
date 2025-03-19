@@ -104,14 +104,14 @@ public class ExcelUtil {
 
                 EmployeeDTO employee = new EmployeeDTO();
                 employee.setRowIndex(i + 1);
-                employee.setCode(row.getCell(1).getStringCellValue());
-                employee.setName(row.getCell(2).getStringCellValue());
-                employee.setEmail(row.getCell(3).getStringCellValue());
-                employee.setPhone(row.getCell(4).getStringCellValue());
-                employee.setAge((int) row.getCell(5).getNumericCellValue());
-                employee.setProvinceName(row.getCell(6).getStringCellValue());
-                employee.setDistrictName(row.getCell(7).getStringCellValue());
-                employee.setCommuneName(row.getCell(8).getStringCellValue());
+                employee.setCode(row.getCell(0).getStringCellValue());
+                employee.setName(row.getCell(1).getStringCellValue());
+                employee.setEmail(row.getCell(2).getStringCellValue());
+                employee.setPhone(row.getCell(3).getStringCellValue());
+                employee.setAge((int) row.getCell(4).getNumericCellValue());
+                employee.setProvinceName(row.getCell(5).getStringCellValue());
+                employee.setDistrictName(row.getCell(6).getStringCellValue());
+                employee.setCommuneName(row.getCell(7).getStringCellValue());
 
                 employees.add(employee);
             }
@@ -122,32 +122,5 @@ public class ExcelUtil {
         return employees;
     }
 
-    //// Lấy tên tỉnh, huyện, xã từ file Excel
-    //                String provinceName = row.getCell(6).getStringCellValue();
-    //                String districtName = row.getCell(7).getStringCellValue();
-    //                String communeName = row.getCell(8).getStringCellValue();
-    //
-    //                // Tìm ID của tỉnh từ database
-    //                Optional<Province> province = provinceRepo.findByName(provinceName);
-    //                if (province.isPresent()) {
-    //                    employee.setProvinceId(province.get().getId());
-    //                } else {
-    //                    throw new RuntimeException("Không tìm thấy tỉnh: " + provinceName + " ở dòng " + (i + 1));
-    //                }
-    //
-    //                // Tìm ID của huyện từ database
-    //                Optional<District> districtOpt = districtRepo.findByNameAndProvinceId(districtName, employee.getProvinceId());
-    //                if (districtOpt.isPresent()) {
-    //                    employee.setDistrictId(districtOpt.get().getId());
-    //                } else {
-    //                    throw new RuntimeException("Không tìm thấy huyện: " + districtName + " thuộc tỉnh " + provinceName + " ở dòng " + (i + 1));
-    //                }
-    //
-    //                // Tìm ID của xã từ database
-    //                Optional<Commune> communeOpt = communeRepo.findByNameAndDistrictId(communeName, employee.getDistrictId());
-    //                if (communeOpt.isPresent()) {
-    //                    employee.setCommuneId(communeOpt.get().getId());
-    //                } else {
-    //                    throw new RuntimeException("Không tìm thấy xã: " + communeName + " thuộc huyện " + districtName + " ở dòng " + (i + 1));
-    //                }
+
 }

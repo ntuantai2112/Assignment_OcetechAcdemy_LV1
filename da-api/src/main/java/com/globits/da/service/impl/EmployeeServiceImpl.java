@@ -9,6 +9,7 @@ import com.globits.da.dto.response.EmployeeResponse;
 import com.globits.da.dto.search.EmployeeSearchDto;
 import com.globits.da.exception.EmployeeAppException;
 import com.globits.da.exception.EmployeeCodeException;
+import com.globits.da.exception.ProvinceCodeException;
 import com.globits.da.mapper.EmployeeMapper;
 import com.globits.da.repository.CommuneRepository;
 import com.globits.da.repository.DistrictRepository;
@@ -28,10 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -330,100 +328,145 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<String> importExcelEmployee(MultipartFile file) {
-        List<String> errors = new ArrayList<>();
+    public Map<String, Object> importExcelEmployee(MultipartFile file) {
+        Map<String, Object> response = new HashMap<>();
+
         try (InputStream is = file.getInputStream()) {
             List<EmployeeDTO> employeeList = ExcelUtil.excelToEmployeeDtoList(is);
 
             // Validate dữ liệu
-            errors = validateEmployees(employeeList);
+            List<Map<String, Object>> errors = validateEmployees(employeeList);
             if (!errors.isEmpty()) {
-                return errors; // Nếu có lỗi, trả về danh sách lỗi
+                response.put("success", false);
+                response.put("errors", errors);
+                return response;
             }
-            // Convert từ DTO sang Entity
-            List<Employee> employeesToSave = new ArrayList<>();
-            for (EmployeeDTO dto : employeeList) {
-                Employee employee = employeeMapper.toEmployee(dto);
-                employee.setProvince(provinceRepo.findById(dto.getProvinceId()).get());
-                employee.setDistrict(districtRepository.findById(dto.getDistrictId()).get());
-                employee.setCommune(communeRepository.findById(dto.getCommuneId()).get());
-                employeesToSave.add(employee);
-            }
+
+            // Convert từ DTO sang Entity và lưu vào DB
+            List<Employee> employeesToSave = employeeList.stream()
+                    .map(dto -> {
+                        Employee employee = employeeMapper.toEmployee(dto);
+                        employee.setProvince(provinceRepo.findById(dto.getProvinceId()).orElse(null));
+                        employee.setDistrict(districtRepository.findById(dto.getDistrictId()).orElse(null));
+                        employee.setCommune(communeRepository.findById(dto.getCommuneId()).orElse(null));
+                        return employee;
+                    })
+                    .collect(Collectors.toList());
+
             employeeRepo.saveAll(employeesToSave);
+
+            response.put("success", true);
         } catch (Exception e) {
-            log.error(e.getMessage());
-            List<String> errorList = new ArrayList<>();
-            errorList.add("Lỗi khi xử lý file!");
-            return errorList;
+            log.error("Error processing the file: {}", e.getMessage());
         }
+
+        return response;
+    }
+
+
+    public List<Map<String, Object>> validateEmployees(List<EmployeeDTO> employeeList) {
+        List<Map<String, Object>> errors = new ArrayList<>();
+
+        for (EmployeeDTO dto : employeeList) {
+            List<Map<String, String>> fieldErrors = new ArrayList<>();
+
+            // Validate mã nhân viên
+            if (dto.getCode() == null || dto.getCode().isEmpty()) {
+                fieldErrors.add(createError("code", EmployeeCodeException.EMPLOYEE_CODE_NOT_NULL.getMessage()));
+            } else {
+                String code = dto.getCode().trim();
+                if (!ValidationUtil.isValidCode(code)) {
+                    fieldErrors.add(createError("code", EmployeeCodeException.EMPLOYEE_CODE_NOT_SPACE.getMessage()));
+                }
+                if (employeeRepo.findByCode(code).isPresent()) {
+                    fieldErrors.add(createError("code", EmployeeCodeException.EMPLOYEE_CODE_ALREADY_EXISTS.getMessage()));
+                }
+                if (code.length() < 6) {
+                    fieldErrors.add(createError("code", EmployeeCodeException.EMPLOYEE_CODE_MIN_LENGTH.getMessage()));
+                }
+                if (code.length() > 10) {
+                    fieldErrors.add(createError("code", EmployeeCodeException.EMPLOYEE_CODE_MAX_LENGTH.getMessage()));
+                }
+            }
+
+            // Validate tên nhân viên
+            if (dto.getName() == null || dto.getName().isEmpty()) {
+                fieldErrors.add(createError("name", EmployeeCodeException.EMPLOYEE_NAME_NOT_NULL.getMessage()));
+            }
+
+            // Validate email
+            if (dto.getEmail() == null || dto.getEmail().isEmpty()) {
+                fieldErrors.add(createError("email", EmployeeCodeException.EMPLOYEE_EMAIL_NOT_NULL.getMessage()));
+            } else if (!ValidationUtil.isValidEmail(dto.getEmail())) {
+                fieldErrors.add(createError("email", EmployeeCodeException.EMPLOYEE_EMAIL_FORMAT.getMessage()));
+            }
+
+            // Validate số điện thoại
+            if (dto.getPhone() == null || dto.getPhone().isEmpty()) {
+                fieldErrors.add(createError("phone", EmployeeCodeException.EMPLOYEE_PHONE_NOT_NULL.getMessage()));
+            } else if (!ValidationUtil.isPhone(dto.getPhone())) {
+                fieldErrors.add(createError("phone", EmployeeCodeException.EMPLOYEE_PHONE_FORMAT.getMessage()));
+            }
+
+            // Validate tuổi
+            if (dto.getAge() < 18) {
+                fieldErrors.add(createError("age", EmployeeCodeException.EMPLOYEE_AGE_MIN.getMessage()));
+            } else if (dto.getAge() > 60) {
+                fieldErrors.add(createError("age", EmployeeCodeException.EMPLOYEE_AGE_MAX.getMessage()));
+            }
+
+            // Validate tỉnh/thành phố
+            if (dto.getProvinceName() == null || dto.getProvinceName().trim().isEmpty()) {
+                fieldErrors.add(createError("province", "The province name cannot be null or empty"));
+            } else {
+                Optional<Province> provinceOpt = provinceRepo.findByName(dto.getProvinceName());
+                if (!provinceOpt.isPresent()) {
+                    fieldErrors.add(createError("province", "No province found: " + dto.getProvinceName()));
+                } else {
+                    dto.setProvinceId(provinceOpt.get().getId());
+
+                    // Validate quận/huyện
+                    if (dto.getDistrictName() == null || dto.getDistrictName().trim().isEmpty()) {
+                        fieldErrors.add(createError("district", "The district name cannot be null or empty"));
+                    } else {
+                        Optional<District> districtOpt = districtRepository.findByNameAndProvinceId(dto.getDistrictName(), dto.getProvinceId());
+                        if (!districtOpt.isPresent()) {
+                            fieldErrors.add(createError("district", "No district found: " + dto.getDistrictName()));
+                        } else {
+                            dto.setDistrictId(districtOpt.get().getId());
+
+                            // Validate phường/xã
+                            if (dto.getCommuneName() == null || dto.getCommuneName().trim().isEmpty()) {
+                                fieldErrors.add(createError("commune", "The commune name cannot be null or empty"));
+                            } else {
+                                Optional<Commune> communeOpt = communeRepository.findByNameAndDistrictId(dto.getCommuneName(), dto.getDistrictId());
+                                if (!communeOpt.isPresent()) {
+                                    fieldErrors.add(createError("commune", "No commune found: " + dto.getCommuneName()));
+                                } else {
+                                    dto.setCommuneId(communeOpt.get().getId());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            // Nếu có lỗi thì thêm vào danh sách lỗi
+            if (!fieldErrors.isEmpty()) {
+                Map<String, Object> errorMap = new LinkedHashMap<>();
+                errorMap.put("row", dto.getRowIndex());
+                errorMap.put("errors", fieldErrors);
+                errors.add(errorMap);
+            }
+        }
+
         return errors;
     }
 
-    private List<String> validateEmployees(List<EmployeeDTO> employeeList) {
-        List<String> errors = new ArrayList<>();
-
-        for (EmployeeDTO dto : employeeList) {
-            StringBuilder errorMsg = new StringBuilder("Dòng " + dto.getRowIndex() + ": ");
-
-            // Kiểm tra các giá trị bắt buộc
-            if (dto.getCode() == null || dto.getCode().isEmpty()) {
-                errorMsg.append("Mã nhân viên không được để trống. ");
-            }
-            if (dto.getName() == null || dto.getName().isEmpty()) {
-                errorMsg.append("Tên không được để trống. ");
-            }
-            if (dto.getPhone() == null || dto.getPhone().isEmpty()) {
-                errorMsg.append("Số điện thoại không được để trống. ");
-            }
-
-            if (dto.getPhone() != null && !ValidationUtil.isPhone(dto.getPhone())) {
-                errorMsg.append("Số điện thoại không được để trống. ");
-            }
-
-            if (dto.getEmail() == null || dto.getEmail().isEmpty()) {
-                errorMsg.append("Email không được để trống. ");
-            }
-
-            if (dto.getEmail() != null && !ValidationUtil.isValidEmail(dto.getEmail())) {
-                errorMsg.append("Email không hợp lệ. ");
-            }
-
-            if (dto.getAge() < 18) {
-                errorMsg.append("Tuổi phải lớn hơn hoặc bằng 18. ");
-            }
-
-
-            // Kiểm tra tỉnh
-            Optional<Province> province = provinceRepo.findByName(dto.getProvinceName());
-            if (province == null || Objects.isNull(province)) {
-                errorMsg.append("Không tìm thấy tỉnh: ").append(dto.getProvinceName()).append(". ");
-                continue;
-            } else {
-                dto.setProvinceId(province.get().getId());
-            }
-
-            Optional<District> district = districtRepository.findByNameAndProvinceId(dto.getDistrictName(), dto.getProvinceId());
-            if (district == null || Objects.isNull(district)) {
-                errorMsg.append("Không tìm thấy huyện: ").append(dto.getDistrictName()).append(". ");
-            } else {
-                dto.setDistrictId(district.get().getId());
-            }
-
-            Optional<Commune> commune = communeRepository.findByNameAndDistrictId(dto.getCommuneName(), dto.getDistrictId());
-            if (commune == null || Objects.isNull(commune)) {
-                errorMsg.append("Không tìm thấy xã: ").append(dto.getCommuneName()).append(". ");
-                continue;
-            } else {
-                dto.setCommuneId(commune.get().getId());
-            }
-
-
-            // Nếu có lỗi, thêm vào danh sách lỗi
-            if (!errorMsg.toString().equals("Dòng " + dto.getRowIndex() + ": ")) {
-                errors.add(errorMsg.toString());
-            }
-        }
-        return errors;
+    private static Map<String, String> createError(String column, String message) {
+        Map<String, String> error = new HashMap<>();
+        error.put("column", column);
+        error.put("error", message);
+        return error;
     }
 
 

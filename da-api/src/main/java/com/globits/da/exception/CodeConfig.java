@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public enum CodeConfig {
-    SUCCESS_CODE(200, "Success fully!");
+    SUCCESS_CODE(200, "Success fully!"),
+    ERROR_IMPORT_EXCEL(400, "Import failed! Invalid data!");
 
     private int code;
     private String message;

@@ -23,7 +23,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -38,6 +41,7 @@ public class RestEmployeeController {
 
     // Câu 19 : Tạo api lấy tất cả employee
     @GetMapping("/get-all-employee")
+//    @RestSta
     public ApiResponse<List<EmployeeResponse>> getAll() {
 
         return apiResponse(empService.getAllEmployee());
@@ -87,20 +91,29 @@ public class RestEmployeeController {
 
     // Câu 32: Import Excel
     @PostMapping("/import-excel")
-    public ApiResponse<String> importEmployees(@RequestParam("file") MultipartFile file) {
-        ApiResponse apiResponse = new ApiResponse<>();
+    public ApiResponse<Map<String, Object>> importEmployees(@RequestParam("file") MultipartFile file) {
+        ApiResponse<Map<String, Object>> apiResponse = new ApiResponse<>();
+
         try {
-            empService.importExcelEmployee(file);
-            CodeConfig codeConfig = CodeConfig.SUCCESS_CODE;
-            apiResponse.setCode(codeConfig.getCode());
-            apiResponse.setMessage(codeConfig.getMessage());
-            apiResponse.setResult("Import File Excel Successfully!");
+            Map<String, Object> response = empService.importExcelEmployee(file);
+            boolean success = (boolean) response.get("success");
+            if (!success) {
+                apiResponse.setCode(CodeConfig.ERROR_IMPORT_EXCEL.getCode());
+                apiResponse.setMessage("There is an error in the imported data, please check again..");
+                apiResponse.setResult(response);
+                return apiResponse;
+            }
+
+            // Import thành công
+            apiResponse.setCode(CodeConfig.SUCCESS_CODE.getCode());
+            apiResponse.setMessage("Import File Excel Successfully!");
+            apiResponse.setResult(response);
+
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("Error when importing Excel file: {}", e.getMessage());
         }
 
         return apiResponse;
-
     }
 
 
